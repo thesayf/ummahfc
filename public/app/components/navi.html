@@ -1,0 +1,310 @@
+<body>
+    <div class="am-wrapper am-nosidebar-left">
+        <nav class="navbar navbar-default navbar-fixed-top am-top-header">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="page-title">
+                        <span>Moverslite</span>
+                    </div>
+                    <a href="/instant" class="navbar-brand"></a>
+                </div>
+                <a href="#" data-toggle="collapse" data-target="#am-navbar-collapse" class="am-toggle-top-header-menu collapsed">
+                    <span class="icon s7-menu"></span>
+                </a>
+                <div id="am-navbar-collapse" class="collapse navbar-collapse">
+                    <button class="hide" id="review-booking-modal" data-toggle="modal" data-target="#md-review">Review booking</button>
+                    <button class="hide" id="job-complete-modal" data-toggle="modal" data-target="#md-complete">Booking Complete</button>
+
+                    <ul class="nav navbar-nav navbar-right am-user-nav">
+                        <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="angle-down s7-menu"></span></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li ng-click="displayBooking()" data-toggle="modal" data-target="#md-default"><a href=""> <span class="icon s7-date"></span>Upcoming Bookings</a></li>
+                                <li ng-click="displayBookingHistory()" data-toggle="modal" data-target="#booking-history"><a href=""> <span class="icon s7-date"></span>Booking History</a></li>
+                                <li ng-click="displayProfile()" data-toggle="modal" data-target="#mod-info"><a href=""> <span class="icon s7-user"></span>My profile</a></li>
+                                <li ng-click="checkCard()" id="payment-button" data-toggle="modal" data-target="#stripe-addcard">
+                                    <a href=""><span class="icon s7-credit"></span>Payment Details</a>
+                                </li>
+                                <li data-toggle="modal" data-target="#mod-warning">
+                                    <a href="" ng-click="isEmailSent == false">
+                                        <span class="icon s7-mail-open-file"></span>Contact Us
+                                    </a>
+                                </li>
+                                <li><a href="#" ng-click="logout()"> <span class="icon s7-power"></span>Sign Out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="am-content">
+
+        </div>
+
+    </div>
+
+    <!-- USER PROFILE -------------------------------------------------------------------------------------------->
+    <div id="mod-info" tabindex="-1" role="dialog" class="modal fade colored-header">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                    <h3 class="modal-title">Customer Profile</h3>
+                </div>
+                <div class="modal-body form">
+                    <div class="form-group">
+                        <div class="user-profile col-md-12 col-sm-12">
+                            <div class=" info-block panel panel-default">
+                                <table class="no-border no-strip skills">
+                                    <tbody class="no-border-x no-border-y">
+                                        <tr>
+                                            <td class="item">Username:<span class="icon s7-user"></span></td>
+                                            <td>{{user.username}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Mobile:<span class="icon s7-phone"></span></td>
+                                            <td>{{user.mobile}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMAIL FORM -------------------------------------------------------------------------------------------->
+    <div id="mod-warning" tabindex="-1" role="dialog" class="modal fade colored-header">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                    <h3>Send Us an Email</h3>
+                </div>
+                <div class="modal-body">
+                    <div ng-if="isEmailSent == false" class="panel-body">
+                        <form role="form">
+                            <h4 class="ebottom">Drop us an email and we will get back to you within 30 minutes</h4>
+                            <div class="form-group">
+                                <label>Your email address</label>
+                                <input ng-model="email.emailAddress" type="email" placeholder="Enter email" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input ng-model="email.subject" type="subject" placeholder="subject" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>What is your query</label>
+                                <textarea ng-model="email.message" class="form-control"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div ng-if="isEmailSent == true" class="panel-body">
+                        <div class="text-center">
+                            <div class="i-circle text-success"><i class="icon s7-check"></i></div>
+                            <h4>Message Sent!</h4>
+                            <p>You email has been sent to our team and we will get back to you within the next 30 minutes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button ng-click="contactSend()" type="button" class="btn btn-warning">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- BOOKING HISTORY INFO  -------------------------------------------------------------------------------------------->
+    <div id="booking-history" tabindex="-1" role="dialog" class="modal fade colored-header">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button " data-dismiss="modal" aria-hidden="true" class="close">
+                        <i class="icon s7-close"></i>
+                    </button>
+                    <h3>Booing History</h3>
+                </div>
+                <div class="modal-body">
+                    <!--Responsive table-->
+                    <div ng-if="bookings" class="table-responsive">
+                        <table class="table table-striped table-fw-widget table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="30%">Job</th>
+                                    <th width="30%">Status</th>
+                                    <th width="30%">View</th>
+                                </tr>
+                            </thead>
+                            <tbody class="no-border-x">
+                                <tr ng-repeat="booking in bookings" ng-if="booking.status == 'cancelled' || booking.status == 'completed' || booking.status == 'missed' ">
+                                    <td>{{booking.jobName}} </td>
+                                    <td> {{booking.status}}</td>
+                                    <td> <button ng-click="displayOneBooking(booking._id)" data-toggle="modal" data-target="#mod-error" type="button" class="btn btn-space btn-danger">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-if="checkBookingStatus('cancelled','completed','missed') == false" class="table-responsive tc">
+                        <div class="text-center">
+                              <div class="i-circle text-danger"><i class="icon s7-close"></i></div>
+                              <h4>No Job History</h4>
+                              
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completed booking  -------------------------------------------------------------------------------------------->
+    <div id="md-complete" tabindex="-1" role="dialog" class="modal fade colored-header">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button " data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                    <h3>Your Job Is Booked</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div class="text-center">
+                            <div class="i-circle text-success"><i class="icon s7-check"></i></div>
+                            <h4>Awesome Your Job has been booked!</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Create New Booking</button>
+                    <button type="button" ng-click="hackTools.fixModalScroll('md-default')" data-toggle="modal" data-target="#md-default" data-dismiss="modal" class="btn btn-primary">Review Live Bookings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- LIVE BOOKINGS  -------------------------------------------------------------------------------------------->
+    <div id="md-default" tabindex="-1" role="dialog" class="modal fade colored-header">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button " data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                    <h3>Upcoming Bookings</h3>
+                </div>
+                <div class="modal-body">
+                    <!--Responsive table-->
+                    <div ng-if="bookings" class="table-responsive">
+                        <table class="table table-striped table-fw-widget table-hover">
+                            <thead>
+                                <tr>
+                                    <th width="30%">Job</th>
+                                    <th width="30%">Status</th>
+                                    <th width="30%">View</th>
+                                </tr>
+                            </thead>
+                            <tbody class="no-border-x">
+                                <tr ng-repeat="booking in bookings" ng-if="booking.status !== 'cancelled' && booking.status !== 'completed' && booking.status !== 'missed'">
+                                    <td>{{booking.jobName}} </td>
+                                    <td> {{booking.status}}</td>
+                                    <td> <button ng-click="displayOneBooking(booking._id)" data-toggle="modal" data-target="#mod-error" type="button" class="btn btn-space btn-danger">View</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div ng-if="checkBookingStatus('cancelled','completed','missed') == true">
+                        <div class="text-center">
+                              <div class="i-circle text-danger"><i class="icon s7-close"></i></div>
+                              <h4>Sorry</h4>
+                              <p>There are no upcoming jobs</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    <button type="button" data-dismiss="modal" class="btn btn-primary">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOOKING INFO  -------------------------------------------------------------------------------------------->
+    <div id="mod-error" tabindex="10" role="dialog" class="modal fade colored-header">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">
+                        <i class="icon s7-close"></i>
+                    </button>
+                    <h3>Job Details</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center">
+                        <div class="user-profile col-md-12 col-sm-12">
+                            <div class=" info-block panel panel-default">
+                                <table class="no-border no-strip skills">
+                                    <tbody class="no-border-x no-border-y">
+                                        <tr>
+                                            <td class="item">Job Name<span class="icon s7-ticket"></span></td>
+                                            <td>{{currBooking.jobName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Status<span class="icon s7-signal"></span></td>
+                                            <td>{{currBooking.status}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Driver Name<span class="icon s7-id"></span></td>
+                                            <td>{{currBooking.driverName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Driver Number:<span class="icon s7-phone"></span></td>
+                                            <td>{{currBooking.driverPhone}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Vehicle:<span class="icon s7-car"></span></td>
+                                            <td>{{currBooking.vanType}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Price:<span class="icon s7-credit"></span></td>
+                                            <td class="text-center"><strong><h1>£{{currBooking.fuelPrice}}</h1></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Route:<span class="icon s7-map-marker"></span></td>
+                                            <td>
+                                                <strong>Pickup:</strong> {{currBooking.pickUp}}<br>
+                                                <strong> Dropoff:</strong> {{currBooking.dropOff}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="item">Date:<span class="icon s7-date"></span></td>
+                                                <td>{{currBooking.jobDate}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="item">Notes:<span class="icon s7-comment"></span></td>
+                                                <td>"{{currBooking.driverNote}}"</td>
+                                            </tr>
+                                            <tr ng-if="status !== 'cancelled' && status !== 'completed' ">
+                                                <td class="item">Cancel Job:<span class="icon s7-close-circle"></span></td>
+                                                <td>
+                                                    <button data-dismiss="modal" class="btn btn-primary" ng-click="cancelJob(currBooking.jobPK)">cancel</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div card-added></div>
+
+    </div>
+
+</body>

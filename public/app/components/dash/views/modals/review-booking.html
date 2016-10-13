@@ -1,0 +1,160 @@
+<div id="md-review" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" id="review-booking-close" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                <h3>Review Booking</h3>
+            </div>
+
+            <div class="modal-body">
+                <div class="row">
+                 <div class="text-center">
+                        <div class="user-profile col-md-12 col-sm-12">
+                            <div class=" info-block panel panel-default">
+                                <table class="no-border no-strip skills">
+                                    <tbody class="no-border-x no-border-y">
+                                        <tr>
+                                            <td class="item">Vehicle:<span class="icon s7-car"></span></td>
+                                            <td>{{dashInstant.vanName}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="item">Route:<span class="icon s7-map-marker"></span></td>
+                                            <td>
+                                                <strong>Pickup:</strong> SW19 3TZ<br>
+                                                <strong> Dropoff:</strong> SE15 2NF</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="item">Date:<span class="icon s7-date"></span></td>
+                                                <td>{{dashInstant.jobDate}}</td>
+                                            </tr>
+                                             <tr>
+                                            <td class="item">Price:<span class="icon s7-credit"></span></td>
+                                            <td class="text-center"><strong><h1>£140</h1></strong></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!--
+            <div class="row">
+                        <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-6">
+                            <div class="widget widget-tile">
+                              <div class="data-info">
+                                <div  data-toggle="counter" data-end="18.6" data-decimals="1" data-suffix="%" class="value">{{dashInstant.vanName}}</div>
+                                <div class="desc">Van Type</div>
+                              </div>
+                              <div class="icon"><span class="s7-car"></span></div>
+                            </div>
+                </div>
+                <div class="col-md-6">
+                            <div class="widget widget-tile">
+                              <div class="data-info">
+                                <div class="value">4</div>
+                                <div class="desc">Hours</div>
+                              </div>
+                              <div class="icon"><span class="s7-timer"></span></div>
+                            </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                            <div class="widget widget-tile">
+                              <div class="data-info">
+                                <div class="value">{{dashInstant.jobDate}}</div>
+                                <div class="desc">Date</div>
+                              </div>
+                              <div class="icon"><span class="s7-date"></span></div>
+                            </div>
+                </div>
+                <div class="col-md-6">
+                            <div class="widget widget-tile">
+                              <div class="data-info">
+                                <div class="value">SW19 3TZ</div>
+                                <div class="desc">Route</div>
+                              </div>
+                              <div class="icon"><span class="s7-map-marker"></span></div>
+                            </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="widget widget-tile widget-tile-wide">
+                    <div class="tile-info">
+                      <div class="icon"><span class="s7-credit"></span></div>
+                      <div class="data-info">
+                        <div class="title">Total Pice</div>
+                          <div class="desc">Estimated Cost</div>
+                      </div>
+                    </div>
+                    <div class="tile-value"><span>£140</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                </div>
+                -->
+                        	<hr>					
+				            <p><small class="text-muted">PS. This form doesn't do anything. Just a heads up.</small></p>
+												
+                            <form class="form-horizontal col-md-6">
+                                <div class="form-group ">
+                                    <div class="col-lg-10">
+                                        <input class="form-control" id="inputName" placeholder="Name" type="text">
+                                    </div>
+                                </div>
+                            </form>
+                
+                            <form class="form-horizontal col-md-6">
+                                <div class="form-group">
+                                    <div class="col-lg-10">
+                                        <textarea class="form-control" id="inputMessage" placeholder="Message" rows="3"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                
+                
+                      
+            </div>
+                <div class="clearfix"></div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+
+                <button ng-if="misc.hasCard !== true" data-dismiss="modal" data-toggle="modal" data-target="#stripe-addcard" ng-click="showAddCard()" class="btn btn-danger btn-space btn-hspace">Add Card</button>
+
+                <button ng-if="misc.hasCard == true" ng-click="bookInstantJob()" class="btn btn-danger btn-space btn-hspace">Book Job</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        
+        
+        
+        <!--
+
+						<form class="form-horizontal">
+													<div class="form-group">
+														<label class="col-lg-2 control-label" for="inputName">Name</label>
+														<div class="col-lg-10">
+															<input class="form-control" id="inputName" placeholder="Name" type="text">
+														</div>
+													</div>
+													
+													<div class="form-group">
+														<label class="col-lg-2 control-label" for="inputMessage">Message</label>
+														<div class="col-lg-10">
+															<textarea class="form-control" id="inputMessage" placeholder="Message" rows="3"></textarea>
+														</div>
+													</div>
+												</form>
+											</div><!-- end modal-body -->
+
+
+
+
+
+-->

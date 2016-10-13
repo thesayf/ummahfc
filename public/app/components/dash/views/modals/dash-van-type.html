@@ -1,0 +1,61 @@
+<!-- Get fixed quote Modal Ends Here-->
+
+<div id="inv-fullWidth" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog full-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--cancel button starts here-->
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                <h3 class="modal-title">Choose your van</h3>
+                <!--cancel button ends here-->
+            </div>
+            <div class="modal-body">
+            <div class="panel-body">
+                <div class="row">
+            <table class="table">
+                <thead>
+                        <tr>
+                            <th>Item Size</th>
+                            <th>Name</th>
+                            <th>Qty</th>
+                            <th>Add another</th>
+                        </tr>
+                        <tbody ng-repeat="boxes in itemBoxes">
+                            <td>
+                                <select ng-model="itemBoxes[$index].size" ng-if="firstedit !== false" ng-model="driver.vehicle" class="form-control" placeholder="Van Type Name" required>
+                                      <option value="smItems">Small Item (anthing up to a box)</option>
+                                      <option value="mdItems">Medium Item (anthing up to a chest of draws)</option>
+                                      <option value="lgItem">Large Item (anthing up to a chest of king size bed)</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" ng-model="itemBoxes[$index].name">
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" ng-model="itemBoxes[$index].qty">
+                            </td>
+                            <td>
+                                <button class="btn btn-primary" ng-click="addItembox()">+ add Item</button>
+                            </td>
+                        </tbody>
+                    </thead>
+               <tbody>
+                        <tr ng-repeat="contact in contactlist">
+                            <td>{{contact.name}}</td>
+                            <td>{{contact.email}}</td>
+                            <td>{{contact.number}}</td>
+                   <td><button class="btn btn-danger" ng-click="remove(contact._id)">remove</button></td>
+                   <td><button class="btn btn-warning" ng-click="edit(contact._id)">edit</button></td>
+                        </tr>
+               </tbody>
+            </table>
+                </div>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                <button type="button" data-dismiss="modal" class="btn btn-primary">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
