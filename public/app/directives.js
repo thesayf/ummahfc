@@ -227,3 +227,10 @@ app.directive('reviewBooking', function() {
 		controller: 'ReviewBookingCtrl',
 	}
 })
+
+app.directive('checkout', function() {
+	return {
+		templateUrl: dir+'dash/views/dash-checkout.html',
+		controller: 'CheckoutCtrl',
+	}
+})

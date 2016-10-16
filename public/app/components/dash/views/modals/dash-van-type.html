@@ -18,7 +18,7 @@
                             <th>Item Size</th>
                             <th>Name</th>
                             <th>Qty</th>
-                            <th>Add another</th>
+<!--                            <th>Add another</th>-->
                         </tr>
                         <tbody ng-repeat="boxes in itemBoxes">
                             <td>
@@ -34,9 +34,11 @@
                             <td>
                                 <input type="number" class="form-control" ng-model="itemBoxes[$index].qty">
                             </td>
+<!--
                             <td>
                                 <button class="btn btn-primary" ng-click="addItembox()">+ add Item</button>
                             </td>
+-->
                         </tbody>
                     </thead>
                <tbody>

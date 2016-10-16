@@ -190,13 +190,7 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
     }
 
     $scope.reviewBooking = function() {
-        $scope.stripeForm.checkCardRes(function(status) {
-            if(status == true) {
-                $scope.misc.hasCard = true;
-            } else {
-                $scope.misc.hasCard = false;
-            }
-        });
+        $location.path("/checkout");
     }
 
     $scope.updateMaps = function() {
@@ -500,5 +494,14 @@ app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, das
             document.getElementById('payment-button').click();
             $scope.stripeForm.checkCard();
         }
+    }
+})
+
+
+app.controller('CheckoutCtrl', function($scope) {
+    $scope.currentStage = 2;
+    $scope.showCheckoutStep = function(stage) {
+        $scope.currentStage = stage;
+        console.log($scope.currentStage);
     }
 })

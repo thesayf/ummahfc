@@ -251,6 +251,12 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'ContractorSignupCtrl',
             //action    : 'dash-allmessages'
         })
+        
+        .when('/checkout', {
+            templateUrl : 'app/components/dash/views/dash-checkout.html',
+            controller  : 'CheckoutCtrl',
+            //action    : 'dash-allmessages'
+        })
 
         .otherwise({
             redirectTo: '/'
