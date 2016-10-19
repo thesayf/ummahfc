@@ -19392,4 +19392,109 @@ div.dataTables_wrapper div.dataTables_length label select {
   .lg-mb-0 {
     margin-bottom: 0px;
   }
+    
+.darkSection h3, .aboutPeople h3, .setp5 .thanksContent h3 {
+  color: #ffffff;
+  text-transform: capitalize;
+  font-weight: 400;
+  margin-bottom: 25px;
 }
+    
+/*=== 12.5 STEP # 05 ===*/
+.setp5 {
+  padding-bottom: 90px;
+}
+.setp5 .thanksContent {
+  border: 5px solid #f0f0f0;
+  padding: 50px 30px;
+}
+.setp5 .thanksContent h2 {
+  display: block;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 700;
+  margin-bottom: 55px;
+}
+@media (min-width: 480px) {
+  .setp5 .thanksContent h2 {
+    font-size: 26px;
+  }
+}
+@media (min-width: 768px) {
+  .setp5 .thanksContent h2 {
+    font-size: 30px;
+  }
+}
+.setp5 .thanksContent h2 small {
+  display: block;
+  margin-top: 14px;
+  font-size: 14px;
+}
+.setp5 .thanksContent h3 {
+  color: #252525;
+}
+.setp5 .thanksContent .thanksInner {
+  padding: 30px;
+  min-height: 214px;
+  border: 3px solid #f0f0f0;
+}
+.setp5 .thanksContent .thanksInner .tableBlcok {
+  display: table;
+  height: 154px;
+}
+.setp5 .thanksContent .thanksInner .tableBlcok address {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 30px;
+}
+.setp5 .thanksContent .thanksInner .tableBlcok address span {
+  font-weight: 400;
+}
+.setp5 .thanksContent .thanksInner .tableBlcok address a {
+  color: #252525;
+  text-decoration: none;
+}
+
+
+.setp5 .thanksContent .thanksInner .well {
+  background-color: #47bac1;
+  border: none;
+  float: right;
+  border-radius: 0;
+  margin-bottom: 0;
+  text-align: center;
+  height: 154px;
+  padding: 50px 0 0 0;
+}
+@media (max-width: 479px) {
+  .setp5 .thanksContent .thanksInner .well {
+    width: 100%;
+  }
+}
+@media (min-width: 480px) {
+  .setp5 .thanksContent .thanksInner .well {
+    width: 100%;
+  }
+}
+@media (min-width: 768px) {
+  .setp5 .thanksContent .thanksInner .well {
+    width: 250px;
+  }
+}
+.setp5 .thanksContent .thanksInner .well h2 {
+  color: #ffffff;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.setp5 .thanksContent .thanksInner .well h2 small {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  margin: 0 0 13px 0;
+}
+    
+}
+

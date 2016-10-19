@@ -18,21 +18,27 @@
                     <ul class="nav navbar-nav navbar-right am-user-nav">
                         <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="angle-down s7-menu"></span></a>
                             <ul role="menu" class="dropdown-menu">
-                                <li ng-click="displayBooking()" data-toggle="modal" data-target="#md-default"><a href=""> <span class="icon s7-date"></span>Upcoming Bookings</a></li>
-                                <li ng-click="displayBookingHistory()" data-toggle="modal" data-target="#booking-history"><a href=""> <span class="icon s7-date"></span>Booking History</a></li>
-                                <li ng-click="displayProfile()" data-toggle="modal" data-target="#mod-info"><a href=""> <span class="icon s7-user"></span>My profile</a></li>
-                                <li ng-click="checkCard()" id="payment-button" data-toggle="modal" data-target="#stripe-addcard">
-                                    <a href=""><span class="icon s7-credit"></span>Payment Details</a>
-                                </li>
                                 <li data-toggle="modal" data-target="#mod-warning">
                                     <a href="" ng-click="isEmailSent == false">
                                         <span class="icon s7-mail-open-file"></span>Contact Us
                                     </a>
                                 </li>
-                                <li><a href="#" ng-click="logout()"> <span class="icon s7-power"></span>Sign Out</a></li>
                             </ul>
                         </li>
                     </ul>
+                    <ul class="nav navbar-nav am-nav-right">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Services <span class="angle-down s7-angle-down"></span></a>
+                <ul role="menu" class="dropdown-menu">
+                  <li><a href="#">UI Consulting</a></li>
+                  <li><a href="#">Web Development</a></li>
+                  <li><a href="#">Database Management</a></li>
+                  <li><a href="#">Seo Improvement</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Support</a></li>
+            </ul>
                 </div>
             </div>
         </nav>

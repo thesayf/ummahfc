@@ -257,6 +257,24 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
         })
+        
+        .when('/checkout-2', {
+            templateUrl : 'app/components/dash/views/dash-checkout-2.html',
+            controller  : 'CheckoutCtrl',
+            //action    : 'dash-allmessages'
+        })
+        
+        .when('/checkout-3', {
+            templateUrl : 'app/components/dash/views/dash-checkout-3.html',
+            controller  : 'CheckoutCtrl',
+            //action    : 'dash-allmessages'
+        })
+    
+        .when('/booking-complete', {
+            templateUrl : 'app/components/dash/views/booking-complete.html',
+            controller  : 'CheckoutCtrl',
+            //action    : 'dash-allmessages'
+        })
 
         .otherwise({
             redirectTo: '/'

@@ -234,3 +234,24 @@ app.directive('checkout', function() {
 		controller: 'CheckoutCtrl',
 	}
 })
+
+app.directive('checkoutTwo', function() {
+	return {
+		templateUrl: dir+'dash/views/dash-checkout-2.html',
+		controller: 'CheckoutCtrl',
+	}
+})
+
+app.directive('checkoutThree', function() {
+	return {
+		templateUrl: dir+'dash/views/dash-checkout-3.html',
+		controller: 'CheckoutCtrl',
+	}
+})
+
+app.directive('bookingComplete', function() {
+	return {
+		templateUrl: dir+'dash/views/booking-complete.html',
+		controller: 'CheckoutCtrl',
+	}
+})

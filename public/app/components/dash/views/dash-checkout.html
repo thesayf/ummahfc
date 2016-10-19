@@ -36,176 +36,86 @@ body { margin-top:20px; }
               <div class="block-wizard panel panel-default">
                 <div id="wizard1" class="wizard wizard-ux">
                   <ul class="steps">
-                    <li data-step="1" ng-click="showCheckoutStep(1)" >Step 1<span class="chevron"></span></li>
-                    <li data-step="2" ng-click="showCheckoutStep(2)" class="active">Step 2<span class="chevron"></span></li>
-                    <li data-step="3" ng-click="showCheckoutStep(3)">Step 3<span class="chevron"></span></li>
+                    <li data-step="1" ng-click="showCheckoutStep(1)" class="active">Booking Review<span class="chevron"></span></li>
+                    <li data-step="2" ng-click="showCheckoutStep(2)">Add Contact Details<span class="chevron"></span></li>
+                    <li data-step="3" ng-click="showCheckoutStep(3)">Payment<span class="chevron"></span></li>
                   </ul>
-                  <div class="actions">
-                    <button type="button" class="btn btn-xs btn-prev btn-default"><i class="icon s7-angle-left"></i>Prev</button>
-                    <button type="button" data-last="Finish" class="btn btn-xs btn-next btn-default">Next<i class="icon s7-angle-right"></i></button>
-                  </div>
                   <div class="step-content">
                     <div  data-step="1" class="step-pane active">
                       <form action="#" data-parsley-namespace="data-parsley-" data-parsley-validate="" novalidate="" class="form-horizontal group-border-dashed">
-                        <div class="form-group no-padding">
-                          <div class="col-sm-7">
-                            <h3 class="wizard-title">Pick Up</h3>
-                          </div>
+                            <div class="form-group no-padding">
+                              <div class="col-sm-7">
+                                <h3 class="wizard-title">Booking Review</h3>
+                              </div>
+                            </div>
+                          
+                          <div class="row">
+                                <div class="col-md-4 col-md-offset-2">
+                                  <div class="panel panel-alt4">
+                                    <div class="panel-heading">
+                                      <div class="tools"></div><span class="title">Pick Up Information</span>
+                                    </div>
+                                    <div class="panel-body">
+                                      <p><strong>Pick Up Date and Timer:</strong> 8/12/2017 13:00</p>
+                                      <p><strong>Pick Up Address:</strong> 8 Sharpland Aylestone Leicester LE2 8UL</p>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <div class="panel panel-alt4">
+                                    <div class="panel-heading">
+                                      <div class="tools"></div><span class="title">Delivery Information</span>
+                                    </div>
+                                    <div class="panel-body">
+                                      <p><strong>Pick Up Address:</strong> 8 Sharpland Aylestone Leicester LE2 8UL</p>
+                                    </div>
+                                  </div>
+                                </div>
                         </div>
-                        <div class="form-group">
-                          <label class="col-sm-3 control-label">House Nnumber</label>
-                          <div class="col-sm-6">
-                            <input type="text" placeholder="User name" class="form-control">
-                          </div>
+                          
+                        <div class="row">
+                            
+                                <div class="col-md-4 col-md-offset-2">
+                                  <div class="panel panel-alt4">
+                                    <div class="panel-heading">
+                                      <div class="tools"></div><span class="title">Booking Information</span>
+                                    </div>
+                                    <div class="panel-body">
+                                      <p><strong>Inventory:</strong> Small items x 4, large items x 6  </p>
+                                      <p><strong>Extra helper:</strong>Yes</p>
+                                      <p><strong>Availibilty: </strong>Yes</p>
+                                    </div>
+                                  </div>
+                                </div>
+                            
+                                <div class="col-md-4">
+                                  <div class="panel panel-alt4">
+                                    <div class="panel-heading">
+                                      <div class="tools"></div><span class="title">Price Information</span>
+                                    </div>
+                                    <div class="panel-body">
+                                      <p><strong>Full Price</strong> £450 </p>
+                                      <p><strong>Deposit To be paid</strong> £55</p>
+                                      <p><strong>Refund Policy</strong> A refund can be given at any time before a driver has been dispatched </p>
+                                    </div>
+                                  </div>
+                                </div>
                         </div>
-                        <div class="form-group">
-                          <label class="col-sm-3 control-label">First Line</label>
-                          <div class="col-sm-6">
-                            <input type="text" placeholder="User E-Mail" class="form-control">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-sm-3 control-label">Postcode</label>
-                          <div class="col-sm-6">
-                            <input type="password" placeholder="Enter your password" class="form-control">
-                          </div>
-                        </div>
-                        <div class="form-group">
-                          <label class="col-sm-3 control-label">Verify Password</label>
-                          <div class="col-sm-6">
-                            <input type="password" placeholder="Enter your password again" class="form-control">
-                          </div>
-                        </div>
+                           
+                          
+                          
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-default btn-space">Cancel</button>
-                            <button data-wizard="#wizard1" ng-click="" class="btn btn-primary btn-space wizard-next">Next Step <i class="icon s7-angle-right"></i></button>
+                            <button class="btn btn-default btn-space">Go back to booking page</button>
+                            <button ng-click="next()" class="btn btn-primary btn-space wizard-next">Next Step <i class="icon s7-angle-right"></i></button>
                           </div>
                         </div>
                       </form>
                     </div>
                     <div data-step="2" class="step-pane">
                           <!-- Vendor libraries -->
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.13.1/jquery.validate.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.payment/1.2.3/jquery.payment.min.js"></script>
 
-<!-- If you're using Stripe for payments -->
-<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
-<div class="container">
-    <div class="row">
-        <!-- You can make it whatever width you want. I'm making it full width
-             on <= small devices and 4/12 page width on >= medium devices -->
-        <div class="col-xs-12 col-md-4">
-        
-        
-            <!-- CREDIT CARD FORM STARTS HERE -->
-            <div class="panel panel-default credit-card-box">
-                <div class="panel-heading display-table" >
-                    <div class="row display-tr" >
-                        <h3 class="panel-title display-td" >Payment Details</h3>
-                        <div class="display-td" >                            
-                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
-                        </div>
-                    </div>                    
-                </div>
-                <div class="panel-body">
-                    <form role="form" id="payment-form" method="POST" action="javascript:void(0);">
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="cardNumber">CARD NUMBER</label>
-                                    <div class="input-group">
-                                        <input 
-                                            type="tel"
-                                            class="form-control"
-                                            name="cardNumber"
-                                            placeholder="Valid Card Number"
-                                            autocomplete="cc-number"
-                                            required autofocus 
-                                        />
-                                        <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
-                                    </div>
-                                </div>                            
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-7 col-md-7">
-                                <div class="form-group">
-                                    <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
-                                    <input 
-                                        type="tel" 
-                                        class="form-control" 
-                                        name="cardExpiry"
-                                        placeholder="MM / YY"
-                                        autocomplete="cc-exp"
-                                        required 
-                                    />
-                                </div>
-                            </div>
-                            <div class="col-xs-5 col-md-5 pull-right">
-                                <div class="form-group">
-                                    <label for="cardCVC">CV CODE</label>
-                                    <input 
-                                        type="tel" 
-                                        class="form-control"
-                                        name="cardCVC"
-                                        placeholder="CVC"
-                                        autocomplete="cc-csc"
-                                        required
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <div class="form-group">
-                                    <label for="couponCode">COUPON CODE</label>
-                                    <input type="text" class="form-control" name="couponCode" />
-                                </div>
-                            </div>                        
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <button class="subscribe btn btn-success btn-lg btn-block" type="button">Start Subscription</button>
-                            </div>
-                        </div>
-                        <div class="row" style="display:none;">
-                            <div class="col-xs-12">
-                                <p class="payment-errors"></p>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>            
-            <!-- CREDIT CARD FORM ENDS HERE -->
-            
-            
-        </div>            
-        
-        <div class="col-xs-12 col-md-8" style="font-size: 12pt; line-height: 2em;">
-            <p><h1>Features:</h1>
-                <ul>
-                    <li>As-you-type, input formatting</li>
-                    <li>Form field validation (also as you type)</li>
-                    <li>Graceful error feedback for declined card, etc</li>
-                    <li>AJAX form submission w/ visual feedback</li>
-                    <li>Creates a Stripe credit card token</li>
-                </ul>
-            </p>
-            <p>Be sure to replace the dummy API key with a valid Stripe API key.</p>
-            
-            <p>Built upon: Bootstrap, jQuery, 
-                <a href="http://jqueryvalidation.org/">jQuery Validation Plugin</a>, 
-                <a href="https://github.com/stripe/jquery.payment">jQuery.payment library</a>,
-                and <a href="https://stripe.com/docs/stripe.js">Stripe.js</a>
-            </p>
-        </div>
-
-        
-    </div>
-</div>
 
                     </div>
                     <div data-step="3" class="step-pane">
@@ -216,3 +126,7 @@ body { margin-top:20px; }
               </div>
             </div>
           </div>
+
+
+<!--
+-->

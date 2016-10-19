@@ -1,0 +1,101 @@
+<style>
+/* Padding - just for asthetics on Bootsnipp.com */
+body { margin-top:20px; }
+
+/* CSS for Credit Card Payment form */
+.credit-card-box .panel-title {
+    display: inline;
+    font-weight: bold;
+}
+.credit-card-box .form-control.error {
+    border-color: red;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(255,0,0,0.6);
+}
+.credit-card-box label.error {
+  font-weight: bold;
+  color: red;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+.credit-card-box .payment-errors {
+  font-weight: bold;
+  color: red;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+.credit-card-box label {
+    display: block;
+
+</style>
+
+<div navi></div>
+
+<div class="row wizard-row">
+            <div class="col-md-12 fuelux">
+              <div class="block-wizard panel panel-default">
+                <div id="wizard1" class="wizard wizard-ux">
+                  <ul class="steps">
+                    <li data-step="1" ng-click="showCheckoutStep(1)" >Booking Review<span class="chevron"></span></li>
+                    <li data-step="2" ng-click="showCheckoutStep(2)" class="active">Add Contact Details<span class="chevron"></span></li>
+                    <li data-step="3" ng-click="showCheckoutStep(3)">Payment<span class="chevron"></span></li>
+                  </ul>
+                  <div class="step-content">
+                    <div  data-step="1" class="step-pane active">
+           <div class="col-sm-6">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3>Pleas Add Contact Details</h3>
+                </div>
+                <div class="panel-body">
+                  <form role="form" data-parsley-validate="" novalidate="" class="form-horizontal">
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Name</label>
+                      <div class="col-sm-10">
+                        <input id="inputPassword3" required="" placeholder="Name" class="form-control">
+                      </div>
+                    </div>
+                      
+                      <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                      <div class="col-sm-10">
+                        <input id="inputEmail3" type="email" required="" parsley-type="email" placeholder="Email" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Number</label>
+                      <div class="col-sm-10">
+                        <input required="" placeholder="Number" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Extra nstructions for driver </label>
+                      <div class="col-sm-10">
+                        <textarea required="" class="form-control"></textarea>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-offset-2 col-sm-10">
+                        <div class="text-right">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <button class="btn btn-default btn-space">Go back to booking page</button>
+                            <button  ng-click="back()" class="btn btn-primary btn-space wizard-next"><i class="icon s7-angle-left"></i>Back Step</button>
+                            <button ng-click="next2()" class="btn btn-primary btn-space wizard-next">Next Step <i class="icon s7-angle-right"></i></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+                    </div>
+                   
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

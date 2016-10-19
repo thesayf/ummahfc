@@ -26,32 +26,35 @@ app.controller('DashSignupCtrl', function($scope, $http, $rootScope, validation,
         ],
     };*/
 
-    $scope.register = function(user){
-        var valiOptions = [
-            {eleName: 'userFirstName', type: 'name', msg: 'Please enter a valid Firstname!'},
-            {eleName: 'userLastName', type: 'name', msg: 'Please enter a valid Lastname!'},
-            {eleName: 'userPhone', type: 'number', msg: 'Please enter a valid Mobile Number!'},
-            {eleName: 'userEmail', type: 'email', msg: 'Please enter a valid email address!'},
-            {eleName: 'userPassword', type: 'password', msg: 'Please enter a password!'}
-        ]
-        validation.checkVal(valiOptions, function(callback) {
-            if(callback > 0) {
-                return false
-            } else {
-                $http.post('/api/register', $scope.user)
-                .success(function(user){
-                    console.log(user);
-                    $rootScope.currentUser = user;
-                    if(user.success == false) {
-                        toastr.error(user.message);
-                    } else {
-                        $localStorage['token'] = user.data;
-                        $location.path('/dash');
-                        toastr.success('Login successful');
-                    }
-                });
-            }
-        })
+    $scope.register = function(){
+        
+        $location.path("/dash");
+        
+//        var valiOptions = [
+//            {eleName: 'userFirstName', type: 'name', msg: 'Please enter a valid Firstname!'},
+//            {eleName: 'userLastName', type: 'name', msg: 'Please enter a valid Lastname!'},
+//            {eleName: 'userPhone', type: 'number', msg: 'Please enter a valid Mobile Number!'},
+//            {eleName: 'userEmail', type: 'email', msg: 'Please enter a valid email address!'},
+//            {eleName: 'userPassword', type: 'password', msg: 'Please enter a password!'}
+//        ]
+//        validation.checkVal(valiOptions, function(callback) {
+//            if(callback > 0) {
+//                return false
+//            } else {
+//                $http.post('/api/register', $scope.user)
+//                .success(function(user){
+//                    console.log(user);
+//                    $rootScope.currentUser = user;
+//                    if(user.success == false) {
+//                        toastr.error(user.message);
+//                    } else {
+//                        $localStorage['token'] = user.data;
+//                        $location.path('/dash');
+//                        toastr.success('Login successful');
+//                    }
+//                });
+//            }
+//        })
     };
 })
 
@@ -149,8 +152,8 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
         $scope.dashInstant.estiCalc = $scope.totalCost;
     }
 
-    $scope.slider = $('.bslider').slider();
-    $scope.slider.slider('setValue', 1);
+//    $scope.slider = $('.bslider').slider();
+//    $scope.slider.slider('setValue', 1);
 
     var realTime = new Date();
     $('#job-date-picker').datetimepicker({
@@ -498,10 +501,29 @@ app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, das
 })
 
 
-app.controller('CheckoutCtrl', function($scope) {
-    $scope.currentStage = 2;
-    $scope.showCheckoutStep = function(stage) {
-        $scope.currentStage = stage;
-        console.log($scope.currentStage);
+app.controller('CheckoutCtrl', function($scope, $location) {
+    $scope.next = function(){
+        
+        $location.path("/checkout-2")
+    }
+    
+    $scope.back = function(){
+        
+        $location.path("/checkout")
+    }
+    
+    $scope.next2 = function(){
+        
+        $location.path("/checkout-3")
+    }
+    
+    $scope.back2 = function(){
+        
+        $location.path("/checkout-2")
+    }
+    
+    $scope.next3= function(){
+        
+         $location.path("/booking-complete")
     }
 })
