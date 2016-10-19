@@ -27,9 +27,9 @@ app.controller('DashSignupCtrl', function($scope, $http, $rootScope, validation,
     };*/
 
     $scope.register = function(){
-        
+
         $location.path("/dash");
-        
+
 //        var valiOptions = [
 //            {eleName: 'userFirstName', type: 'name', msg: 'Please enter a valid Firstname!'},
 //            {eleName: 'userLastName', type: 'name', msg: 'Please enter a valid Lastname!'},
@@ -96,7 +96,8 @@ app.controller('DashLoginCtrl', function($scope, $http, $rootScope, $location, $
 })
 
 // Ctrl For Dash
-app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashVans, maps, $http, tdispatch, bookingGrab, bookings, misc, user, stripeForm, rates, items, dev, routeInfo) {
+app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashVans, maps, $http, tdispatch, bookingGrab, bookings, misc, user, stripeForm, rates, items, dev, routeInfo, $timeout, $localStorage) {
+    $localStorage.vg = {};
 
     $scope.itemBoxes = [
         {size: '', name: '', qty: ''}
@@ -112,6 +113,21 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
     }
 
 
+    dashInstant.extraHelp = $('#swt5')[0].checked;
+
+    $scope.holdDriverDelay = function() {
+        var spinImg = '<img class="spin-img" src="/assets/img/35.gif">';
+        $('#review-body').hide().before(spinImg);
+        $('#modal-cont').addClass('tc');
+
+        var timeout = setTimeout(function() {
+            $('.spin-img').remove()
+            $('#review-body').show()
+            $('#modal-cont').removeClass('tc');
+        }, 3000)
+
+        //id="review-body"
+    }
 
     $scope.tester = function() {
         $scope.calcAlgo();
@@ -126,13 +142,9 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
             var itemQty = $scope.itemBoxes[ti].qty;
             var itemCuft = items[''+itemType+'']['cuFt'];
             $scope.loadTime = $scope.loadTime + (items[''+itemType+'']['loadTime'] * itemQty);
-            console.log($scope.loadTime+' + '+ items[''+itemType+'']['loadTime']+' * '+itemQty);
             $scope.unloadTime = $scope.unloadTime + (items[''+itemType+'']['unloadTime'] * itemQty);
             $scope.totalCuft = $scope.totalCuft + (itemCuft * itemQty);
         }
-        console.log($scope.loadTime);
-        console.log($scope.unloadTime);
-        console.log($scope.totalCuft);
 
         var rate = 0;
         for(rat in rates) {
@@ -143,13 +155,20 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
             }
         }
 
-        var driveTime = routeInfo.duration / 60;
-        var fuelCost = (routeInfo.distance * 0.000621371192237) * .70;
+        var driveTime = dashInstant.duration / 60;
+        var fuelCost = (dashInstant.distance * 0.000621371192237) * .70;
 
         var totalTime = $scope.loadTime + $scope.unloadTime + driveTime;
         var workCost = totalTime * rate;
-        $scope.totalCost = Math.ceil((workCost + fuelCost) * 10) / 10;
+        if(dashInstant.extraHelp == true) {
+            var extra = 20 * (totalTime/60);
+        } else {
+            var extra = 0;
+        }
+        $scope.totalCost = Math.ceil((workCost + fuelCost + extra) * 10) / 10;
         $scope.dashInstant.estiCalc = $scope.totalCost;
+        dashInstant.deposit = (($scope.totalCost / 100) * 25);
+        $localStorage.vg.jobDetails = dashInstant;
     }
 
 //    $scope.slider = $('.bslider').slider();
@@ -184,6 +203,7 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
     $('#job-date-picker').datetimepicker().on('changeDate', function(ev){
         $('#job-date-picker').datetimepicker('hide');
     });
+
 
     $scope.showWaypointField = function(type) {
         var waypointFields = $('[data-address-type="'+type+'"]').length;
@@ -235,6 +255,12 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
         }
     }
 
+    $scope.extraHelpClick = function() {
+        dashInstant.extraHelp = $('#swt5')[0].checked;
+        $scope.algoCalc();
+        $scope.calcAlgo();
+    }
+
     $scope.algoCalc = function() {
         $scope.dashInstant.estiCalc = ($scope.vanHourlyPrice * $scope.dashInstant.jobHoursEsti) + $scope.dashInstant.fuelPrice;
         dashInstant.estiCalc = $scope.dashInstant.estiCalc;
@@ -279,6 +305,13 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
             $('#review-booking-button').click();
         }
     })
+
+    $scope.goToCheck = function() {
+        $timeout(function() {
+            $location.path('/checkout');
+        },1000)
+
+    }
 
 })
 
@@ -503,27 +536,27 @@ app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, das
 
 app.controller('CheckoutCtrl', function($scope, $location) {
     $scope.next = function(){
-        
+
         $location.path("/checkout-2")
     }
-    
+
     $scope.back = function(){
-        
+
         $location.path("/checkout")
     }
-    
+
     $scope.next2 = function(){
-        
+
         $location.path("/checkout-3")
     }
-    
+
     $scope.back2 = function(){
-        
+
         $location.path("/checkout-2")
     }
-    
+
     $scope.next3= function(){
-        
+
          $location.path("/booking-complete")
     }
 })

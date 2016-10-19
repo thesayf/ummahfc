@@ -27,22 +27,22 @@
                                 <tr>
                                     <td class="item">Extra Helper:<span class="icon s7-add-user"></span></td>
                                     <td><div class="form-group">
-                      
+
                                       <div class="col-sm-6 xs-pt-5">
                                         <div class="switch-button switch-button-success">
-                                          <input type="checkbox" checked="" name="swt5" id="swt5"><span>
+                                          <input ng-click="extraHelpClick()" type="checkbox" model="dashInstant.extraHelp" name="swt5" id="swt5"><span>
                                             <label for="swt5"></label></span>
                                         </div>
                                       </div>
-                                        
-                                        
+
+
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="item">Price Estimate:<span ng-click="tester()" class="icon s7-credit"></span></td>
                                     <td class="text-center">
-                                        <div ng-if="dashInstant.fuelPrice > 0" class="">
+                                        <div class="">
                                             <strong><font size="6">£{{totalCost}}</font></strong>
                                         </div>
                                     </td>
@@ -51,7 +51,7 @@
                         </table>
                     </div>
                 </div>
-                <button data-toggle="modal" data-target="#md-review" id="review-booking-button" ng-click="" class="btn btn-danger btn-space btn-hspace col-md-12 col-xs-12">Find Drivers</button>
+                <button data-toggle="modal" data-target="#md-review" id="review-booking-button" ng-click="holdDriverDelay()" class="btn btn-danger btn-space btn-hspace col-md-12 col-xs-12">Find Drivers</button>
             </div>
         </div>
     </div>

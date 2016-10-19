@@ -3,7 +3,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
 
         .when('/', {
-            templateUrl : 'app/components/home/home-view.html',
+            templateUrl : 'app/components/home/con-web/index.html',
             controller  : 'HomeCtrl'
         })
 
@@ -251,25 +251,25 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'ContractorSignupCtrl',
             //action    : 'dash-allmessages'
         })
-        
+
         .when('/checkout', {
             templateUrl : 'app/components/dash/views/dash-checkout.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
         })
-        
+
         .when('/checkout-2', {
             templateUrl : 'app/components/dash/views/dash-checkout-2.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
         })
-        
+
         .when('/checkout-3', {
             templateUrl : 'app/components/dash/views/dash-checkout-3.html',
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
         })
-    
+
         .when('/booking-complete', {
             templateUrl : 'app/components/dash/views/booking-complete.html',
             controller  : 'CheckoutCtrl',
@@ -285,7 +285,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
 
 });
 
-app.run(function($http, $location, $rootScope, $localStorage) {
+/*app.run(function($http, $location, $rootScope, $localStorage) {
     $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
         var type = current.type;
         console.log(type);
@@ -313,4 +313,4 @@ app.run(function($http, $location, $rootScope, $localStorage) {
             }
         }
     })
-})
+})*/

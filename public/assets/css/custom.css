@@ -1,5 +1,5 @@
 .tc {text-align: center;}
-.tc {text-align: left;}
+.tl {text-align: left;}
 .ib {display: inline-block;}
 .m-5 {margin: 5px}
 .bord {border: 1px solid #d7d7d7;}
@@ -50,3 +50,5 @@
 }
 
 .slider.slider-horizontal {width: 130px;}
+
+.spin-img {margin: 30px 0;}

@@ -44,6 +44,7 @@ app.factory("dashInstant", function(){
         vanName: '',
         jobDate: '',
         jobHoursEsti: '',
+        extraHelp: '',
         estiCalc: '',
         fuelPrice: '',
         duration: '',
@@ -53,11 +54,13 @@ app.factory("dashInstant", function(){
         address: {
             "start_location": {
 		        "name": '',
+		        "number": '',
 		        "lat": '',
 		        "lng": ''
 		    },
             "end_location": {
 		        "name": '',
+                "number": '',
 		        "lat": '',
 		        "lng": ''
 		    },
@@ -843,7 +846,7 @@ app.service('func', function(dashInstant) {
         dashInstant.address.end_location.name = '';
         dashInstant.address.end_location.lng = '';
         dashInstant.address.end_location.lng = '';
-        dashInstant.distance = 0;   
+        dashInstant.distance = 0;
         dashInstant.payment_method = 'cash';
         dashInstant.pk = '';
         dashInstant.recieptUrl = '';
