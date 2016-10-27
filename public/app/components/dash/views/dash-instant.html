@@ -8,8 +8,8 @@
                             <table class="no-border no-strip skills">
                                 <tbody class="no-border-x no-border-y">
                                     <tr>
-                                        <td class="item">Vehicle<span class="icon s7-car"></span></td>
-                                        <td><button data-toggle="modal" data-target="#inv-fullWidth" type="button" class="btn btn-space btn-warning col-md-12 col-xs-12">Choose Vehicle</button></td>
+                                        <td class="item">Items<span class="icon s7-car"></span></td>
+                                        <td><button data-toggle="modal" data-target="#inv-fullWidth" type="button" class="btn btn-space btn-warning col-md-12 col-xs-12">Declare Items</button></td>
                                     </tr>
                                     <tr>
                                         <td class="item">Route:<span class="icon s7-map-marker"></span></td>
@@ -18,7 +18,7 @@
                                     <tr>
                                         <td class="item">Date & Time:<span class="icon s7-date"></span></td>
                                         <td><div class="input-group date datetimepicker col-md-12 col-xs-12">
-                                            <input id="job-date-picker" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
+                                            <input id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
                                             <!-- <span class="input-group-addon btn btn-primary">
                                             <i class="icon-th s7-date"></i> -->
                                         </span>
@@ -42,8 +42,11 @@
                                 <tr>
                                     <td class="item">Price Estimate:<span ng-click="tester()" class="icon s7-credit"></span></td>
                                     <td class="text-center">
-                                        <div class="">
-                                            <strong><font size="6">£{{totalCost}}</font></strong>
+                                        <div ng-if="dashInstant.estiCalc > 0" class="">
+                                            <strong><font size="6">£{{dashInstant.estiCalc}}</font></strong>
+                                        </div>
+                                        <div ng-if="!dashInstant.estiCalc > 0" class="">
+                                            <strong><font size="6">_____</font></strong>
                                         </div>
                                     </td>
                                 </tr>

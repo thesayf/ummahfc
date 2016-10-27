@@ -12,45 +12,30 @@
             <div class="modal-body">
             <div class="panel-body">
                 <div class="row">
-            <table class="table">
-                <thead>
-                        <tr>
-                            <th>Item Size</th>
-                            <th>Name</th>
-                            <th>Qty</th>
-<!--                            <th>Add another</th>-->
-                        </tr>
-                        <tbody ng-repeat="boxes in itemBoxes">
-                            <td>
-                                <select ng-model="itemBoxes[$index].size" ng-if="firstedit !== false" ng-model="driver.vehicle" class="form-control" placeholder="Van Type Name" required>
-                                      <option value="smItems">Small Item (anthing up to a box)</option>
-                                      <option value="mdItems">Medium Item (anthing up to a chest of draws)</option>
-                                      <option value="lgItem">Large Item (anthing up to a chest of king size bed)</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" ng-model="itemBoxes[$index].name">
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" ng-model="itemBoxes[$index].qty">
-                            </td>
-<!--
-                            <td>
-                                <button class="btn btn-primary" ng-click="addItembox()">+ add Item</button>
-                            </td>
--->
-                        </tbody>
-                    </thead>
-               <tbody>
-                        <tr ng-repeat="contact in contactlist">
-                            <td>{{contact.name}}</td>
-                            <td>{{contact.email}}</td>
-                            <td>{{contact.number}}</td>
-                   <td><button class="btn btn-danger" ng-click="remove(contact._id)">remove</button></td>
-                   <td><button class="btn btn-warning" ng-click="edit(contact._id)">edit</button></td>
-                        </tr>
-               </tbody>
-            </table>
+                    <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Small Item (anything up to a box) </label>
+                      <div class="col-sm-2">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[0].qty">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Medium Item (anything up to a chest of draws) </label>
+                      <div class="col-sm-2">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[1].qty">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Large Item (anything up to a chest of king size bed) </label>
+                      <div class="col-sm-2">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty">
+                      </div>
+                    </div>
+                  </form>
+
+
+
+
                 </div>
             </div>
             </div>

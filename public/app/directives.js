@@ -79,12 +79,12 @@ app.directive('dashAddaddress', function() {
 	}
 })
 
-app.directive('dashJobcomplete', function() {
+/*app.directive('dashJobcomplete', function() {
 	return {
 		templateUrl: dir+'dash/views/dash-jobcomplete.html',
 		controller: 'DashJobCompleteCtrl',
 	}
-})
+})*/
 
 app.directive('dashPaymentdetails', function() {
 	return {
@@ -93,26 +93,26 @@ app.directive('dashPaymentdetails', function() {
 	}
 })
 
-app.directive('dashProjectjob', function() {
+/*app.directive('dashProjectjob', function() {
 	return {
 		templateUrl: dir+'dash/views/dash-projectjob.html',
 		controller: 'DashJobCompleteCtrl',
 	}
-})
+})*/
 
-app.directive('dashSavedquotes', function() {
+/*app.directive('dashSavedquotes', function() {
 	return {
 		templateUrl: dir+'dash/views/dash-savedquotes.html',
 		controller: 'DashJobCompleteCtrl',
 	}
-})
+})*/
 
-app.directive('dashPendingjobs', function() {
+/*app.directive('dashPendingjobs', function() {
 	return {
 		templateUrl: dir+'dash/views/dash-pendingjobs.html',
 		controller: 'DashJobCompleteCtrl',
 	}
-})
+})*/
 
 app.directive('dashAllmessages', function() {
 	return {
@@ -122,33 +122,33 @@ app.directive('dashAllmessages', function() {
 })
 
 // Dash Modals
-app.directive('dashPorterQty', function() {
+/*app.directive('dashPorterQty', function() {
 	return {
 		templateUrl: dir+'dash/views/modals/dash-porter-qty.html',
 		controller: 'DashJobCompleteCtrl',
 	}
-})
+})*/
 
 app.directive('dashRoutePlan', function() {
 	return {
 		templateUrl: dir+'dash/views/modals/dash-route-plan.html',
-		controller: 'DashJobCompleteCtrl',
+		controller: 'DashInstantCtrl',
 	}
 })
 
 app.directive('dashVanType', function() {
 	return {
 		templateUrl: dir+'dash/views/modals/dash-van-type.html',
-		controller: 'DashJobCompleteCtrl',
+		controller: 'DashInstantCtrl',
 	}
 })
 
-app.directive('dashOauth', function() {
+/*app.directive('dashOauth', function() {
 	return {
 		templateUrl: dir+'dash/views/modals/dash-oauth-window.html',
 		controller: 'DashJobCompleteCtrl',
 	}
-})
+})*/
 
 app.directive('adminHome', function() {
 	return {
@@ -224,7 +224,7 @@ app.directive('cardAdded', function() {
 app.directive('reviewBooking', function() {
 	return {
 		templateUrl: dir+'dash/views/modals/review-booking.html',
-		controller: 'ReviewBookingCtrl',
+		controller: 'DashInstantCtrl',
 	}
 })
 

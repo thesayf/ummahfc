@@ -9,9 +9,6 @@ app.controller('DashHomeCtrl', function($scope) {
 })
 
 
-app.controller('DashJobCompleteCtrl', function($scope, $location, dashInstant) {
-})
-
 // Ctrl For Signup
 app.controller('DashSignupCtrl', function($scope, $http, $rootScope, validation, $location, $localStorage) {
     $scope.user = {};
@@ -96,24 +93,79 @@ app.controller('DashLoginCtrl', function($scope, $http, $rootScope, $location, $
 })
 
 // Ctrl For Dash
-app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashVans, maps, $http, tdispatch, bookingGrab, bookings, misc, user, stripeForm, rates, items, dev, routeInfo, $timeout, $localStorage) {
-    $localStorage.vg = {};
+app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout) {
 
-    $scope.itemBoxes = [
-        {size: '', name: '', qty: ''}
-    ];
+    // Start GMaps
+    maps.init();
 
-    $scope.addItembox = function() {
-        $scope.itemBoxes.push({
-            size: '',
-            name: '',
-            qty: ''
-        });
-      console.log($scope.itemBoxes);
+    $scope.autocompleteOptions = {
+        componentRestrictions: { country: 'uk' },
+        types: ['geocode']
+    }
+
+    if($localStorage.vg !== undefined && $localStorage.vg.jobDetails) {
+        $scope.dashInstant = $localStorage.vg.jobDetails;
+        $('#swt5')[0].checked = $scope.dashInstant.extraHelp;
+    } else {
+        $localStorage.vg = {};
+        $scope.dashInstant = {};
+        $scope.dashInstant.itemBoxes = [
+            {size: 'smItems', qty: 0},
+            {size: 'mdItems', qty: 0},
+            {size: 'lgItems', qty: 0}
+        ]
+    }
+
+    var realTime = new Date();
+    $('#job-date-picker').datetimepicker({
+        format: 'dd-mm-yy hh:ii',
+        startDate: realTime,
+        initialDate: realTime,
+        todayHighlight: true,
+    });
+
+    // Hide Picker When selected
+    $('#job-date-picker').datetimepicker().on('changeDate', function(ev){
+        $('#job-date-picker').datetimepicker('hide');
+    });
+
+    $scope.changeData = function() {
+        var flag = 0;
+
+        // IF THERES NO INVENTORY FLAG
+        if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
+            flag = flag + 1;
+        }
+
+        // IF NO JOB DATE
+        if($scope.dashInstant.jobDate == '') {
+            flag = flag + 1;
+        }
+
+        // IF NO ADDRESS DATA
+        if($scope.dashInstant.address == undefined) {
+            flag = flag + 1;
+        } else {
+            if($scope.dashInstant.address.start_location !== undefined &&
+                $scope.dashInstant.address.start_location.name == '') {
+                    flag = flag + 1;
+            }
+            if($scope.dashInstant.address.end_location !== undefined &&
+                $scope.dashInstant.address.end_location.name == '') {
+                    flag = flag + 1;
+            }
+        }
+
+        if(flag > 0) {
+            console.log('flagged');
+        } else {
+            console.log('ok no flag');
+            $scope.calcAlgo();
+        }
     }
 
 
-    dashInstant.extraHelp = $('#swt5')[0].checked;
+    $scope.dashInstant.extraHelp = $('#swt5')[0].checked;
 
     $scope.holdDriverDelay = function() {
         var spinImg = '<img class="spin-img" src="/assets/img/35.gif">';
@@ -126,25 +178,21 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
             $('#modal-cont').removeClass('tc');
         }, 3000)
 
-        //id="review-body"
-    }
-
-    $scope.tester = function() {
-        $scope.calcAlgo();
     }
 
     $scope.calcAlgo = function() {
         $scope.loadTime = 0;
         $scope.unloadTime = 0;
         $scope.totalCuft = 0;
-        for(ti in $scope.itemBoxes) {
-            var itemType = $scope.itemBoxes[ti].size;
-            var itemQty = $scope.itemBoxes[ti].qty;
+        for(ti in $scope.dashInstant.itemBoxes) {
+            var itemType = $scope.dashInstant.itemBoxes[ti].size;
+            var itemQty = $scope.dashInstant.itemBoxes[ti].qty;
             var itemCuft = items[''+itemType+'']['cuFt'];
             $scope.loadTime = $scope.loadTime + (items[''+itemType+'']['loadTime'] * itemQty);
             $scope.unloadTime = $scope.unloadTime + (items[''+itemType+'']['unloadTime'] * itemQty);
             $scope.totalCuft = $scope.totalCuft + (itemCuft * itemQty);
         }
+        //dashInstant.itemBoxes = $scope.itemBoxes;
 
         var rate = 0;
         for(rat in rates) {
@@ -155,69 +203,24 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
             }
         }
 
-        var driveTime = dashInstant.duration / 60;
-        var fuelCost = (dashInstant.distance * 0.000621371192237) * .70;
+        var driveTime = $scope.dashInstant.duration / 60;
+        var fuelCost = ($scope.dashInstant.distance * 0.000621371192237) * .70;
 
         var totalTime = $scope.loadTime + $scope.unloadTime + driveTime;
         var workCost = totalTime * rate;
-        if(dashInstant.extraHelp == true) {
+        if($scope.dashInstant.extraHelp == true) {
             var extra = 20 * (totalTime/60);
         } else {
             var extra = 0;
         }
         $scope.totalCost = Math.ceil((workCost + fuelCost + extra) * 10) / 10;
         $scope.dashInstant.estiCalc = $scope.totalCost;
-        dashInstant.deposit = (($scope.totalCost / 100) * 25);
-        $localStorage.vg.jobDetails = dashInstant;
-    }
-
-//    $scope.slider = $('.bslider').slider();
-//    $scope.slider.slider('setValue', 1);
-
-    var realTime = new Date();
-    $('#job-date-picker').datetimepicker({
-        format: 'dd-mm-yy hh:ii',
-        startDate: realTime,
-        initialDate: realTime,
-        todayHighlight: true,
-    });
-
-    $scope.dashInstant = dashInstant;
-    $scope.dashVans = dashVans;
-    $scope.tdispatch = tdispatch;
-    $scope.booking = bookings;
-    $scope.misc = misc;
-    $scope.stripeForm = stripeForm;
-
-    // Set up autocomplete
-    $scope.address = dashInstant.address;
-
-    $scope.autocompleteOptions = {
-        componentRestrictions: { country: 'uk' },
-        types: ['geocode']
-    }
-    // Start GMaps
-    maps.init();
-
-    // Hide Picker When selected
-    $('#job-date-picker').datetimepicker().on('changeDate', function(ev){
-        $('#job-date-picker').datetimepicker('hide');
-    });
-
-
-    $scope.showWaypointField = function(type) {
-        var waypointFields = $('[data-address-type="'+type+'"]').length;
-        var hiddenWaypointFields = $('[data-address-type="'+type+'"].hide').length;
-        var waypointId = (waypointFields - hiddenWaypointFields) + 2;
-        $('[data-address-type="'+type+'"][data-address-id="'+waypointId+'"]').removeClass("hide");
-    }
-
-    $scope.reviewBooking = function() {
-        $location.path("/checkout");
+        $scope.dashInstant.deposit = (($scope.totalCost / 100) * 25);
+        $scope.dashInstant.deposit = $scope.dashInstant.deposit.toFixed(2);
     }
 
     $scope.updateMaps = function() {
-        if(dev.offline !== true) {
+        if($scope.dashInstant.address.start_location !== undefined) {
             if($scope.dashInstant.address.start_location.name.formatted_address) {
                 $scope.dashInstant.address.start_location.lat =
                 $scope.dashInstant.address.start_location.name.geometry.location.lat();
@@ -225,99 +228,53 @@ app.controller('DashInstantCtrl', function($scope, $location, dashInstant, dashV
                 $scope.dashInstant.address.start_location.name.geometry.location.lng();
                 $scope.dashInstant.address.start_location.name = $scope.dashInstant.address.start_location.name.formatted_address;
             }
-            if($scope.address.end_location.name.formatted_address) {
+        }
+        if($scope.dashInstant.address.end_location !== undefined) {
+            if($scope.dashInstant.address.end_location.name.formatted_address) {
                 $scope.dashInstant.address.end_location.lat =
                 $scope.dashInstant.address.end_location.name.geometry.location.lat();
                 $scope.dashInstant.address.end_location.lng =
                 $scope.dashInstant.address.end_location.name.geometry.location.lng();
                 $scope.dashInstant.address.end_location.name = $scope.dashInstant.address.end_location.name.formatted_address;
             }
-            if($scope.address.pickup1.formatted_address) {
-                $scope.address.pickup1.name = $scope.address.pickup1.formatted_address;
-            }
-            if($scope.address.dropoff1.formatted_address) {
-                $scope.address.dropoff1.name = $scope.address.dropoff1.formatted_address;
-            }
-            if($scope.address.pickup2.formatted_address) {
-                $scope.address.pickup2.name = $scope.address.pickup2.formatted_address;
-            }
-            if($scope.address.dropoff2.formatted_address) {
-                $scope.address.dropoff2.name = $scope.address.dropoff2.formatted_address;
-            }
-            if($scope.address.start_location.name !== '' && $scope.address.end_location.name !== '') {
-                maps.setDirections($scope.address, function(distance) {
-                    var tempMiles = 0.000621371192237 * distance;
-                    $scope.dashInstant.fuelPrice = Math.round(tempMiles * 0.72);
-                    $scope.algoCalc();
-                    $scope.calcAlgo();
-                });
-            }
         }
+        if($scope.dashInstant.address.pickup1 !== undefined && $scope.dashInstant.address.pickup1.formatted_address) {
+            $scope.dashInstant.address.pickup1.name = $scope.dashInstant.address.pickup1.formatted_address;
+        }
+        if($scope.dashInstant.address.dropoff1 !== undefined && $scope.dashInstant.address.dropoff1.formatted_address) {
+            $scope.dashInstant.address.dropoff1.name = $scope.dashInstant.address.dropoff1.formatted_address;
+        }
+
+        if($scope.dashInstant.address.start_location !== undefined &&
+            $scope.dashInstant.address.start_location.name !== '' &&
+            $scope.dashInstant.address.end_location !== undefined &&
+            $scope.dashInstant.address.end_location.name !== '') {
+                maps.setDirections($scope.dashInstant.address, function(data) {
+                    var tempMiles = 0.000621371192237 * data.distance;
+                    $scope.dashInstant.fuelPrice = Math.round(tempMiles * 0.72);
+                    $scope.dashInstant.distance = tempMiles;
+                    $scope.dashInstant.duration = data.duration;
+                });
+         }
     }
 
     $scope.extraHelpClick = function() {
-        dashInstant.extraHelp = $('#swt5')[0].checked;
-        $scope.algoCalc();
-        $scope.calcAlgo();
+        $scope.dashInstant.extraHelp = $('#swt5')[0].checked;
+        $scope.changeData();
     }
-
-    $scope.algoCalc = function() {
-        $scope.dashInstant.estiCalc = ($scope.vanHourlyPrice * $scope.dashInstant.jobHoursEsti) + $scope.dashInstant.fuelPrice;
-        dashInstant.estiCalc = $scope.dashInstant.estiCalc;
-        if($scope.dashInstant.fuelPrice > 0 && $scope.vanHourlyPrice > 0 && $scope.dashInstant.jobHoursEsti > 0) {
-            // OK Hack
-            $scope.$apply();
-        }
-    }
-
-    $($scope.slider).on('change', function() {
-        $scope.dashInstant.jobHoursEsti = $scope.slider.val()
-        $scope.algoCalc();
-        $scope.calcAlgo();
-    })
-
-    // NO SAVE ButTON
-    $scope.saveInstantjob = function(){
-        $http.post('/api/save-instant-job', {data: dashInstant}).then(function(res){
-            // $scope.matchFields(res);
-        }, function(response){
-            // failure callback
-        });
-    }
-
-    $scope.calcInstantJob = function() {
-        $http.post('/api/tdispatch-calc', {data: dashInstant}).then(function(res){
-            $scope.matchFields(res);
-        }, function(response){
-            // failure callback
-        });
-    }
-
-    $scope.matchFields = function(res) {
-        $scope.dashInstant.waitTime = 'Wait Time: '+res.data.data.fare.time_to_wait / 60+' Mins';
-        $scope.dashInstant.suggestedPrice = res.data.data.fare.total_cost;
-        dashInstant = $scope.dashInstant;
-    }
-
-    $scope.$watch('misc.dirtModalHack', function(newVal, oldVal) {
-        console.log('hack '+newVal);
-        if(newVal == true) {
-            $('#review-booking-button').click();
-        }
-    })
 
     $scope.goToCheck = function() {
+        $localStorage.vg.jobDetails = $scope.dashInstant;
         $timeout(function() {
             $location.path('/checkout');
         },1000)
-
     }
 
 })
 
 
 // Ctrl For Navigation
-app.controller('NaviCtrl', function($scope, views, $route, auth, $http, user, infoGrab, bookings, bookingGrab, bookings, email, $location, misc, stripeForm, cardDetails, currBooking, dashInstant, hackTools, $interval) {
+app.controller('NaviCtrl', function($scope, views, $route, auth, $http, user, infoGrab, bookings, bookingGrab, bookings, email, $location, misc, stripeForm, cardDetails, currBooking, /*dashInstant*/ hackTools, $interval) {
 
     $scope.views = views;
     views.currentView = $route.current.action;
@@ -332,7 +289,7 @@ app.controller('NaviCtrl', function($scope, views, $route, auth, $http, user, in
     $scope.currBooking = currBooking;
     $scope.email = email;
     $scope.isEmailSent = '';
-    $scope.dashInstant = dashInstant;
+    //$scope.dashInstant = dashInstant;
     $scope.hackTools = hackTools;
 
     $scope.cancelJob = function(jobPK) {
@@ -402,17 +359,17 @@ app.controller('NaviCtrl', function($scope, views, $route, auth, $http, user, in
     };
 
     $scope.displayProfile = function() {
-        infoGrab.displayOneRecord(null, "User");
+        //infoGrab.displayOneRecord(null, "User");
     }
 
-    $scope.displayBooking = bookingGrab.displayAllRecords(null, "Quote", function(resp){
+    /*$scope.displayBooking = bookingGrab.displayAllRecords(null, "Quote", function(resp){
         console.log(resp);
         if(resp.success == true) {
             $scope.bookings = resp.data;
         } else {
             toastr.error(resp.message);
         }
-    });
+    });*/
 
     $scope.checkBookingStatus = function(status1, status2, status3) {
         var flag = 0;
@@ -432,14 +389,14 @@ app.controller('NaviCtrl', function($scope, views, $route, auth, $http, user, in
         }
     }
 
-    $scope.$watch('misc.myBookingsReady', function(newValue, oldValue) {
+    /*$scope.$watch('misc.myBookingsReady', function(newValue, oldValue) {
         if(newValue == true) {
             $scope.displayBooking = bookingGrab.displayAllRecords(null, "Quote", function(resp){
                 $scope.bookings = resp;
                 $scope.misc.myBookingsReady = false;
             });
         }
-    });
+    });*/
 })
 
 app.controller('CardAddedCtrl', function($scope, user, stripeForm, misc, hackTools) {
@@ -484,9 +441,9 @@ app.controller('CardAddedCtrl', function($scope, user, stripeForm, misc, hackToo
 })
 
 
-app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, dashInstant, $http, bookings, bookingGrab, deets, hackTools, func) {
+app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, /*dashInstant,*/ $http, bookings, bookingGrab, deets, hackTools, func) {
 
-    $scope.dashInstant = dashInstant;
+    //$scope.dashInstant = dashInstant;
     $scope.stripeForm = stripeForm;
     $scope.bookings = bookings;
     $scope.bookingGrab = bookingGrab;
@@ -502,7 +459,7 @@ app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, das
     }
 
     // FROM BOOK BUTTON TO SERVER ROUTES (DATA IT SENDS: DASHINSTANT)
-    $scope.bookInstantJob = function(){
+    /*$scope.bookInstantJob = function(){
         // if customer has card in mongo
         if(user.cardAdded == 'added') {
             // SAVES JOB TO DB
@@ -530,33 +487,67 @@ app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, das
             document.getElementById('payment-button').click();
             $scope.stripeForm.checkCard();
         }
-    }
+    }*/
 })
 
 
-app.controller('CheckoutCtrl', function($scope, $location) {
-    $scope.next = function(){
+app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http) {
+    $scope.jobDeets = $localStorage.vg.jobDetails;
 
+
+    $scope.next = function(){
         $location.path("/checkout-2")
     }
 
     $scope.back = function(){
-
         $location.path("/checkout")
     }
 
     $scope.next2 = function(){
-
+        $localStorage.vg.jobDetails = $scope.jobDeets;
         $location.path("/checkout-3")
     }
 
     $scope.back2 = function(){
-
         $location.path("/checkout-2")
     }
 
-    $scope.next3= function(){
+    $(function() {
+      var $form = $('#payment-form');
+      $form.submit(function(event) {
+        // Disable the submit button to prevent repeated clicks:
+        $form.find('.submit').prop('disabled', true);
 
-         $location.path("/booking-complete")
+        // Request a token from Stripe:
+        Stripe.card.createToken($form, function(status, res) {
+            $http.post("/api/charge-card", {stripe: res, user: $localStorage.vg.jobDetails}).then(function(status){
+                console.log(status);
+                alert(status.data.message);
+                if(status.data.status !== false) {
+                    $scope.jobDeets.paymentID = status.data.data.id;
+                    $localStorage.vg.jobDetails.paymentID = $scope.jobDeets.paymentID;
+                    $location.path("/booking-complete");
+                    $http.post("/api/send-email", {data: $localStorage.vg.jobDetails}).then(function(status){
+                        //
+                    });
+                } else {
+                    // declined
+                }
+            });
+        });
+
+        // Prevent the form from being submitted:
+        return false;
+      });
+    });
+
+    $scope.next3 = function(event){}
+
+    $scope.test = function() {
+        $http.post("/api/send-email", {data: $localStorage.vg.jobDetails}).then(function(status){
+            //
+        });
     }
+
+
 })

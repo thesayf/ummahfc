@@ -24,7 +24,9 @@
     "seiyria-bootstrap-slider": "latest",
     "ng-file-upload": "^12.0.4",
     "ngstorage": "^0.3.11",
-    "angular-modal-service": "^0.10.1"
+    "angular-modal-service": "^0.10.1",
+    "open-sans": "^1.1.0",
+    "raleway": "^1.0.1"
   },
   "resolutions": {
     "angular": "1.4.4"

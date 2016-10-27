@@ -1,100 +1,37 @@
 module.exports = function(app, models, utils, cont, info) {
 
-    // This registers the User
-	app.post("/api/register", function(req, res){
-        cont.member.register(models.User, req, {username: req.body.username}, cont, function(resp) {
-			console.log(resp);
-            if(resp.status == false) {
-				cont.func.sendInfo(res, resp.status, {errMessage: resp.msg});
+	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
+	app.post("/api/charge-card", function(req, res) {
+        cont.stripePay.chargeCustomer(req.body.user.deposit, req.body.user.email, req.body.user.name, req.body.stripe.id, function(resp) {
+			if(resp == false) {
+				// card declined
+				cont.func.sendInfo(res, false, {message: 'Payment Failed!'})
 			} else {
-				cont.pp.issueToken(resp.user, function(err, token) {
-	                res.cookie('remember_me', token, { maxAge: 604800000 });
-	                if(err) { return next(err);}
-					cont.func.sendInfo(res, true, {message: 'Re successful.', data: token});
-	            });
+				// charge ok
+				cont.func.sendInfo(res, true, {data: resp, message: 'Payment Successful!'})
 			}
-        })
+		})
 	});
 
-    // This logs user in
-    app.post('/api/login', function(req, res, next) {
-        utils.passport.authenticate('local', function(err, user, info) {
-            if(user === false) {
-                cont.func.sendInfo(res, user, {errMessage: 'Unable to login.'});
-            } else {
-                cont.pp.issueToken(user, function(err, token) {
-                    cont.func.sendInfo(res, true, {message: 'Login successful.', data: token});
-                });
-            }
-        })(req, res, next);
-    });
+	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
+	app.post("/api/send-email", function(req, res) {
+		req.body.data.msg = 'Vangrab.com Order Reciept\r_________________________________________________________\rThe Most Convenient Way To Move Anything!\r\rWhether you are moving flat or collecting new furniture from Ikea, eBay, Freecycle or Gumtree, the MoversPro web-app is the simplest, cheapest and quickest way to get a driver, on-demand.\r___________________________\rDATE & TIME\r'+req.body.data.jobDate+'\r___________________________\rPICK UP ADDRESS\r'+req.body.data.address.start_location.number+' '+req.body.data.address.start_location.name+'\r___________________________\rDROP OFF ADDRESS';
 
-    // This logs user out
-    app.post("/api/logout", function(req, res){
-        req.logOut();
-        res.cookie('connect.sid', '', { expires: new Date(1), path: '/' });
-        res.cookie('remember_me', '', { expires: new Date(1), path: '/' });
-		res.json(req.user);
-	});
+		req.body.data.msg = req.body.data.msg+'\r'+req.body.data.address.end_location.number+' '+req.body.data.address.end_location.name+'\r___________________________\rEXTRA HELPER\r'+req.body.data.extraHelp+'\r___________________________\rINVENTORY\rSmall Items x '+req.body.data.itemBoxes[0].qty;
 
-    // This authenitcates users token
-    app.post('/api/check-token', function(req, res) {
-        cont.pp.checkAuthDetails(req.body.data, function(userID){
-            if(userID) {
-                cont.func.sendInfo(res, true, {message: 'Verified', data: userID});
-            }
-        })
-    })
+		req.body.data.msg = req.body.data.msg+'\rMedium Items x '+req.body.data.itemBoxes[1].qty+'\rLarge Items x '+req.body.data.itemBoxes[2].qty+'\r___________________________\rTOTAL PRICE\r'+req.body.data.estiCalc+'\r___________________________\rDEPOSIT PAID\r'+req.body.data.deposit+'\r\rRefund Policy: A refund can be given at any time before a driver has been dispatched';
 
-    // this sets up passport
-    utils.passport.use('local', new utils.localStrategy(function(username, password, done){
-	    models.User.findOne({username: username, password: password}, function(err, user){
-	        if(user){return done(null, user);}
-            return done(null, false, {message: 'Unable to login'});
-	    });
-	}));
+		req.body.data.subject = 'Vangrab Order Reciept';
 
-	utils.passport.serializeUser(function(user, done) {
-        done(null, user);
-    });
-    utils.passport.deserializeUser(function(user, done) {
-        done(null, user);
-    });
-
-    // This gets all user booking info
-    app.post("/api/grab-bookings", function(req, res){
-        if(req.body.token) {
-            cont.pp.getUserIDFromToken(req.body.token, function(userID){
-                //var tempdb = db.getCollection. req.body.colName;
-                models.Quote.find({userID: userID}, function(err, records){
-                    if(err) {
-                        cont.func.sendInfo(res, false, {errMessage: 'There was error, try again later.'});
-                    }
-                    cont.func.sendInfo(res, true, {data: records, errMessage: 'There was error, try again later.'});
-                })
-            });
-        } else {
-            // no cookie
-            res.send(false);
-        }
-	});
-
-	// BOOK A JOB GET SWIFT
-	app.post("/api/book-job", function(req, res){
-        if(req.body.token) {
-            cont.pp.getUserIDFromToken(req.body.token, function(userID){
-                //var tempdb = db.getCollection. req.body.colName;
-                models.Quote.find({userID: userID}, function(err, records){
-                    if(err) {
-                        cont.func.sendInfo(res, false, {errMessage: 'There was error, try again later.'});
-                    }
-                    cont.func.sendInfo(res, true, {data: records, errMessage: 'There was error, try again later.'});
-                })
-            });
-        } else {
-            // no cookie
-            res.send(false);
-        }
+        cont.func.sendEmail(req.body.data, utils, function(resp) {
+			if(resp == false) {
+				// card declined
+				cont.func.sendInfo(res, false, {message: 'Payment Failed!'})
+			} else {
+				// charge ok
+				cont.func.sendInfo(res, true, {data: resp, message: 'Payment Successful!'})
+			}
+		})
 	});
 
     // This shows the main angular index

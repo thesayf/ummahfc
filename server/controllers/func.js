@@ -105,6 +105,28 @@ func.param = function(data) {
     }).join("&");
 }
 
+func.sendEmail = function(data, utils, cb) {
+    // create reusable transporter object using the default SMTP transport
+    var transporter = utils.nodemailer.createTransport('smtps://yasin3683%40gmail.com:Allah001@smtp.gmail.com');
+
+    // setup e-mail data with unicode symbols
+    var mailOptions = {
+        from: '"Hello" <hello@vangrab.com>', // sender address
+        to: 'yasinadam@outlook.com', // list of receivers
+        subject: data.subject, // Subject line
+        text: data.msg // plaintext body
+        //html: '<b>Hello world ?</b>' // html body
+    };
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+        if(error){
+            return console.log(error);
+        }
+        console.log('Message sent: ' + info.response);
+    });
+}
+
 func.sendInfo = function(res, status, dataObj) {
     //console.log(dataObj);
     if(dataObj.data) {
@@ -112,14 +134,14 @@ func.sendInfo = function(res, status, dataObj) {
     }
     if(status == true) {
         res.json({
-            success: status,
+            status: status,
             message: dataObj.message,
             data: dataHold
         })
     } else {
         res.json({
-            success: status,
-            message: dataObj.errMessage,
+            status: status,
+            message: dataObj.message,
             data: dataHold
         })
     }

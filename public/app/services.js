@@ -37,7 +37,7 @@ app.factory("email", function(){
     };
 });
 
-app.factory("dashInstant", function(){
+/*app.factory("dashInstant", function(){
     return {
         jobName: '',
         vanType: '',
@@ -90,9 +90,10 @@ app.factory("dashInstant", function(){
         pk: '',
         recieptUrl: '',
         status: '',
+        : {},
         finalCost: ''
     };
-});
+});*/
 
 
 
@@ -352,25 +353,12 @@ app.service('hackTools', function() {
 
 
 
-app.service('stripeForm', function($http, user, cardDetails) {
+app.service('stripeForm', function($http, $localStorage) {
 
     var stripeForm = {};
 
     stripeForm.getCardForm = function(callback) {
-        $('#payment-form').submit(function(event) {
-            event.preventDefault();
-            var $form = $(this);
 
-            Stripe.setPublishableKey('pk_test_GrFP5ytVZ9Df9ZKztAJbiOmc');
-
-            Stripe.card.createToken($form, function(status, res) {
-               // console.log(res);
-                $http.post("/api/add-card", res).success(function(status){
-                    stripeForm.checkCard();
-                    callback(status);
-                });
-            });
-        })
     }
 
     stripeForm.getCardFormRes = function(callback) {
@@ -481,7 +469,7 @@ app.service('auth', function($location, $http, $localStorage){
     return auth;
 });
 
-app.service('maps', function(dashInstant, $timeout, $window, routeInfo) {
+app.service('maps', function($timeout, $window, routeInfo) {
     var maps = {};
 
     // Set Vars
@@ -506,9 +494,9 @@ app.service('maps', function(dashInstant, $timeout, $window, routeInfo) {
 
     // Render Directions
     maps.setDirections = function(address, callback) {
-        //console.log(address);
-        var tempWay = [];
-        if(address.pickup1.name !== '') {
+        console.log(address);
+        //var tempWay = [];
+        /*if(address.pickup1.name !== '') {
             tempWay.push({location: address.pickup1.name+', UK', stopover:false});
         }
         if(address.dropoff1.name !== '') {
@@ -520,7 +508,8 @@ app.service('maps', function(dashInstant, $timeout, $window, routeInfo) {
         if(address.dropoff2.name !== '') {
             tempWay.push({location: address.dropoff2.name+', UK', stopover:false});
         }
-        var waypointCount = Object.keys(tempWay).length || 0;
+        var waypointCount = Object.keys(tempWay).length || 0;*/
+
 
         /*if(waypointCount == 0) {
             var destination = address.dropoff1.name;
@@ -529,10 +518,12 @@ app.service('maps', function(dashInstant, $timeout, $window, routeInfo) {
             var destination = tempWay[waypointCount-1]['location'];
         }*/
 
+        var dashInstant = {};
+
         request = {
             origin: address.start_location.name+', UK',
             destination: address.end_location.name+', UK',
-            waypoints: tempWay,
+            //waypoints: tempWay,
             travelMode: 'DRIVING',
             provideRouteAlternatives: false,
             unitSystem: google.maps.UnitSystem.METRIC,
@@ -544,12 +535,6 @@ app.service('maps', function(dashInstant, $timeout, $window, routeInfo) {
                 directionsDisplay.setDirections(response);
                 dashInstant.distance = response.routes[0].legs[0].distance.value;
                 dashInstant.duration = response.routes[0].legs[0].duration.value;
-                dashInstant.address.pickup1.lat = response.routes[0].legs[0].start_location.lat();
-                dashInstant.address.dropoff1.lng = response.routes[0].legs[0].start_location.lng();
-                dashInstant.address.pickup2.lat = response.routes[0].legs[0].end_location.lat();
-                dashInstant.address.dropoff2.lng = response.routes[0].legs[0].end_location.lng();
-            } else {
-                console.log(status);
             }
             google.maps.event.trigger(map, 'resize');
             callback(dashInstant);
@@ -829,33 +814,8 @@ app.service('validation', function() {
 
 
 
-app.service('func', function(dashInstant) {
+app.service('func', function() {
     var func = {};
-
-    func.resetQuote = function() {
-        dashInstant.jobName = '';
-        dashInstant.vanType = '';
-        dashInstant.vanName = '';
-        dashInstant.jobDate = '';
-        dashInstant.fuelPrice = '';
-        dashInstant.suggestedPrice = '';
-        dashInstant.driverNote = '';
-        dashInstant.address.start_location.name = '';
-        dashInstant.address.start_location.lat = '';
-        dashInstant.address.start_location.lng = '';
-        dashInstant.address.end_location.name = '';
-        dashInstant.address.end_location.lng = '';
-        dashInstant.address.end_location.lng = '';
-        dashInstant.distance = 0;
-        dashInstant.payment_method = 'cash';
-        dashInstant.pk = '';
-        dashInstant.recieptUrl = '';
-        dashInstant.status = '';
-        dashInstant.finalCost = '';
-    }
 
     return func;
 })
-
-
-//======================================******END OF SERVICES ******=====================================================//

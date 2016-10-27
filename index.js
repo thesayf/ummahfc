@@ -18,6 +18,7 @@ var jwt                     = require('jsonwebtoken');
 var sgAPI                   = "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"
 var sendgrid                = require("sendgrid")(sgAPI);
 var env                     = require('node-env-file');
+var nodemailer              = require('nodemailer');
 
 
 var utils = {};
@@ -32,6 +33,7 @@ utils.multipart = multipart;
 utils.multipartMiddleware = multipartMiddleware;
 utils.passport = passport;
 utils.localStrategy = localStrategy;
+utils.nodemailer = nodemailer;
 
 var Quote       = require(__dirname + '/server/models/quote');
 var Token       = require(__dirname + '/server/models/token');
