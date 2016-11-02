@@ -31,6 +31,18 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
         })
+    
+        .when('/about-us', {
+            templateUrl : 'app/components/home/con-web/page.html',
+            controller  : 'DashSignupCtrl',
+            //action    : 'dash-allmessages'
+        })
+        
+        .when('/driver-signup', {
+            templateUrl : 'app/components/home/con-web/page2.html',
+            controller  : 'ContractorSignupCtrl',
+            //action    : 'dash-allmessages'
+        })
 
         .when('/booking-complete', {
             templateUrl : 'app/components/dash/views/booking-complete.html',

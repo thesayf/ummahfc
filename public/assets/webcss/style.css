@@ -1368,7 +1368,7 @@ img.parallax-slider.loaded, .ie img.parallax-slider, .ie9 img.parallax-slider {
 	
 	#header .header-content {
 		text-align:center;
-		padding:80px 0px 40px;
+		padding:40px 0px 40px;
 	}
 	#header .header-content.header-page-content { padding:100px 0px 60px; }
 	#header .header-content .header-heading-title { padding:0px 0px 40px; }
@@ -1430,7 +1430,7 @@ img.parallax-slider.loaded, .ie img.parallax-slider, .ie9 img.parallax-slider {
 	.affa_testimonials_carousel .testimonial-item:before, .affa_testimonials_carousel .testimonial-item:after { display:none; }
 	
 	.affa_client_logo { padding:0px 5px; }
-	
+	   
 }
 
 @media (max-width: 480px) {

@@ -2,13 +2,22 @@ module.exports = function(app, models, utils, cont, info) {
 
 	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
 	app.post("/api/charge-card", function(req, res) {
-        cont.stripePay.chargeCustomer(req.body.user.deposit, req.body.user.email, req.body.user.name, req.body.stripe.id, function(resp) {
+        
+        console.log(req.body.user.deposit);
+         console.log(req.body.user.email);
+         console.log(req.body.user.name);
+        console.log(req.body.stripe.id);
+                
+        
+        cont.stripePay.chargeCustomer(req.body.user.deposit, req.body.user.email, req.body.user.name, req.body.stripe.id, function(err, resp) {
 			if(resp == false) {
 				// card declined
 				cont.func.sendInfo(res, false, {message: 'Payment Failed!'})
+                console.log(err);
 			} else {
 				// charge ok
 				cont.func.sendInfo(res, true, {data: resp, message: 'Payment Successful!'})
+                console.log(resp);
 			}
 		})
 	});

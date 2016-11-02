@@ -4,7 +4,7 @@
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="page-title">
-                        <span>Moverslite</span>
+                        <span></span>
                     </div>
                     <a href="/instant" class="navbar-brand"></a>
                 </div>
@@ -12,32 +12,23 @@
                     <span class="icon s7-menu"></span>
                 </a>
                 <div id="am-navbar-collapse" class="collapse navbar-collapse">
-                    <button class="hide" id="review-booking-modal" data-toggle="modal" data-target="#md-review">Review booking</button>
-                    <button class="hide" id="job-complete-modal" data-toggle="modal" data-target="#md-complete">Booking Complete</button>
-
-                    <ul class="nav navbar-nav navbar-right am-user-nav">
-                        <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle"><span class="angle-down s7-menu"></span></a>
-                            <ul role="menu" class="dropdown-menu">
-                                <li data-toggle="modal" data-target="#mod-warning">
-                                    <a href="" ng-click="isEmailSent == false">
-                                        <span class="icon s7-mail-open-file"></span>Contact Us
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
                     <ul class="nav navbar-nav am-nav-right">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Services <span class="angle-down s7-angle-down"></span></a>
+              <li><a href="/dash">Home</a></li>
+              <li><a href="/about-us">About</a></li>
+              <li class="dropdown"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">FAQ <span class="angle-down s7-angle-down"></span></a>
                 <ul role="menu" class="dropdown-menu">
-                  <li><a href="#">UI Consulting</a></li>
-                  <li><a href="#">Web Development</a></li>
-                  <li><a href="#">Database Management</a></li>
-                  <li><a href="#">Seo Improvement</a></li>
+                  <li><a href="/faq">What is your Refund policy</a></li>
+                  <li><a href="/faq">What Happens if nobody turns up to the booking</a></li>
+                  <li><a href="/faq">My Paymant is not working</a></li>
+                  <li><a href="/faq">How do know the right size van is coming </a></li>
                 </ul>
               </li>
-              <li><a href="#">Support</a></li>
+              <li data-toggle="modal" data-target="#mod-warning"><a href="#" ng-click="isEmailSent == false">Send Us An Email</a></li>
+            </ul>
+                
+                    <ul class="nav navbar-nav am-nav-right pull-right">
+              <li><a > Any Queries Call Us On: 07852806618 </a></li>
+
             </ul>
                 </div>
             </div>

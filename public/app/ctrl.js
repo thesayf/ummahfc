@@ -496,7 +496,9 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http)
 
 
     $scope.next = function(){
-        $location.path("/checkout-2")
+        $localStorage.vg.jobDetails = $scope.jobDeets;
+        console.log("this fired")
+        console.log($localStorage.vg.jobDetails);
     }
 
     $scope.back = function(){
@@ -522,12 +524,12 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http)
         Stripe.card.createToken($form, function(status, res) {
             $http.post("/api/charge-card", {stripe: res, user: $localStorage.vg.jobDetails}).then(function(status){
                 console.log(status);
-                alert(status.data.message);
                 if(status.data.status !== false) {
+                    alert(status.data.message);
                     $scope.jobDeets.paymentID = status.data.data.id;
                     $localStorage.vg.jobDetails.paymentID = $scope.jobDeets.paymentID;
                     $location.path("/booking-complete");
-                    $http.post("/api/send-email", {data: $localStorage.vg.jobDetails}).then(function(status){
+                    $http.post("/api/sen    d-email", {data: $localStorage.vg.jobDetails}).then(function(status){
                         //
                     });
                 } else {
