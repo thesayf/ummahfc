@@ -1,6 +1,7 @@
+<div navi></div>
 <div class="am-content">
     <aside class="page-aside">
-        <div class="am-scroller nano">
+        <div id="am-scroll" class="am-scroller nano">
             <div class="nano-content">
                 <div class="content">
                     <div class="user-profile col-md-12 col-sm-12 no-pad-l">
@@ -8,7 +9,7 @@
                             <table class="no-border no-strip skills">
                                 <tbody class="no-border-x no-border-y">
                                     <tr>
-                                        <td class="item"> 1. Please List your Itmes</td>
+                                        <td class="item"> 1. List your Items</td>
                                         <td>
                                             <button data-toggle="modal" data-target="#inv-fullWidth" type="button" class="btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Add</button>
                                             </td>
@@ -24,31 +25,23 @@
                                         <td><div class="input-group date datetimepicker col-md-12 col-xs-12">
                                             <input id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
                                             <span class="input-group-addon btn btn-primary">
-                                            <i class="icon-th s7-date"></i> 
+                                            <i class="icon-th s7-date"></i>
                                         </span>
                                     </div></td>
                                     </tr>
                                     <tr>
-                                        <td class="item"> 4. Earliest Time:</td>
+                                        <td class="item"> 4. Pick a Time:</td>
                                         <td>
                                             <div class="input-group date datetimepicker col-md-12 col-xs-12">
-                                            <input id="job-date-picker" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
-                                            <!-- <span class="input-group-addon btn btn-primary">
-                                            <i class="icon-th s7-date"></i> </span> -->
+                                                <input id="early-time-picker" ng-change="changeData(); closeTimePicker()" ng-model="dashInstant.jobStartTime" size="16" type="text" value="" class="form-control">
+                                                <span class="input-group-addon btn btn-primary">
+                                                    <i class="icon-th s7-clock"></i>
+                                                </span>
                                             </div>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="item"> 5. Latest Time:</td>
-                                        <td><div class="input-group date datetimepicker col-md-12 col-xs-12">
-                                            <input id="job-date-picker" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
-                                            <!-- <span class="input-group-addon btn btn-primary">
-                                            <i class="icon-th s7-date"></i> -->
-                                        </span>
-                                    </div></td>
-                                    </tr>
                                 <tr>
-                                    <td class="item"> 6. Do you want to add an extra helper for £100</td>
+                                    <td class="item"> 5. Do you want to add an extra helper for £100</td>
                                     <td><div class="form-group">
 
                                       <div class="col-sm-6 xs-pt-5 pull-right">
@@ -62,12 +55,13 @@
                                         </div>
                                     </td>
                                 </tr>
-                              
+
                             </tbody>
                         </table>
                     </div>
                 </div>
-                <button data-toggle="modal" data-target="#md-review" id="review-booking-button" ng-click="holdDriverDelay()" class="btn btn-danger btn-space btn-hspace col-md-12 col-xs-12">Find Drivers</button>
+                <button data-toggle="modal"  id="review-booking-button" ng-click="holdDriverDelay()" class="disabled btn btn-danger btn-space btn-hspace col-md-12 col-xs-12">Find Drivers</button>
+                <button id="cubic-click" data-toggle="modal" data-target="#cubic-limit" class="hide"></button>
             </div>
         </div>
     </div>
@@ -86,6 +80,7 @@
 <div dash-route-plan></div>
 
 
+<div cubic-limit></div>
 <div review-booking></div>
 
 
@@ -118,7 +113,7 @@
                                         <td><div class="input-group date datetimepicker col-md-12 col-xs-12">
                                             <input id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
                                             <!-- <span class="input-group-addon btn btn-primary">
-                                            <i class="icon-th s7-date"></i> 
+                                            <i class="icon-th s7-date"></i>
                                         </span>
                                     </div></td>
                                 </tr>

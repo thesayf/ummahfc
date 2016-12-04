@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <!--cancel button starts here-->
-                <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                <button id="item-modal-close" type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
                 <h3 class="modal-title">Choose your van</h3>
                 <!--cancel button ends here-->
             </div>
@@ -31,6 +31,13 @@
                         <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty">
                       </div>
                     </div>
+                    <div id="limit-note" role="alert" class="alert alert-danger alert-icon alert-icon-color alert-dismissible">
+                    <div class="icon"><span class="s7-close-circle"></span></div>
+                    <div class="message">
+                        <h3>Cubic Volume Limit Has Been Reached!</h3>
+                        <p>Please call us to arrange a special move 07852806618</p>
+                    </div>
+                  </div>
                   </form>
 
 

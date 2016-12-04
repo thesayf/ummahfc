@@ -2,25 +2,39 @@ module.exports = function(app, models, utils, cont, info) {
 
 	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
 	app.post("/api/charge-card", function(req, res) {
-        
-        console.log(req.body.user.deposit);
-         console.log(req.body.user.email);
-         console.log(req.body.user.name);
-        console.log(req.body.stripe.id);
-                
-        
-        cont.stripePay.chargeCustomer(req.body.user.deposit, req.body.user.email, req.body.user.name, req.body.stripe.id, function(err, resp) {
+        cont.stripePay.chargeCustomer(req.body.user.deposit, req.body.user.email, req.body.user.name, req.body.stripe.id, function(resp) {
 			if(resp == false) {
 				// card declined
 				cont.func.sendInfo(res, false, {message: 'Payment Failed!'})
-                console.log(err);
 			} else {
 				// charge ok
 				cont.func.sendInfo(res, true, {data: resp, message: 'Payment Successful!'})
-                console.log(resp);
 			}
 		})
 	});
+
+	app.post('/api/list-drivers', function(req, res) {
+		cont.swift.listDrivers(utils.needle, function(resp) {
+			var driverTemp = [];
+			for(key in resp) {
+				driverTemp.push({id: resp[key].identifier});
+			}
+			cont.func.sendInfo(res, true, {data: driverTemp, message: 'Got Driver List'})
+		})
+	})
+
+	app.post('/api/book-job', function(req, res) {
+		cont.swift.bookJob(utils.rest, req.body.data, function(resp) {
+			//currentStatus
+			var obj = JSON.parse(resp.rawEncoded);
+			var stat = obj['delivery']['currentStatus'];
+			if(stat == 'Received') {
+				cont.func.sendInfo(res, true, {message: 'Booking Successful!'});
+			} else {
+				cont.func.sendInfo(res, false, {message: 'Booking Failed!'});
+			}
+		})
+	})
 
 	// CHARGE CUSTOMER DEPOSIT WITH STRIPE
 	app.post("/api/send-email", function(req, res) {

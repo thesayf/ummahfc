@@ -582,6 +582,18 @@ app.service('tdispatch', function($http, dashInstant) {
     return tdispatch;
 })
 
+app.service('swift', function($http) {
+    var swift = {};
+
+    swift.driverList = function(cb) {
+        $http.post('api/list-drivers').then(function(resp){
+            cb(resp.data.data);
+        })
+    }
+
+    return swift;
+})
+
 
 app.service('validation', function() {
 

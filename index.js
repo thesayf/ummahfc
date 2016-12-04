@@ -56,6 +56,7 @@ var stripePay = require(__dirname + '/server/controllers/stripe.js');
 var func = require(__dirname + '/server/controllers/func.js');
 var member = require(__dirname + '/server/controllers/member.js');
 var gs = require(__dirname + '/server/controllers/gs.js');
+var swift = require(__dirname + '/server/controllers/swift.js');
 
 var cont = {};
 cont.td = td;
@@ -64,6 +65,7 @@ cont.stripePay = stripePay;
 cont.func = func;
 cont.member = member;
 cont.gs = gs;
+cont.swift = swift;
 
 env(__dirname + '/.env');
 

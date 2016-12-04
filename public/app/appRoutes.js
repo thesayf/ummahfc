@@ -8,7 +8,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
         })
 
         .when('/dash', {
-            templateUrl : 'app/components/dash/dash-view.html',
+            templateUrl : 'app/components/dash/views/dash-instant.html',
             controller  : 'DashHomeCtrl',
             action      : 'dash-instant',
             type        : 'dash'
@@ -31,13 +31,13 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'CheckoutCtrl',
             //action    : 'dash-allmessages'
         })
-    
+
         .when('/about-us', {
             templateUrl : 'app/components/home/con-web/page.html',
             controller  : 'DashSignupCtrl',
             //action    : 'dash-allmessages'
         })
-        
+
         .when('/driver-signup', {
             templateUrl : 'app/components/home/con-web/page2.html',
             controller  : 'ContractorSignupCtrl',

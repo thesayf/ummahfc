@@ -9145,9 +9145,9 @@ button:focus {
   }
 }
 .am-animate .am-content {
-  -webkit-transition: all 0.35s ease;
+  /*-webkit-transition: all 0.35s ease;
        -o-transition: all 0.35s ease;
-          transition: all 0.35s ease;
+          transition: all 0.35s ease;*/
 }
 .am-nosidebar-left .am-content {
   margin-left: 0;

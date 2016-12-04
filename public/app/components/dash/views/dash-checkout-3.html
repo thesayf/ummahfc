@@ -48,7 +48,7 @@ body { margin-top:20px; }
 
                         <div class="container col-sm-12 col-md-offset-2 col-md-8">
                             <div class="row">
-                            
+
 
 
                                     <div class="panel panel-default credit-card-box">
@@ -62,7 +62,7 @@ body { margin-top:20px; }
                                         </div>
                                         <div class="panel-body">
 
-                                            <form action="/your-charge-code" method="POST" id="payment-form">
+                                            <form method="POST" id="payment-form">
                                                   <span class="payment-errors"></span>
 
                                                   <div class="row">
@@ -70,12 +70,12 @@ body { margin-top:20px; }
                                                           <div class="form-group">
                                                             <label for="cardNumber">CARD NUMBER</label>
                                                               <div class="input-group">
-                                                              <input type="text" size="20" class="form-control" data-stripe="number">
+                                                              <input ng-model="ccDeets.number" type="text" size="20" class="form-control" data-stripe="number">
                                                                 <span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
                                                                   </div>
                                                         </div>
 
-                                                          
+
                                                     </div>
                                                 </div>
 
@@ -84,8 +84,8 @@ body { margin-top:20px; }
                                                         <div class="form-group">
                                                             <label>
                                                               <span>Expiration (MM)</span>
-                                                              <input class="form-control" type="text" size="4" data-stripe="exp_month">
-                                                                
+                                                              <input maxlength="2" ng-model="ccDeets.expMonth" class="form-control" type="text" size="4" data-stripe="exp_month">
+
                                                             </label>
 
                                                           </div>
@@ -95,7 +95,7 @@ body { margin-top:20px; }
                                                          <div class="form-group">
                                                             <label>
                                                               <span>Expiration (YY)</span>
-                                                              <input type="text" class="form-control" size="4" data-stripe="exp_year">
+                                                              <input maxlength="2" ng-model="ccDeets.expYear" type="text" class="form-control" size="4" data-stripe="exp_year">
                                                             </label>
                                                         </div>
                                                       </div>
@@ -104,13 +104,13 @@ body { margin-top:20px; }
                                                          <div class="form-group">
                                                             <label>
                                                               <span>CVC</span>
-                                                              <input class="form-control" type="text" size="4" data-stripe="cvc">
+                                                              <input maxlength="3" ng-model="ccDeets.expCvc" class="form-control" type="text" size="4" data-stripe="cvc">
                                                             </label>
                                                         </div>
                                                       </div>
                                                 </div>
-                                                
-                                                
+
+
 
                                                   <div class="row">
                                                       <div class="col-xs-12 col-md-12">
@@ -131,25 +131,25 @@ body { margin-top:20px; }
                                                   </div>
                                                 </form>
                                         </div>
-                                    </div>         
+                                    </div>
             <!-- CREDIT CARD FORM ENDS HERE -->
-            
+
             <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-default btn-space">Go back to booking page</button>
+                            <button ng-click="backToBooking()" class="btn btn-default btn-space">Go back to booking page</button>
                             <button  ng-click="back2()" class="btn btn-primary btn-space wizard-next"><i class="icon s7-angle-left"></i>Back Step</button>
                           </div>
                         </div>
-            
-            
-        </div>  
 
-        
+
+        </div>
+
+
     </div>
 </div>
                     </div>
-                   
-                    
+
+
                   </div>
                 </div>
               </div>
@@ -178,7 +178,7 @@ body { margin-top:20px; }
                         <div class="container">
                             <div class="row">
                                 <!-- You can make it whatever width you want. I'm making it full width
-                                on <= small devices and 4/12 page width on >= medium devices 
+                                on <= small devices and 4/12 page width on >= medium devices
                                 <div class="col-xs-12 col-md-4">
 
 

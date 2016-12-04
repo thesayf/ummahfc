@@ -9,7 +9,7 @@ stripePay.chargeCustomer = function(price, customerID, name, token, callback) {
     stripe.charges.create({
         amount: price*100, // stripe takes pence
         currency: "GBP",
-        name: name,
+        metadata: {name: name},
         source: token,
         description: customerID
     }, function(err, charge) {

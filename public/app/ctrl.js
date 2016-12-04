@@ -1,6 +1,9 @@
+
+
+
 // Ctrl For Dash
-app.controller('HomeCtrl', function($scope) {
-    //
+app.controller('HomeCtrl', function($scope, $localStorage) {
+    $localStorage.vg = {};
 })
 
 // Ctrl For Dash
@@ -93,7 +96,7 @@ app.controller('DashLoginCtrl', function($scope, $http, $rootScope, $location, $
 })
 
 // Ctrl For Dash
-app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout) {
+app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout, $http, swift) {
 
     // Start GMaps
     maps.init();
@@ -104,8 +107,26 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
 
     if($localStorage.vg !== undefined && $localStorage.vg.jobDetails) {
+        var timeNow = new Date().getTime();
+        var saveTime = $localStorage.vg.jobDetails.timestamp;
+        var saveTimePlus5Hr = saveTime + (1000 * 60 * 60 * 5);
+        console.log(saveTime+' - '+saveTimePlus5Hr);
+
+        //var diff = saveTimePlus5Hr - saveTime;
+        if(timeNow > saveTimePlus5Hr) {
+            $localStorage.vg = {};
+            $scope.dashInstant = {};
+            $scope.dashInstant.itemBoxes = [
+                {size: 'smItems', qty: 0},
+                {size: 'mdItems', qty: 0},
+                {size: 'lgItems', qty: 0}
+            ]
+        }
+        //1000 * 60 * 60 * 24
         $scope.dashInstant = $localStorage.vg.jobDetails;
-        $('#swt5')[0].checked = $scope.dashInstant.extraHelp;
+        if($scope.dashInstant !== undefined) {
+            $('#swt5')[0].checked = $scope.dashInstant.extraHelp;
+        }
     } else {
         $localStorage.vg = {};
         $scope.dashInstant = {};
@@ -116,68 +137,174 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         ]
     }
 
+
+    /*if($localStorage.vg.drivers) {
+
+    } else {
+
+    }*/
+
     var realTime = new Date();
     $('#job-date-picker').datetimepicker({
-        format: 'dd-mm-yy hh:ii',
+        format: 'dd-mm-yy',
         startDate: realTime,
         initialDate: realTime,
         todayHighlight: true,
+        minView: 'month',
+        autoclose: true
+    });
+
+    $('#early-time-picker').datetimepicker({
+        startDate: realTime,
+        initialDate: realTime,
+        startView: 'day',
+        format: 'hh:ii',
+        maxView: 'day',
+        autoclose: true
     });
 
     // Hide Picker When selected
-    $('#job-date-picker').datetimepicker().on('changeDate', function(ev){
-        $('#job-date-picker').datetimepicker('hide');
-    });
+    /*$('#job-date-picker').datetimepicker().on('changeDate', function(ev){
+        $scope.dashInstant.startTime = $scope.dashInstant.jobDate;
+        var tempDate = $scope.dashInstant.startTime.split('-');
+        $scope.dashInstant.startTime = tempDate[1]+'-'+tempDate[0]+'-'+tempDate[2];
+        $scope.dashInstant.startTime = new Date($scope.dashInstant.startTime);
+        console.log($scope.dashInstant.startTime);
+        $('#early-time-picker').datetimepicker('remove');
+        $('#early-time-picker').datetimepicker({
+            startDate: $scope.dashInstant.startTime,
+            initialDate: $scope.dashInstant.startTime,
+            startView: 'day',
+            format: 'hh:ii',
+            maxView: 'day'
+        });
+    });*/
+
+    $scope.closeTimePicker = function() {
+        $('.datetimepicker-dropdown-bottom-right').hide();
+    }
+
+    $('#early-time-picker').datetimepicker().on('show', function(ev){
+        $('.datetimepicker-hours table thead tr th.prev').html('');
+        $('.datetimepicker-hours table thead tr th.switch').text('Hour Picker');
+        $('.datetimepicker-hours table thead tr th.next').html('');
+        /*$('.datetimepicker-minutes table thead tr th.prev').html('');
+        $('.datetimepicker-minutes table thead tr th.switch').text('Minute Picker');
+        $('.datetimepicker-minutes table thead tr th.next').html('');*/
+    })
+
+    $('.datetimepicker-hours').on('click', function() {
+        $timeout(function() {
+            $('.datetimepicker-minutes table thead tr th.prev').html('');
+            $('.datetimepicker-minutes table thead tr th.switch').text('Minute Picker');
+            $('.datetimepicker-minutes table thead tr th.next').html('');
+        },1)
+
+    })
+
+    //var timepicker = $('.datetimepicker-hours.table-condensed thead tr th');
+    //console.log(timepicker.length);
 
     $scope.changeData = function() {
         var flag = 0;
+        var canProgress = 0;
 
         // IF THERES NO INVENTORY FLAG
         if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
             flag = flag + 1;
-        }
-
-        // IF NO JOB DATE
-        if($scope.dashInstant.jobDate == '') {
-            flag = flag + 1;
+            canProgress = canProgress + 1;
         }
 
         // IF NO ADDRESS DATA
         if($scope.dashInstant.address == undefined) {
             flag = flag + 1;
+            canProgress = canProgress + 1;
         } else {
             if($scope.dashInstant.address.start_location !== undefined &&
                 $scope.dashInstant.address.start_location.name == '') {
                     flag = flag + 1;
+                    canProgress = canProgress + 1;
             }
             if($scope.dashInstant.address.end_location !== undefined &&
                 $scope.dashInstant.address.end_location.name == '') {
                     flag = flag + 1;
+                    canProgress = canProgress + 1;
             }
         }
 
+        // IF NO JOB DATE
+        if($scope.dashInstant.jobDate == undefined || $scope.dashInstant.jobDate == '') {
+            canProgress = canProgress + 1;
+        }
+        if($scope.dashInstant.jobStartTime == undefined || $scope.dashInstant.jobStartTime == '') {
+            canProgress = canProgress + 1;
+        }
+
         if(flag > 0) {
-            console.log('flagged');
+            //console.log('flagged');
         } else {
-            console.log('ok no flag');
+            //console.log('ok no flag');
             $scope.calcAlgo();
+        }
+
+        if(canProgress > 0) {
+            $('#review-booking-button').attr('data-target', '');
+            $('#review-booking-button').addClass('disabled');
+        } else {
+            //console.log('ok no flag');
+            $('#review-booking-button').attr('data-target', '#md-review');
+            $('#review-booking-button').removeClass('disabled');
         }
     }
 
+    if($scope.dashInstant !== undefined) {
+        $scope.dashInstant.extraHelp = $('#swt5')[0].checked;
+    }
 
-    $scope.dashInstant.extraHelp = $('#swt5')[0].checked;
+    $scope.holdDriverDelay = function(e) {
+        if($('#review-booking-button').hasClass('disabled')) {
+            // IF THERES NO INVENTORY FLAG
+            if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
+                $.growl.error({ message: 'Fill in the Inventory!' });
+            }
 
-    $scope.holdDriverDelay = function() {
-        var spinImg = '<img class="spin-img" src="/assets/img/35.gif">';
-        $('#review-body').hide().before(spinImg);
-        $('#modal-cont').addClass('tc');
+            // IF NO ADDRESS DATA
+            if($scope.dashInstant.address == undefined) {
 
-        var timeout = setTimeout(function() {
-            $('.spin-img').remove()
-            $('#review-body').show()
-            $('#modal-cont').removeClass('tc');
-        }, 3000)
+            } else {
+                if($scope.dashInstant.address.start_location !== undefined &&
+                    $scope.dashInstant.address.start_location.name == '') {
+                        $.growl.error({ message: 'Fill in the Start Location!' });
+                }
+                if($scope.dashInstant.address.end_location !== undefined &&
+                    $scope.dashInstant.address.end_location.name == '') {
+                        $.growl.error({ message: 'Fill in the End Location!' });
+                }
+            }
 
+            // IF NO JOB DATE
+            if($scope.dashInstant.jobDate == undefined || $scope.dashInstant.jobDate == '') {
+                $.growl.error({ message: 'Fill in the Job Date!' });
+            }
+            if($scope.dashInstant.jobStartTime == undefined || $scope.dashInstant.jobStartTime == '') {
+                $.growl.error({ message: 'Fill in the Start Time!' });
+            }
+
+
+        } else {
+            $('.modal-body').prepend('<img class="spin-img" src="/assets/img/35.gif">');
+            $('.modal-body').addClass('tc');
+            $('.review-body').addClass('hide');
+            swift.driverList(function(resp) {
+                //$localStorage.vg.drivers = resp;
+                $scope.dashInstant.driverCount = Math.ceil(resp.length / 4);
+                $timeout(function() {
+                    $('.review-body').removeClass('hide');
+                    $('.modal-body').removeClass('tc');
+                    $('.spin-img').remove();
+                },1000)
+            })
+        }
     }
 
     $scope.calcAlgo = function() {
@@ -192,6 +319,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             $scope.unloadTime = $scope.unloadTime + (items[''+itemType+'']['unloadTime'] * itemQty);
             $scope.totalCuft = $scope.totalCuft + (itemCuft * itemQty);
         }
+
+
         //dashInstant.itemBoxes = $scope.itemBoxes;
 
         var rate = 0;
@@ -214,6 +343,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             var extra = 0;
         }
         $scope.totalCost = Math.ceil((workCost + fuelCost + extra) * 10) / 10;
+
+
         $scope.dashInstant.estiCalc = $scope.totalCost;
         $scope.dashInstant.deposit = (($scope.totalCost / 100) * 25);
         $scope.dashInstant.deposit = $scope.dashInstant.deposit.toFixed(2);
@@ -264,11 +395,35 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
 
     $scope.goToCheck = function() {
+        $scope.dashInstant.timestamp = new Date().getTime();
         $localStorage.vg.jobDetails = $scope.dashInstant;
         $timeout(function() {
             $location.path('/checkout');
         },1000)
     }
+
+    $scope.changeData();
+
+    $scope.$watch('dashInstant.itemBoxes', function(oldValue, newValue) {
+        $scope.loadTime = 0;
+        $scope.unloadTime = 0;
+        $scope.totalCuft = 0;
+        for(ti in $scope.dashInstant.itemBoxes) {
+            var itemType = $scope.dashInstant.itemBoxes[ti].size;
+            var itemQty = $scope.dashInstant.itemBoxes[ti].qty;
+            var itemCuft = items[''+itemType+'']['cuFt'];
+            $scope.loadTime = $scope.loadTime + (items[''+itemType+'']['loadTime'] * itemQty);
+            $scope.unloadTime = $scope.unloadTime + (items[''+itemType+'']['unloadTime'] * itemQty);
+            $scope.totalCuft = $scope.totalCuft + (itemCuft * itemQty);
+        }
+
+        if($scope.totalCuft > 500) {
+            $('#limit-note').removeClass('hide');
+
+        } else {
+            $('#limit-note').addClass('hide');
+        }
+    }, true)
 
 })
 
@@ -492,16 +647,44 @@ app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, /*d
 
 
 app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http) {
+    $scope.ccDeets = {};
+
     $scope.jobDeets = $localStorage.vg.jobDetails;
+
+    $scope.vali = function(name, length, msg, cb) {
+        if(name == '' || name == undefined || name.length < 3) {
+            $.growl.error({ message: msg });
+            cb(1);
+        } else {
+            cb(0);
+        }
+
+
+    }
 
 
     $scope.next = function(){
         $localStorage.vg.jobDetails = $scope.jobDeets;
-        console.log("this fired")
-        console.log($localStorage.vg.jobDetails);
+        var flag = 0;
+        $scope.vali($scope.jobDeets.name, 3, 'Please fill in your name!', function(resp) {
+            flag = flag + resp;
+            $scope.vali($scope.jobDeets.email, 3, 'Please fill in your email!', function(resp2) {
+                flag = flag + resp2;
+                $scope.vali($scope.jobDeets.number, 3, 'Please fill in your number!', function(resp3) {
+                    flag = flag + resp3;
+                    if(flag > 0) {
+                        console.log('flagged');
+                    } else {
+                        $location.path("/checkout-3");
+                    }
+                });
+            });
+        });
+
     }
 
     $scope.back = function(){
+        console.log('bk');
         $location.path("/checkout")
     }
 
@@ -511,35 +694,82 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http)
     }
 
     $scope.back2 = function(){
-        $location.path("/checkout-2")
+        $location.path("/checkout")
     }
+
+    $scope.backToBooking = function(){
+        $location.path("/dash");
+    }
+
+    $scope.testSwift = function() {
+        $http.post('/api/book-job', {data: $localStorage.vg.jobDetails}).then(function(resp) {
+
+        })
+    }
+
+
 
     $(function() {
       var $form = $('#payment-form');
       $form.submit(function(event) {
-        // Disable the submit button to prevent repeated clicks:
-        $form.find('.submit').prop('disabled', true);
+          event.preventDefault();
 
-        // Request a token from Stripe:
-        Stripe.card.createToken($form, function(status, res) {
-            $http.post("/api/charge-card", {stripe: res, user: $localStorage.vg.jobDetails}).then(function(status){
-                console.log(status);
-                if(status.data.status !== false) {
-                    alert(status.data.message);
-                    $scope.jobDeets.paymentID = status.data.data.id;
-                    $localStorage.vg.jobDetails.paymentID = $scope.jobDeets.paymentID;
-                    $location.path("/booking-complete");
-                    $http.post("/api/sen    d-email", {data: $localStorage.vg.jobDetails}).then(function(status){
-                        //
-                    });
-                } else {
-                    // declined
-                }
+
+          var flag = 0;
+          if($scope.ccDeets.number == undefined || $scope.ccDeets.number.replace(/ /g,'').length !== 16) {
+              $.growl.error({ message: 'Card Number Must Be 16 Digits!'});
+              flag = flag + 1;
+          }
+          if($scope.ccDeets.expMonth == undefined || $scope.ccDeets.expMonth.length !== 2) {
+              $.growl.error({ message: 'Card Expiration Month Must Be 2 Digits!'});
+              flag = flag + 1;
+          }
+          if($scope.ccDeets.expYear == undefined || $scope.ccDeets.expYear.length !== 2) {
+              $.growl.error({ message: 'Card Expiration Year Must Be 2 Digits!'});
+              flag = flag + 1;
+          }
+          if($scope.ccDeets.expCvc == undefined || $scope.ccDeets.expCvc.length !== 3) {
+              $.growl.error({ message: 'Card CVC Number Must Be 3 Digits!'});
+              flag = flag + 1;
+          }
+
+          if(flag > 0) {
+            return false;
+          } else {
+            // Disable the submit button to prevent repeated clicks:
+            $form.find('.submit').prop('disabled', true);
+
+            // Request a token from Stripe:
+            Stripe.card.createToken($form, function(status, res) {
+                $http.post("/api/charge-card", {stripe: res, user: $localStorage.vg.jobDetails}).then(function(status){
+                    if(status.data.status !== false) {
+                        $.growl.notice({message: status.data.message});
+                        $scope.jobDeets.paymentID = status.data.data.id;
+                        $localStorage.vg.jobDetails.paymentID = $scope.jobDeets.paymentID;
+                        $http.post('/api/book-job', {data: $localStorage.vg.jobDetails}).then(function(resp) {
+                            if(resp.data.status == true) {
+                                $location.path("/booking-complete");
+                                $http.post("/api/send-email", {data: $localStorage.vg.jobDetails}).then(function(status){
+                                    $localStorage.vg = {};
+                                    $scope.dashInstant = {};
+                                    $scope.dashInstant.itemBoxes = [
+                                        {size: 'smItems', qty: 0},
+                                        {size: 'mdItems', qty: 0},
+                                        {size: 'lgItems', qty: 0}
+                                    ]
+                                });
+                            } else {
+                                $.growl.error({message: 'Job Booking Failed Please Call Us!'});
+                            }
+                        })
+                    } else {
+                        $.growl.error({message: 'Payment Failed, Try a different card!'});
+                    }
+                });
             });
-        });
-
+        }
         // Prevent the form from being submitted:
-        return false;
+        //return false;
       });
     });
 

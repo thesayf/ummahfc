@@ -228,6 +228,13 @@ app.directive('reviewBooking', function() {
 	}
 })
 
+app.directive('cubicLimit', function() {
+	return {
+		templateUrl: dir+'dash/views/modals/cubic-limit.html',
+		controller: 'DashInstantCtrl',
+	}
+})
+
 app.directive('checkout', function() {
 	return {
 		templateUrl: dir+'dash/views/dash-checkout.html',

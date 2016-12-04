@@ -128,7 +128,6 @@ func.sendEmail = function(data, utils, cb) {
 }
 
 func.sendInfo = function(res, status, dataObj) {
-    //console.log(dataObj);
     if(dataObj.data) {
         var dataHold = dataObj.data;
     }
@@ -136,13 +135,13 @@ func.sendInfo = function(res, status, dataObj) {
         res.json({
             status: status,
             message: dataObj.message,
-            data: dataHold
+            data: dataObj.data
         })
     } else {
         res.json({
             status: status,
             message: dataObj.message,
-            data: dataHold
+            data: dataObj.data
         })
     }
 }
