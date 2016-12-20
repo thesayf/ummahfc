@@ -675,7 +675,7 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http)
                     if(flag > 0) {
                         console.log('flagged');
                     } else {
-                        $location.path("/checkout-3");
+                        $location.path("/checkout-2");
                     }
                 });
             });

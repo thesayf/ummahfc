@@ -37,8 +37,9 @@ body { margin-top:20px; }
               <div class="block-wizard panel panel-default">
                 <div id="wizard1" class="wizard wizard-ux">
                   <ul class="steps">
-                    <li data-step="1" ng-click="showCheckoutStep(1)">Booking Review<span class="chevron"></span></li>
-                    <li data-step="3" ng-click="showCheckoutStep(3)" class="active">Payment<span class="chevron"></span></li>
+                    <li data-step="1" ng-click="showCheckoutStep(1)">Contact details<span class="chevron"></span></li>
+                      <li data-step="2" ng-click="showCheckoutStep(2)">Review <span class="chevron"></span></li>
+                    <li data-step="3" ng-click="showCheckoutStep(3)"  class="active">Payment<span class="chevron"></span></li>
                   </ul>
                   <div class="step-content">
                     <div  data-step="1" class="step-pane active">
@@ -134,18 +135,19 @@ body { margin-top:20px; }
                                     </div>
             <!-- CREDIT CARD FORM ENDS HERE -->
 
-            <div class="form-group">
-                          <div class="col-sm-offset-2 col-sm-10">
-                            <button ng-click="backToBooking()" class="btn btn-default btn-space">Go back to booking page</button>
-                            <button  ng-click="back2()" class="btn btn-primary btn-space wizard-next"><i class="icon s7-angle-left"></i>Back Step</button>
-                          </div>
-                        </div>
+            
 
 
         </div>
 
 
     </div>
+                        
+                        <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            <a href="/checkout-2"><button class="btn btn-default btn-space wizard-next pull-right"><i class="icon s7-angle-left"></i>Back</button></a>
+                          </div>
+                        </div>
 </div>
                     </div>
 

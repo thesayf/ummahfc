@@ -6056,7 +6056,7 @@ button.list-group-item-danger.active:focus {
   padding: 15px 20px 20px;
 }
 .panel-heading {
-  padding: 20px 20px 15px;
+  padding: 0px 0px 15px;
   border-bottom: 1px solid transparent;
   border-top-right-radius: -1;
   border-top-left-radius: -1;
@@ -6565,7 +6565,7 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 600px;
+    width: 400px;
     margin: 30px auto;
   }
   .modal-content {
@@ -15913,7 +15913,7 @@ fieldset[disabled] .btn-social.btn-tumblr.active {
   font-weight: 300;
   padding-left: 0;
   padding-right: 0;
-  margin: 0 20px;
+  margin: 0 0px;
 }
 .panel-heading .panel-title,
 .panel-heading .title,
@@ -19495,5 +19495,105 @@ div.dataTables_wrapper div.dataTables_length label select {
   font-size: 15px;
   margin: 0 0 13px 0;
 }
+    
+/*------------------------------------------------------------------
+  [Pricing tables]
+*/
+.pricing-tables {
+  margin: 30px 0 20px;
+}
+.pricing-tables > div {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.pricing-table {
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.04);
+  border-radius: 0;
+  border-top: 3px solid #c9c9c9;
+  padding: 35px 20px;
+  padding-bottom: 0px;
+  background: #ffffff;
+  text-align: center;
+  margin: 0 0 20px;
+}
+.pricing-table-title {
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+.pricing-table-price {
+  padding: 0 0 20px;
+  color: #525252;
+}
+.pricing-table-price .currency {
+  vertical-align: top;
+  font-size: 18px;
+  line-height: 1;
+}
+.pricing-table-price .value {
+  font-size: 60px;
+  line-height: 40px;
+  letter-spacing: -3px;
+}
+.pricing-table-price .frecuency {
+  font-size: 20px;
+  font-weight: 300;
+  margin-left: 5px;
+}
+.pricing-table-description {
+  color: #858585;
+  margin-bottom: 10px;
+}
+.pricing-table-features {
+  margin: 0 0 30px;
+  padding: 0;
+  list-style: none;
+}
+.pricing-table-features > li {
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: 300;
+  line-height: 33px;
+}
+.pricing-table .btn {
+  line-height: 23px;
+  min-width: 120px;
+  margin-bottom: 10px;
+}
+.pricing-table .panel-divider {
+  padding-top: 0px;
+  margin-bottom: 30px;
+}
+.pricing-table-primary {
+  border-color: #ef6262;
+}
+.pricing-table-warning {
+  border-color: #ffc870;
+}
+.pricing-table-success {
+  border-color: #7accbe;
+}
+.pricing-table-danger {
+  border-color: #ef6262;
+}
+.pricing-table-alt1 {
+  border-color: #95d9f0;
+}
+.pricing-table-alt2 {
+  border-color: #ffdc7a;
+}
+.pricing-table-alt3 {
+  border-color: #7a98bf;
+}
+.pricing-table-alt4 {
+  border-color: #cccccc;
+}
+    
+.panel-color {
+ background-color: aqua;
+ padding-top: 20px;
+}
+    
 
 }

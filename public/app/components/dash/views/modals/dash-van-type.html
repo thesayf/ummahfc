@@ -1,13 +1,83 @@
 <!-- Get fixed quote Modal Ends Here-->
 
 <div id="inv-fullWidth" tabindex="-1" role="dialog" class="modal fade colored-header">
-    <div class="modal-dialog full-width">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <!--cancel button starts here-->
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
+                <h3 class="modal-title">List Your Items</h3>
+                <!--cancel button ends here-->
+            </div>
+            <div class="modal-body">
+            <div class="panel-body">
+               
+                <div class="row">
+                     <div class="panel-heading">
+                  <h3><strong>QTY of Items you are moving</strong></h3>
+                </div>
+                    <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Small Item (anything up to a box) </label>
+                      <div class="col-sm-7">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[0].qty">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Medium Item (anything up to a chest of draws) </label>
+                      <div class="col-sm-7">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[1].qty">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Large Item (anything up to a chest of king size bed) </label>
+                      <div class="col-sm-7">
+                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                 
+                <br>
+                <hr>
+                    
+<!--
+                <div class="row">
+                    <div class="panel-heading">
+                  <h3><strong>Name the items you are moving</strong></h3>
+                </div>
+                    <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+                    <div class="form-group">
+                      <label class="col-sm-5 control-label">Give us a brief list of the names of the items you are moving </label>
+                      <div class="col-sm-7">
+                        <textarea required=""  ng-model="jobDeets.instructions" class="form-control"></textarea>
+                      </div>
+                    </div>
+                  </form>
+                
+                </div>
+-->
+                
+                
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default">Cancel</button>
+                <button type="button" data-dismiss="modal" class="btn btn-primary">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--
+<div id="inv-fullWidth" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog full-width">
+        <div class="modal-content">
+            <div class="modal-header">
                 <button id="item-modal-close" type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
                 <h3 class="modal-title">Choose your van</h3>
-                <!--cancel button ends here-->
             </div>
             <div class="modal-body">
             <div class="panel-body">
@@ -40,9 +110,6 @@
                   </div>
                   </form>
 
-
-
-
                 </div>
             </div>
             </div>
@@ -53,3 +120,4 @@
         </div>
     </div>
 </div>
+-->

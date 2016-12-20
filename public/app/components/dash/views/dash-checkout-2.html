@@ -1,36 +1,170 @@
-<style>
-/* Padding - just for asthetics on Bootsnipp.com */
-body { margin-top:20px; }
-
-/* CSS for Credit Card Payment form */
-.credit-card-box .panel-title {
-    display: inline;
-    font-weight: bold;
-}
-.credit-card-box .form-control.error {
-    border-color: red;
-    outline: 0;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(255,0,0,0.6);
-}
-.credit-card-box label.error {
-  font-weight: bold;
-  color: red;
-  padding: 2px 8px;
-  margin-top: 2px;
-}
-.credit-card-box .payment-errors {
-  font-weight: bold;
-  color: red;
-  padding: 2px 8px;
-  margin-top: 2px;
-}
-.credit-card-box label {
-    display: block;
-}
-</style>
-
 <div navi></div>
 
+<div class="row wizard-row">
+            <div class="col-md-6 col-md-offset-3 fuelux">
+              <div class="block-wizard panel panel-default">
+                <div id="wizard1" class="wizard wizard-ux">
+                  <ul class="steps">
+                    <li data-step="1" ng-click="showCheckoutStep(1)">Contact details<span class="chevron"></span></li>
+                      <li data-step="2" ng-click="showCheckoutStep(2)" class="active">Review <span class="chevron"></span></li>
+                    <li data-step="3" ng-click="showCheckoutStep(3)">Payment<span class="chevron"></span></li>
+                  </ul>
+                  <div class="step-content">
+                    <div  data-step="1" class="step-pane active">
+                        
+                        
+                        <div class="col-md-12">
+              <div class="panel panel-default panel-heading-fullwidth panel-borders">
+                <div class="panel-heading panel-color"><span class="title">Full-width with borders</span></div>
+                <div class="panel-body">
+                  <div class="row">
+                        <div class="col-md-3">
+                           <strong>Delivery Summary:</strong>
+                        </div>
+                        
+                        <div class="col-md-9">
+                               A delivery for {{jobDeets.name}}  from   {{jobDeets.address.start_location.number}} {{jobDeets.address.start_location.name}}  to {{jobDeets.address.end_location.number}} {{jobDeets.address.end_location.name}}  on the  {{jobDeets.jobDate}} 
+                        </div>
+                        
+                    </div>
+                    <br>
+                    <hr>
+                    
+<!--                    Row 1-->
+                    
+                    <div class="row">                        
+                        <div class="col-md-3">
+                           <strong>Refund Terms:</strong>
+                        </div>
+                        
+                        <div class="col-md-9">
+                                We can issue a 100% refund on your deposit at any time before dispatch of our driver *Please see our <a ng-href="consumer-terms">terms</a>
+                        </div>
+                    </div>
+                    
+                     <br>
+                    <hr>
+                    
+                    <div class="row">
+                        <div class="col-md-3">
+                           <strong>Delivery Items:</strong>
+                        </div>
+                        
+                        <div class="col-md-9">
+                          Small items x {{jobDeets.itemBoxes[0].qty}},
+                          Medium items x {{jobDeets.itemBoxes[1].qty}}
+                          Large items x {{jobDeets.itemBoxes[2].qty}}
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <br>
+                    <hr>
+                    
+                    <div class="row">
+                    
+                    <div class="col-md-3">
+                           <strong>Extra Helper:</strong>
+                        </div>
+                        
+                        <div class="col-md-9 text-left">
+                                {{jobDeets.extraHelp}}
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                    <br>
+                    <hr>
+                  
+                    <div class="row">
+                        
+                        <div class="col-md-3">
+                           <strong>Email:</strong>
+                        </div>
+                        
+                        <div class="col-md-9">
+                                {{jobDeets.email}}
+                        </div>
+                        
+                        
+                    </div>
+                    <br>
+                    <hr>
+                    
+                    <div class="row">
+                    
+                    <div class="col-md-3">
+                           <strong>Phone Number</strong>
+                        </div>
+                        
+                        <div class="col-md-9">
+                                {{jobDeets.number}}
+                        </div>
+                        
+                        </div>
+                    
+                    <br>
+                    
+                    <hr>
+                    
+                    <!--                    Row 2-->
+                    
+                    <div class="row well">
+                        <div class="col-md-2">
+                           <strong> Booking price:</strong>
+                        </div>
+                        
+                        <div class="col-md-2">
+                                £{{jobDeets.estiCalc}}
+                        </div>
+                        
+                        <div class="col-md-2">
+                           <strong>Deposit to pay now:</strong>
+                        </div>
+                        
+                        <div class="col-md-2">
+                                £{{jobDeets.deposit}}
+                        </div>
+                        
+                        <div class="col-md-2">
+                           <strong> Balance to pay on delivery:</strong>
+                        </div>
+                        
+                        <div class="col-md-2">
+                                £{{jobDeets.estiCalc}}
+                        </div>
+                    </div>
+                    
+                </div>
+              </div>
+            </div>   
+                        
+                        
+                        
+                      </form>
+                      <div class="form-group">
+                          <div class="col-sm-offset-2 col-sm-10">
+                            
+                              <a href="/checkout-3"><button ng-click="next()" class="btn btn-primary btn-space wizard-next pull-right">Next<i class="icon s7-angle-right"></i></button></a>
+                              <a href="/checkout"><button class="btn btn-default btn-space wizard-next pull-right"><i class="icon s7-angle-left"></i>Back</button></a>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+<!--
 <div class="row wizard-row">
             <div class="col-md-12 fuelux">
               <div class="block-wizard panel panel-default">
@@ -99,3 +233,4 @@ body { margin-top:20px; }
               </div>
             </div>
           </div>
+-->

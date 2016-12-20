@@ -9,19 +9,29 @@
                             <table class="no-border no-strip skills">
                                 <tbody class="no-border-x no-border-y">
                                     <tr>
-                                        <td class="item"> 1. List your Items</td>
+                                        <td class="item"> <strong>List Your Items</strong>
+<!--                                            <a href="javascript:;" data-toggle="popover" data-content="list all the items you would like delivered" data-placement="top">    <span class="badge badge-primary">i</span></a>-->
+                                            <hr>
+                                            list all the items you would like delivered
+                                            
+                                        </td>
                                         <td>
                                             <button data-toggle="modal" data-target="#inv-fullWidth" type="button" class="btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Add</button>
-                                            </td>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td class="item"> 2. Choose Your Route</td>
+                                        <td class="item"><strong>Addresses</strong>
+                                            <hr>
+                                            
+                                            Add Pickup and deliver Address 
+                                            </td>
                                         <td>
                                              <button data-toggle="modal" data-target="#form-bp1" type="button" class="btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker"></i> Add</button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="item"> 3. Date</td>
+                                        <td class="item"> <strong>Date</strong>
+                                            </td>
                                         <td><div class="input-group date datetimepicker col-md-12 col-xs-12">
                                             <input id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
                                             <span class="input-group-addon btn btn-primary">
@@ -30,7 +40,8 @@
                                     </div></td>
                                     </tr>
                                     <tr>
-                                        <td class="item"> 4. Pick a Time:</td>
+                                        <td class="item"> <strong>Collection Time</strong>
+                                            </td>
                                         <td>
                                             <div class="input-group date datetimepicker col-md-12 col-xs-12">
                                                 <input id="early-time-picker" ng-change="changeData(); closeTimePicker()" ng-model="dashInstant.jobStartTime" size="16" type="text" value="" class="form-control">
@@ -41,7 +52,11 @@
                                         </td>
                                     </tr>
                                 <tr>
-                                    <td class="item"> 5. Do you want to add an extra helper for £100</td>
+                                    <td class="item"><strong>Add Helper</strong>
+<!--                                        <a href="javascript:;" data-toggle="popover" data-content=" A Choose yes if you need a 2 man service" data-placement="top"><span class="badge badge-primary">i</span></a>-->
+                                        <hr>
+                                            Would you like and extra man to help with the lifting?
+                                       </td>
                                     <td><div class="form-group">
 
                                       <div class="col-sm-6 xs-pt-5 pull-right">
@@ -60,7 +75,7 @@
                         </table>
                     </div>
                 </div>
-                <button data-toggle="modal"  id="review-booking-button" ng-click="holdDriverDelay()" class="disabled btn btn-danger btn-space btn-hspace col-md-12 col-xs-12">Find Drivers</button>
+                <button data-toggle="modal"  id="review-booking-button" ng-click="holdDriverDelay()" class="disabled btn btn-danger btn-space btn-hspace col-md-12 col-xs-12">Get Price</button>
                 <button id="cubic-click" data-toggle="modal" data-target="#cubic-limit" class="hide"></button>
             </div>
         </div>

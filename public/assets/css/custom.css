@@ -66,3 +66,8 @@
 #orderIdBox h2 {
     font-size: 20px;
 }
+
+.panel-color {
+ background-color: aqua;
+ padding-top: 20px;
+}
