@@ -267,11 +267,24 @@ app.factory('items', function() {
 
 app.factory('rates', function() {
     return {
-        0: {minRange: 0, maxRange: 300,  rate: .25},
-        1: {minRange: 301, maxRange: 400,  rate: .33},
-        2: {minRange: 401, maxRange: 600,  rate: .58}
+        0: {minRange: 0, maxRange: 300,  rate: .25, van: 'Small Van'},
+        1: {minRange: 301, maxRange: 400,  rate: .33, van: 'Medium Van'},
+        2: {minRange: 401, maxRange: 600,  rate: .58, van: 'Luton Van'}
     };
 })
+
+app.factory('autho', function() {
+    return {
+        checkout1: false,
+        checkout2: false,
+        checkout3: false,
+        bc: false
+    }
+})
+
+// biggest luton
+// middle medium van
+// smallest small van
 
 app.factory('routeInfo', function() {
     var routeInfo = {};

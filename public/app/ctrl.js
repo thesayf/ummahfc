@@ -96,7 +96,7 @@ app.controller('DashLoginCtrl', function($scope, $http, $rootScope, $location, $
 })
 
 // Ctrl For Dash
-app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout, $http, swift) {
+app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout, $http, swift, $filter, autho) {
 
     // Start GMaps
     maps.init();
@@ -151,16 +151,18 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         initialDate: realTime,
         todayHighlight: true,
         minView: 'month',
-        autoclose: true
+        autoclose: true,
+        showMeridian: true
     });
 
     $('#early-time-picker').datetimepicker({
-        startDate: realTime,
-        initialDate: realTime,
+        //startDate: realTime,
+        //initialDate: realTime,
         startView: 'day',
         format: 'hh:ii',
         maxView: 'day',
-        autoclose: true
+        autoclose: true,
+        showMeridian: true
     });
 
     // Hide Picker When selected
@@ -220,24 +222,78 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             flag = flag + 1;
             canProgress = canProgress + 1;
         } else {
-            if($scope.dashInstant.address.start_location !== undefined &&
-                $scope.dashInstant.address.start_location.name == '') {
+            var add = $scope.dashInstant.address;
+
+            if(add.start_location !== undefined) {
+                if(add.start_location.name !== undefined) {
+                    if(add.start_location.name.length < 3) {
+                        flag = flag + 1;
+                        canProgress = canProgress + 1;
+                    }
+                } else {
                     flag = flag + 1;
                     canProgress = canProgress + 1;
-            }
-            if($scope.dashInstant.address.end_location !== undefined &&
-                $scope.dashInstant.address.end_location.name == '') {
+                }
+                if(add.start_location.number !== undefined) {
+                    if(add.start_location.number.length < 1) {
+                        flag = flag + 1;
+                        canProgress = canProgress + 1;
+                    }
+                } else {
                     flag = flag + 1;
                     canProgress = canProgress + 1;
+                }
+            } else {
+                flag = flag + 1;
+                canProgress = canProgress + 1;
             }
+
+            if(add.end_location !== undefined) {
+                if(add.end_location.name !== undefined) {
+                    if(add.end_location.name.length < 3) {
+                        flag = flag + 1;
+                        canProgress = canProgress + 1;
+                    }
+                } else {
+                    flag = flag + 1;
+                    canProgress = canProgress + 1;
+                }
+                if(add.end_location.number !== undefined) {
+                    if(add.end_location.number.length < 1) {
+                        flag = flag + 1;
+                        canProgress = canProgress + 1;
+                    }
+                } else {
+                    flag = flag + 1;
+                    canProgress = canProgress + 1;
+                }
+            } else {
+                flag = flag + 1;
+                canProgress = canProgress + 1;
+            }
+
         }
 
         // IF NO JOB DATE
         if($scope.dashInstant.jobDate == undefined || $scope.dashInstant.jobDate == '') {
             canProgress = canProgress + 1;
+
         }
+        console.log($scope.dashInstant.jobDate);
         if($scope.dashInstant.jobStartTime == undefined || $scope.dashInstant.jobStartTime == '') {
             canProgress = canProgress + 1;
+        } else {
+            var realTime = new Date();
+            var h = realTime.getHours();
+            var m = realTime.getMinutes();
+            var month = realTime.getUTCMonth() + 1; //months from 1-12
+            var day = realTime.getUTCDate();
+            var year = realTime.getUTCFullYear().toString().substr(2,2);
+            var nowDate = day+'-'+month+'-'+year;
+            var nowTime = h+':'+m;
+            if(nowTime > $scope.dashInstant.jobStartTime && !($scope.dashInstant.jobDate > nowDate) ) {
+                canProgress = canProgress + 1;
+            }
         }
 
         if(flag > 0) {
@@ -270,15 +326,45 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
             // IF NO ADDRESS DATA
             if($scope.dashInstant.address == undefined) {
-
+                $.growl.error({message: 'Fill in the Start & End Location!'});
             } else {
-                if($scope.dashInstant.address.start_location !== undefined &&
-                    $scope.dashInstant.address.start_location.name == '') {
+                var add = $scope.dashInstant.address;
+                if(add.start_location !== undefined) {
+                    if(add.start_location.name !== undefined) {
+                        if(add.start_location.name.length < 3) {
+                            $.growl.error({ message: 'Fill in the Start Location!' });
+                        }
+                    } else {
                         $.growl.error({ message: 'Fill in the Start Location!' });
+                    }
+                    if(add.start_location.number !== undefined) {
+                        if(add.start_location.number.length < 1) {
+                            $.growl.error({ message: 'Fill in the Start Location House Number!' });
+                        }
+                    } else {
+                        $.growl.error({ message: 'Fill in the Start Location House Number!' });
+                    }
+                } else {
+                    $.growl.error({ message: 'Fill in the Start Location!' });
                 }
-                if($scope.dashInstant.address.end_location !== undefined &&
-                    $scope.dashInstant.address.end_location.name == '') {
+
+                if(add.end_location !== undefined) {
+                    if(add.end_location.name !== undefined) {
+                        if(add.end_location.name.length < 3) {
+                            $.growl.error({ message: 'Fill in the End Location!' });
+                        }
+                    } else {
                         $.growl.error({ message: 'Fill in the End Location!' });
+                    }
+                    if(add.end_location.number !== undefined) {
+                        if(add.end_location.number.length < 1) {
+                            $.growl.error({ message: 'Fill in the End Location House Number!' });
+                        }
+                    } else {
+                        $.growl.error({ message: 'Fill in the End Location House Number!' });
+                    }
+                } else {
+                    $.growl.error({ message: 'Fill in the End Location!' });
                 }
             }
 
@@ -288,6 +374,18 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             }
             if($scope.dashInstant.jobStartTime == undefined || $scope.dashInstant.jobStartTime == '') {
                 $.growl.error({ message: 'Fill in the Start Time!' });
+            } else {
+                var realTime = new Date();
+                var h = realTime.getHours();
+                var m = realTime.getMinutes();
+                var month = realTime.getUTCMonth() + 1; //months from 1-12
+                var day = realTime.getUTCDate();
+                var year = realTime.getUTCFullYear().toString().substr(2,2);
+                var nowDate = day+'-'+month+'-'+year;
+                var nowTime = h+':'+m;
+                if(nowTime > $scope.dashInstant.jobStartTime && !($scope.dashInstant.jobDate > nowDate) ) {
+                    $.growl.error({ message: 'The Start Time has already passed!' });
+                }
             }
 
 
@@ -329,8 +427,14 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             var maxRange = rates[rat].maxRange;
             if($scope.totalCuft > minRange && $scope.totalCuft < maxRange) {
                 var rate = rates[rat].rate;
+                var van = rates[rat].van;
+                var jobMinCub = rates[rat].minRange;
+                var jobMaxCub = rates[rat].maxRange;
             }
         }
+
+        $scope.dashInstant.jobMinCub = jobMinCub;
+        $scope.dashInstant.jobMaxCub = jobMaxCub;
 
         var driveTime = $scope.dashInstant.duration / 60;
         var fuelCost = ($scope.dashInstant.distance * 0.000621371192237) * .70;
@@ -344,10 +448,21 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         }
         $scope.totalCost = Math.ceil((workCost + fuelCost + extra) * 10) / 10;
 
-
         $scope.dashInstant.estiCalc = $scope.totalCost;
         $scope.dashInstant.deposit = (($scope.totalCost / 100) * 25);
         $scope.dashInstant.deposit = $scope.dashInstant.deposit.toFixed(2);
+        $scope.dashInstant.toPay = $scope.dashInstant.estiCalc - $scope.dashInstant.deposit;
+        $scope.dashInstant.toPay = $scope.dashInstant.toPay.toFixed(2);
+        console.log('filter');
+        //console.log(new Date($scope.dashInstant.jobDate).toISOString());
+        var ar = $scope.dashInstant.jobDate.split("-");
+        var d = ar[1]+"/"+ar[0]+"/"+ar[2];
+        $scope.dashInstant.jobTimestamp = new Date(d).getTime();
+        $scope.dashInstant.van = van;
+        //console.log(Date.parse($scope.dashInstant.jobDate));
+        //console.log($filter('date')($scope.dashInstant.jobDate, 'EEEE, d ,MMMM'));
+
+
     }
 
     $scope.updateMaps = function() {
@@ -395,6 +510,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
 
     $scope.goToCheck = function() {
+        autho.checkout1 = true;
         $scope.dashInstant.timestamp = new Date().getTime();
         $localStorage.vg.jobDetails = $scope.dashInstant;
         $timeout(function() {
@@ -646,7 +762,24 @@ app.controller('ReviewBookingCtrl', function($scope, user, stripeForm, misc, /*d
 })
 
 
-app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http) {
+app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http, autho) {
+
+    if($location.path() == '/checkout') {
+        if(autho.checkout1 !== true) {$location.path("/dash");}
+    }
+    if($location.path() == '/checkout-2') {
+        if(autho.checkout2 !== true) {$location.path("/dash");}
+    }
+    if($location.path() == '/checkout-3') {
+        if(autho.checkout3 !== true) {$location.path("/dash");}
+    }
+    if($location.path() == '/booking-complete') {
+        if(autho.bc !== true) {$location.path("/dash");}
+    }
+
+
+
+
     $scope.ccDeets = {};
 
     $scope.jobDeets = $localStorage.vg.jobDetails;
@@ -675,6 +808,7 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http)
                     if(flag > 0) {
                         console.log('flagged');
                     } else {
+                        autho.checkout2 = true;
                         $location.path("/checkout-2");
                     }
                 });
@@ -689,6 +823,7 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http)
     }
 
     $scope.next2 = function(){
+        autho.checkout3 = true;
         $localStorage.vg.jobDetails = $scope.jobDeets;
         $location.path("/checkout-3")
     }
@@ -748,6 +883,7 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http)
                         $localStorage.vg.jobDetails.paymentID = $scope.jobDeets.paymentID;
                         $http.post('/api/book-job', {data: $localStorage.vg.jobDetails}).then(function(resp) {
                             if(resp.data.status == true) {
+                                autho.bc = true;
                                 $location.path("/booking-complete");
                                 $http.post("/api/send-email", {data: $localStorage.vg.jobDetails}).then(function(status){
                                     $localStorage.vg = {};

@@ -11,8 +11,8 @@
                   </ul>
                   <div class="step-content">
                     <div  data-step="1" class="step-pane active">
-                        
-                        
+
+
                         <div class="col-md-12">
               <div class="panel panel-default panel-heading-fullwidth panel-borders">
                 <div class="panel-heading panel-color"><span class="title">Full-width with borders</span></div>
@@ -21,134 +21,137 @@
                         <div class="col-md-3">
                            <strong>Delivery Summary:</strong>
                         </div>
-                        
+
                         <div class="col-md-9">
-                               A delivery for {{jobDeets.name}}  from   {{jobDeets.address.start_location.number}} {{jobDeets.address.start_location.name}}  to {{jobDeets.address.end_location.number}} {{jobDeets.address.end_location.name}}  on the  {{jobDeets.jobDate}} 
+                               A delivery for {{jobDeets.name}}  from   {{jobDeets.address.start_location.number}} {{jobDeets.address.start_location.name}}  to {{jobDeets.address.end_location.number}} {{jobDeets.address.end_location.name}}  on the  {{dashInstant.jobTimestamp | date: 'EEEE, d ,MMMM'}}
                         </div>
-                        
+
                     </div>
                     <br>
                     <hr>
-                    
+
 <!--                    Row 1-->
-                    
-                    <div class="row">                        
+
+                    <div class="row">
                         <div class="col-md-3">
                            <strong>Refund Terms:</strong>
                         </div>
-                        
+
                         <div class="col-md-9">
                                 We can issue a 100% refund on your deposit at any time before dispatch of our driver *Please see our <a ng-href="consumer-terms">terms</a>
                         </div>
                     </div>
-                    
+
                      <br>
                     <hr>
-                    
+
                     <div class="row">
                         <div class="col-md-3">
                            <strong>Delivery Items:</strong>
                         </div>
-                        
+
                         <div class="col-md-9">
                           Small items x {{jobDeets.itemBoxes[0].qty}},
                           Medium items x {{jobDeets.itemBoxes[1].qty}}
                           Large items x {{jobDeets.itemBoxes[2].qty}}
                         </div>
-                        
-                        
+
+
                     </div>
-                    
+
                     <br>
                     <hr>
-                    
+
                     <div class="row">
-                    
+
                     <div class="col-md-3">
                            <strong>Extra Helper:</strong>
                         </div>
-                        
-                        <div class="col-md-9 text-left">
-                                {{jobDeets.extraHelp}}
+
+                        <div ng-if="jobDeets.extraHelp == false" class="col-md-9 text-left">
+                                No
+                        </div>
+                        <div ng-if="jobDeets.extraHelp == true" class="col-md-9 text-left">
+                                Yes
                         </div>
                     </div>
-                    
-                    
-                    
-                    
+
+
+
+
                     <br>
                     <hr>
-                  
+
                     <div class="row">
-                        
+
                         <div class="col-md-3">
                            <strong>Email:</strong>
                         </div>
-                        
+
                         <div class="col-md-9">
                                 {{jobDeets.email}}
                         </div>
-                        
-                        
+
+
                     </div>
                     <br>
                     <hr>
-                    
+
                     <div class="row">
-                    
+
                     <div class="col-md-3">
                            <strong>Phone Number</strong>
                         </div>
-                        
+
                         <div class="col-md-9">
                                 {{jobDeets.number}}
                         </div>
-                        
+
                         </div>
-                    
+
                     <br>
-                    
+
                     <hr>
-                    
+
                     <!--                    Row 2-->
-                    
+
                     <div class="row well">
                         <div class="col-md-2">
                            <strong> Booking price:</strong>
                         </div>
-                        
+
                         <div class="col-md-2">
                                 £{{jobDeets.estiCalc}}
                         </div>
-                        
+
                         <div class="col-md-2">
                            <strong>Deposit to pay now:</strong>
                         </div>
-                        
+
                         <div class="col-md-2">
                                 £{{jobDeets.deposit}}
                         </div>
-                        
+
                         <div class="col-md-2">
                            <strong> Balance to pay on delivery:</strong>
                         </div>
-                        
+
                         <div class="col-md-2">
-                                £{{jobDeets.estiCalc}}
+                                £{{jobDeets.toPay}}
                         </div>
                     </div>
-                    
+
                 </div>
               </div>
-            </div>   
-                        
-                        
-                        
+            </div>
+
+
+
                       </form>
                       <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
-                            
-                              <a href="/checkout-3"><button ng-click="next()" class="btn btn-primary btn-space wizard-next pull-right">Next<i class="icon s7-angle-right"></i></button></a>
+
+                              <a><button ng-click="next2()" class="btn btn-primary btn-space wizard-next pull-right">Next<i class="icon s7-angle-right"></i></button></a>
                               <a href="/checkout"><button class="btn btn-default btn-space wizard-next pull-right"><i class="icon s7-angle-left"></i>Back</button></a>
                           </div>
                         </div>

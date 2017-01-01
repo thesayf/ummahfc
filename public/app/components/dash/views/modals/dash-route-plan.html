@@ -13,14 +13,14 @@
                     <input class="form-control" force-selection="true" placeholder="Start Address" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.start_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 1000}' />
                     </div>
                     <div class="form-group">
-                      <input class="form-control" ng-model="dashInstant.address.start_location.number" placeholder="House Number" />
+                      <input class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="House Number" />
                     </div>
                      <div class="form-group">
                       <label><strong>Delivery Address</strong></label>
                       <input class="form-control" force-selection="true" placeholder="End Address" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.end_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 1000}' />
                     </div>
                     <div class="form-group">
-                      <input class="form-control" ng-model="dashInstant.address.end_location.number" placeholder="House Number" />
+                      <input class="form-control" ng-change="changeData()" ng-model="dashInstant.address.end_location.number" placeholder="House Number" />
                     </div>
                   </form>
 <div class="clearfix"></div>

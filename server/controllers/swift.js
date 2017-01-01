@@ -21,7 +21,7 @@ swift.bookJob = function(rest, data, cb) {
       "apiKey": swiftKey,
       "booking": {
         "reference": data.jobStartTime+ - +data.estiCalc - data.deposit+' - '+'Sm:'+data.itemBoxes[0].qty+', Md:'+data.itemBoxes[1].qty+', Lg:'+data.itemBoxes[2].qty,
-        "deliveryInstructions": data.instructions+' - Need Porter: '+data.extraHelp,
+        "deliveryInstructions": data.instructions+' - Need Porter: '+data.extraHelp+' cubic feet: '+data.jobMinCub+' - '+jobMaxCub+' cuFt',
         "itemsRequirePurchase": false,
         "items": [
           {

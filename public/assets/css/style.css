@@ -9399,7 +9399,7 @@ button:focus {
   font-size: 11px;
   font-weight: 600;
   z-index: 0;
-  content: "OFF";
+  content: "NO";
   right: 0;
   display: block;
   width: 100%;
@@ -9429,7 +9429,7 @@ button:focus {
   font-size: 11px;
   font-weight: 600;
   z-index: 0;
-  content: "ON";
+  content: "YES";
   color: #ffffff;
   left: 0;
   text-align: left;
@@ -19495,7 +19495,7 @@ div.dataTables_wrapper div.dataTables_length label select {
   font-size: 15px;
   margin: 0 0 13px 0;
 }
-    
+
 /*------------------------------------------------------------------
   [Pricing tables]
 */
@@ -19589,11 +19589,11 @@ div.dataTables_wrapper div.dataTables_length label select {
 .pricing-table-alt4 {
   border-color: #cccccc;
 }
-    
+
 .panel-color {
  background-color: aqua;
  padding-top: 20px;
 }
-    
+
 
 }
