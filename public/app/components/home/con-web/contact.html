@@ -8,9 +8,8 @@
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="shortcut icon" href="/app/components/home/con-web/images/favicon.ico">
 
-        <!-- Google Fonts -->
         <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700' rel='stylesheet' type='text/css'>
 
@@ -25,6 +24,7 @@
 
         <!-- Color style -->
         <link href="/app/components/home/con-web/css/colors/default.css" rel="stylesheet">
+
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
         <!--[if lt IE 9]>
@@ -53,7 +53,7 @@
                     </button>
 
                     <!-- LOGO -->
-                    <a class="navbar-brand logo" style="padding-top:0px;" href="index.html">
+                    <a class="navbar-brand logo" style="padding-top: 0px;" href="index.html">
                         <img style="width:125px;" class="img-responsive" src="/tvc-logo-all-white.png">
                     </a>
 
@@ -66,16 +66,16 @@
                     <!-- Navbar left -->
                     <ul class="nav navbar-nav nav-custom-left">
                         <li class="active">
-                            <a href="#home" class="nav-link">Home</a>
+                            <a href="javascript:(0);" class="nav-link">Home</a>
                         </li>
                         <li>
-                            <a href="#features" class="nav-link">Features</a>
+                            <a href="javascript:(0);" class="nav-link">Features</a>
                         </li>
                         <li>
-                            <a href="#pricing" class="nav-link">Plans</a>
+                            <a href="javascript:(0);" class="nav-link">Plans</a>
                         </li>
                         <li>
-                            <a href="#clients" class="nav-link">Clients</a>
+                            <a href="javascript:(0);" class="nav-link">Clients</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown">
@@ -107,238 +107,95 @@
 
 
 
-        <!-- HOME -->
-        <section class="home bg-img-1" id="home" >
-            <div style="background-color:rgba(0, 0, 0, 0.6);">
+        <!-- Header title -->
+        <section class="bg-custom header-title-box">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        <div class="home-fullscreen" id="home-fullscreen">
-                            <div class="full-screen">
-                                <div class="home-wrapper home-wrapper-alt">
-                                    <h1 class="font-light">Get a van anywhere within 30 minutes with the first man and van app</h1>
-                                    <h4 class="text-white">Move anything from apartments and furniture to boxes and pallets</h4>
-                                    <a href="/dash" class="btn btn-custom">Get Started</a>
-                                </div>
-                            </div>
-                        </div>
+                      <h3 class="text-white">Get In Touch</h3>
                     </div>
                 </div>
-            </div>
-            </div>
+            </div> <!-- end container -->
         </section>
-        <!-- END HOME -->
+        <!-- END Header title -->
 
 
 
-        <!-- Features Alt -->
-        <section class="section" >
+        <!-- Contact Form -->
+        <section class="section">
             <div class="container">
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="text-center">
-                            <div class="title-box-icon">
-                                <i class="pe-7s-box1"></i>
-                                <h3 class="title">Deliver Anything In Just 3 Simple Steps</h3>
+                        <h3 class="title">Send us a Message</h3>
+                        <p class="text-muted sub-title">If you have any questions just pop us a message and we will get back in touch with you within 24 hours</p>
+                    </div>
+                </div> <!-- end row -->
+
+                <div class="row">
+
+                    <!-- Contact form -->
+                    <div class="col-sm-6">
+                        <form role="form" name="ajax-form" id="contact-form"
+                              action="https://formsubmit.io/send/17a46d93-adb2-4bd5-8694-ec9ba05bf5fd" method="post"
+                              class="contact-form" data-parsley-validate novalidate>
+
+                            <div class="form-group">
+                                <input class="form-control" id="name2" name="name" placeholder="Your name" type="text" value="" parsley-trigger="change" required>
                             </div>
+                            <!-- /Form-name -->
+
+                            <div class="form-group">
+                                <input class="form-control" id="email2" name="email" type="email" placeholder="Your email" value="" parsley-trigger="change" required>
+                            </div>
+                            <!-- /Form-email -->
+
+                            <div class="form-group">
+                                <textarea class="form-control" id="message2" name="message" rows="5" placeholder="Message" parsley-trigger="change" required></textarea>
+                            </div>
+                            <!-- /Form Msg -->
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div id="success-form" class="text-success" style="display: none;">E-mail was successfully sent.</div>
+                                    <div class="error text-center" id="err-form"></div>
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-custom" id="send">Submit</button>
+                                    </div>
+                                </div> <!-- /col -->
+                            </div> <!-- /row -->
+
+                        </form> <!-- /form -->
+                    </div> <!-- end col -->
+
+                    <div class="col-sm-4 col-sm-offset-1">
+                        <div class="contact-box">
+
+                            <div class="contact-detail">
+                                <i class="pe-7s-mail-open-file"></i>
+                                <p>
+                                    <a href="">hello@vanclub.io</a>
+                                </p>
+                            </div>
+
                         </div>
-                    </div>
-                </div><!-- end row -->
-
-                <div class="row">
-                    <div class="col-sm-5">
-                        <div class="feat-description">
-                            <h4 class="text-muted">From wherever you are to ‘Problem Solved’ in just 3 simple steps from your phone or computer:</h4>
-
-                            <p class="text-muted">We have revolutionized the van booking process bringing a first ‘entirely online’ solution into your hands. With the most scrupulous vetting process in the industry you only get top quality local drivers to do your move or delivery.</p>
-
-                            <a href="/dash" class="btn btn-custom">Try Now</a>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-7">
-                        <img src="/app/components/home/con-web/images/macbook.png" alt="img" class="img-responsive">
-                    </div>
-
-                </div><!-- end row -->
-
-            </div> <!-- end container -->
-        </section>
-        <!-- end features alt -->
-
-
-        <!-- Features -->
-        <section class="section bg-light" id="features">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <h3 class="title">A one-of-a-kind app for a one-of-a-kind person</h3>
-                        <p class="text-muted sub-title">We gathered the most important features that our customers value to deliver a market-leading service with no compromise</p>
-                    </div>
-                </div> <!-- end row -->
-
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="features-box">
-                            <i class="pe-7s-box1"></i>
-                            <h4>Instant price based on your items</h4>
-                            <p class="text-muted">List the items you have by their size to work out if you need a small or large van. This is then used to generate your fixed price</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="features-box">
-                            <i class="pe-7s-user"></i>
-                            <h4>Vetted and reviewed local drivers</h4>
-                            <p class="text-muted">All our drivers go through a vetting process to ensure you only recieve the best most professional driver in your local area</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="features-box">
-                            <i class="pe-7s-display1"></i>
-                            <h4>Track Your Driver
-</h4>
-                            <p class="text-muted">No more worrying "Where is my driver?". Receive a live link by sms and track your driver's arrvial time as well as your goods as they are being deliveed</p>
-                        </div>
-                    </div>
-
-                </div> <!-- end row -->
-
-
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="features-box">
-                            <i class="pe-7s-timer"></i>
-                            <h4>Get it picked up in 30 minutes or less</h4>
-                            <p class="text-muted">With access to ou massive fleet of vans there is always a driver close by</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="features-box">
-                            <i class="pe-7s-date"></i>
-                            <h4>Schedule a delivery for a future date</h4>
-                            <p class="text-muted">You can book a delivery for a future date up to a year in advance</p>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="features-box">
-                            <i class="pe-7s-headphones"></i>
-                            <h4>Customer Support</h4>
-                            <p class="text-muted">Contact details of your driver available giving you full control over communication at all times</p>
-                        </div>
-                    </div>
-
+                    </div> <!-- end col -->
                 </div> <!-- end row -->
 
             </div> <!-- end container -->
         </section>
-        <!-- end Features -->
+        <!-- End Contact Form -->
 
 
 
-        <!-- PRICING -->
-        <section class="section" id="pricing">
-            <div class="container">
-
-                <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <h3 class="title">Always Low Prices</h3>
-                        <p class="text-muted sub-title">We work hard to ensure you always get <br> the most competitive rates</p>
-                    </div>
-                </div> <!-- end row -->
-
-
-                <div class="row">
-                    <div class="col-lg-10 col-lg-offset-1">
-                        <div class="row">
-
-                            <!--Pricing Column-->
-                            <article class="pricing-column col-md-4">
-                                <div class="inner-box">
-                                    <div class="plan-header text-center">
-                                        <h3 class="plan-title">Small Van local Delivery From</h3>
-                                        <h2 class="plan-price">£15</h2>
-                                        <div class="plan-duration">Fixed Price</div>
-                                    </div>
-                                    <ul class="plan-stats list-unstyled">
-                                        <li> <i class="pe-7s-user"></i>1 Driver</li>
-                                        <li> <i class="pe-7s-box1"></i>200 Cubic Feet of Space</li>
-                                        <li> <i class="pe-7s-display1"></i>live Driver Tracking</li>
-                                        <li> <i class="pe-7s-timer"></i>Arrival Within 30 Minutes</li>
-                                    </ul>
-
-                                    <div class="text-center">
-                                        <a href="#" class="btn btn-sm btn-custom">Book Now</a>
-                                    </div>
-                                </div>
-                            </article>
-
-
-                            <!--Pricing Column-->
-                            <article class="pricing-column col-md-4">
-                                <div class="inner-box active">
-                                    <div class="plan-header text-center">
-                                        <h3 class="plan-title">Medium Van local Delivery From</h3>
-                                        <h2 class="plan-price">£20</h2>
-                                        <div class="plan-duration">Fixed Price</div>
-                                    </div>
-                                    <ul class="plan-stats list-unstyled">
-                                        <li> <i class="pe-7s-user"></i>1 Driver</li>
-                                        <li> <i class="pe-7s-box1"></i>300 Cubic Feet of Space</li>
-                                        <li> <i class="pe-7s-display1"></i>live Driver Tracking</li>
-                                        <li> <i class="pe-7s-timer"></i>Arrival Within 30 Minutes</li>
-                                    </ul>
-
-                                    <div class="text-center">
-                                        <a href="#" class="btn btn-sm btn-custom">Book Now</a>
-                                    </div>
-                                </div>
-                            </article>
-
-
-                            <!--Pricing Column-->
-                            <article class="pricing-column col-md-4">
-                                <div class="inner-box">
-                                    <div class="plan-header text-center">
-                                        <h3 class="plan-title">Luton Van local Delivery From</h3>
-                                        <h2 class="plan-price">£30</h2>
-                                        <div class="plan-duration">Fixed Price</div>
-                                    </div>
-                                    <ul class="plan-stats list-unstyled">
-                                        <li> <i class="pe-7s-user"></i>1 Driver</li>
-                                        <li> <i class="pe-7s-box1"></i>400 Cubic Feet of Space</li>
-                                        <li> <i class="pe-7s-display1"></i>live Driver Tracking</li>
-                                        <li> <i class="pe-7s-timer"></i>Arrival Within 30 Minutes</li>
-                                    </ul>
-
-                                    <div class="text-center">
-                                        <a href="#" class="btn btn-sm btn-custom">Book Now</a>
-                                    </div>
-                                </div>
-                            </article>
-
-                        </div>
-                    </div><!-- end col -->
-                </div>
-                 <!-- end row -->
-
-            </div> <!-- end container -->
-        </section>
-        <!-- End Pricing -->
-
-
+        <!-- CLIENTS -->
         <!-- Clients -->
         <section class="section bg-light" id="clients">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 text-center">
                         <h3 class="title">Some of the companies that have trusted us with their valuable goods:</h3>
-                        <p class="text-muted sub-title">We work with a wide range of organizations and domestic clients</p>
+                        <p class="text-muted sub-title">The clean and well commented code allows easy customization of the theme.It's <br/> designed for describing your app, agency or business.</p>
                     </div>
                 </div>
                 <!-- end row -->
@@ -415,12 +272,7 @@
 
             </div>
         </section>
-        <!--End  Clients -->
-
-
-        <!-- Subscribe -->
-
-        <!-- End Subscribe -->
+        <!-- END CLIENTS -->
 
 
 
@@ -457,7 +309,6 @@
                     <div class="col-md-3 col-sm-6">
                         <h5>Contact</h5>
                         <address>
-
                             E: <a href="mailto:#">hello@Thevanclub.io</a>
                         </address>
                     </div>
@@ -491,8 +342,8 @@
         <!--sticky header-->
         <script type="text/javascript" src="/app/components/home/con-web/js/jquery.sticky.js"></script>
 
-        <!-- mailchimp - ajax form -->
-        <script type="text/javascript" src="/app/components/home/con-web/js/jquery.ajaxchimp.js"></script>
+        <!-- parsley - form validation -->
+        <script type="text/javascript" src="/app/components/home/con-web/js/parsley.min.js"></script>
 
         <!--common script for all pages-->
         <script src="/app/components/home/con-web/js/jquery.app.js"></script>

@@ -7,6 +7,25 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'HomeCtrl'
         })
 
+        .when('/driver-terms', {
+            templateUrl : 'app/components/home/con-web/driver-terms.html',
+            controller  : 'HomeCtrl'
+        })
+
+        .when('/jobs', {
+            templateUrl : 'app/components/home/con-web/jobs.html',
+            controller  : 'HomeCtrl'
+        })
+
+        .when('/contact', {
+            templateUrl : 'app/components/home/con-web/contact.html',
+            controller  : 'HomeCtrl'
+        })
+        .when('/faq', {
+            templateUrl : 'app/components/home/con-web/faq.html',
+            controller  : 'HomeCtrl'
+        })
+
         .when('/dash', {
             templateUrl : 'app/components/dash/views/dash-instant.html',
             controller  : 'DashHomeCtrl',
