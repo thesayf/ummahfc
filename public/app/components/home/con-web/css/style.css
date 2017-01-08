@@ -39,7 +39,7 @@ body {
   background: #fff;
   font-size: 14px;
   line-height: 22px;
-  overflow-x:hidden;
+  overflow:initial;
 }
 
 ::selection{
