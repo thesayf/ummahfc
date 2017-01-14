@@ -103,6 +103,9 @@ app.controller('DashLoginCtrl', function($scope, $http, $rootScope, $location, $
 
 // Ctrl For Dash
 app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout, $http, swift, $filter, autho) {
+    
+     /*Popover*/
+        $('[data-toggle="popover"]').popover();
 
     // Start GMaps
     maps.init();
