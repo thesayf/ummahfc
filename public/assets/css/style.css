@@ -4009,8 +4009,8 @@ fieldset[disabled] .btn-danger:active,
 .btn-danger.disabled.active,
 .btn-danger[disabled].active,
 fieldset[disabled] .btn-danger.active {
-  background-color: #ef6262;
-  border-color: #ef6262;
+  background-color: #63bf63;
+  border-color: #63bf63;
 }
 .btn-danger .badge {
   color: #ef6262;
@@ -6298,7 +6298,7 @@ button.list-group-item-danger.active:focus {
   border-bottom-color: #dddddd;
 }
 .panel-primary {
-  border-color: #ef6262;
+  border-color: rgb(221, 221, 221)
 }
 .panel-primary > .panel-heading {
   color: #ffffff;

@@ -9,42 +9,33 @@
                             <table class="no-border no-strip skills">
                                 <tbody class="no-border-x no-border-y">
                                     <tr>
-                                        <td class="item"> <strong>List Your Items</strong>
-<!--                                            <a href="javascript:;" data-toggle="popover" data-content="list all the items you would like delivered" data-placement="top">    <span class="badge badge-primary">i</span></a>-->
-                                            <hr>
-                                            list all the items you would like delivered
-
-                                        </td>
+                                        
                                         <td>
-                                            <button data-toggle="modal" data-target="#inv-fullWidth" type="button" class="btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Add</button>
+                                            <button data-toggle="modal" data-target="#inv-fullWidth" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Add items for collection</button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="item"><strong>Addresses</strong>
-                                            <hr>
-
-                                            Add Pickup and deliver Address
-                                            </td>
                                         <td>
-                                             <button data-toggle="modal" data-target="#form-bp1" type="button" class="btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker"></i> Add</button>
+                                             <button data-toggle="modal" data-target="#form-bp1" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker "></i> Add Collection Address </button>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="item"> <strong>Date</strong>
-                                            </td>
+                                        <td>
+                                             <button data-toggle="modal" data-target="#form-bp2" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-map-marker"></i> Add Delivery Address</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td><div class="input-group date datetimepicker col-md-12 col-xs-12">
-                                            <input id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
+                                            <input placeholder="Choose Collection Date" id="job-date-picker" ng-change="changeData()" ng-model="dashInstant.jobDate" size="16" type="text" value="" class="form-control">
                                             <span class="input-group-addon btn btn-primary">
                                             <i class="icon-th s7-date"></i>
                                         </span>
                                     </div></td>
                                     </tr>
                                     <tr>
-                                        <td class="item"> <strong>Collection Time</strong>
-                                            </td>
                                         <td>
                                             <div class="input-group date datetimepicker col-md-12 col-xs-12">
-                                                <input id="early-time-picker" ng-change="changeData(); closeTimePicker()" ng-model="dashInstant.jobStartTime" size="16" type="text" value="" class="form-control">
+                                                <input placeholder="Choose Collection Time" id="early-time-picker" ng-change="changeData(); closeTimePicker()" ng-model="dashInstant.jobStartTime" size="16" type="text" value="" class="form-control">
                                                 <span class="input-group-addon btn btn-primary">
                                                     <i class="icon-th s7-clock"></i>
                                                 </span>
@@ -52,14 +43,12 @@
                                         </td>
                                     </tr>
                                 <tr>
-                                    <td class="item"><strong>Add Helper</strong>
+                                   <td class="item"><strong>Add Helper</strong>
 <!--                                        <a href="javascript:;" data-toggle="popover" data-content=" A Choose yes if you need a 2 man service" data-placement="top"><span class="badge badge-primary">i</span></a>-->
-                                        <hr>
-                                            Would you like and extra man to help with the lifting?
-                                       </td>
-                                    <td><div class="form-group">
+                                       <p>Would you like and extra man</br> to help with the lifting?</p>
+                                        <div class="form-group">
 
-                                      <div class="col-sm-6 xs-pt-5 pull-right">
+                                      <div class="col-sm-5 xs-pt-5 pull-right">
                                         <div class="switch-button switch-button-success">
                                           <input ng-click="extraHelpClick()" type="checkbox" model="dashInstant.extraHelp" name="swt5" id="swt5"><span>
                                             <label for="swt5"></label></span>
@@ -68,7 +57,7 @@
 
 
                                         </div>
-                                    </td>
+                                       </td>
                                 </tr>
 
                             </tbody>
@@ -100,7 +89,31 @@
 
 
 
-
+<div id="form-bp2" tabindex="-1" role="dialog" class="modal fade colored-header">
+    <div class="modal-dialog custom-width">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i class="icon s7-close"></i></button>
+                <h3 class="modal-title">Add Delivery Address</h3>
+            </div>
+            <div class="modal-body form">
+                <form role="form">
+                     <div class="form-group">
+                      <input class="form-control" force-selection="true" placeholder="End Address" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.end_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 1000}' />
+                    </div>
+                    <div class="form-group">
+                      <input class="form-control" ng-change="changeData()" ng-model="dashInstant.address.end_location.number" placeholder="House Number" />
+                    </div>
+                  </form>
+<div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-default md-close">Cancel</button>
+                <button type="button" data-dismiss="modal" class="btn btn-primary md-close">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

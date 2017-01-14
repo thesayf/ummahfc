@@ -2,8 +2,14 @@
 
 
 // Ctrl For Dash
-app.controller('HomeCtrl', function($scope, $localStorage) {
+app.controller('HomeCtrl', function($scope, $localStorage, $location) {
     $localStorage.vg = {};
+    
+    $scope.dashpage = function() {
+        
+        $location.path("/dash")
+        
+    }
 })
 
 // Ctrl For Dash

@@ -12,7 +12,7 @@ app.config(function($routeProvider, $locationProvider, $httpProvider) {
             controller  : 'HomeCtrl'
         })
 
-        .when('/jobs', {
+        .when('/drivers', {
             templateUrl : 'app/components/home/con-web/jobs.html',
             controller  : 'HomeCtrl'
         })

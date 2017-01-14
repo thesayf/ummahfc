@@ -4,23 +4,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close md-close"><i class="icon s7-close"></i></button>
-                <h3 class="modal-title">Build Route</h3>
+                <h3 class="modal-title">Add Collection Address</h3>
             </div>
             <div class="modal-body form">
                 <form role="form">
                     <div class="form-group">
-                      <label><strong>Pick Up Address</strong></label>
                     <input class="form-control" force-selection="true" placeholder="Start Address" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.start_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 1000}' />
                     </div>
                     <div class="form-group">
                       <input class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="House Number" />
-                    </div>
-                     <div class="form-group">
-                      <label><strong>Delivery Address</strong></label>
-                      <input class="form-control" force-selection="true" placeholder="End Address" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.end_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 1000}' />
-                    </div>
-                    <div class="form-group">
-                      <input class="form-control" ng-change="changeData()" ng-model="dashInstant.address.end_location.number" placeholder="House Number" />
                     </div>
                   </form>
 <div class="clearfix"></div>
