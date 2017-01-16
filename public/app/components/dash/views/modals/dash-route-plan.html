@@ -7,6 +7,7 @@
                 <h3 class="modal-title">Add Collection Address</h3>
             </div>
             <div class="modal-body form">
+                <div class="pricing-table pricing-table-primary">
                 <form role="form">
                     <div class="form-group">
                     <input class="form-control" force-selection="true" placeholder="Start Address" g-places-autocomplete options="autocompleteOptions" ng-model="dashInstant.address.start_location.name" ng-change="updateMaps(); changeData()" ng-model-options='{debounce: 1000}' />
@@ -15,6 +16,7 @@
                       <input class="form-control" ng-model="dashInstant.address.start_location.number" ng-change="changeData()" placeholder="House Number" />
                     </div>
                   </form>
+                </div>
 <div class="clearfix"></div>
             </div>
             <div class="modal-footer">

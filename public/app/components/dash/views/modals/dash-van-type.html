@@ -6,40 +6,46 @@
             <div class="modal-header">
                 <!--cancel button starts here-->
                 <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
-                <h3 class="modal-title">List Your Items</h3>
+                <h3 class="modal-title text-center">Add All Items For Delivery</h3>
                 <!--cancel button ends here-->
             </div>
             <div class="modal-body">
             <div class="panel-body">
-               
-                <div class="row">
-                     <div class="panel-heading">
-                  <h3><strong>QTY of Items you are moving</strong></h3>
-                </div>
-                    <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
+                    
+                    <div class="pricing-table pricing-table-primary">
+                     
+                            <p>Tell us how many small items, medium items or large items to be delivered. Every item for delivery must be accurately listed</p>
+                          
+                <hr>
+                        <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
                     <div class="form-group">
-                      <label class="col-sm-5 control-label">Small Item (anything up to a box) </label>
-                      <div class="col-sm-7">
+                      <label class="col-sm-12">Small Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(40cm x 40cm x 30cm) like an average packing box or a black bag " data-placement="top">example</a> </label>
+                      <div class="col-sm-12">
                         <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[0].qty">
                       </div>
-                    </div>
+                    </div>    
                     <div class="form-group">
-                      <label class="col-sm-5 control-label">Medium Item (anything up to a chest of draws) </label>
-                      <div class="col-sm-7">
+                      <label class="col-sm-12">Medium Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(105cm x 105cm x 50cm) like a chest of drawers or a dining table" data-placement="top">example</a> </label>
+                      <div class="col-sm-12">
                         <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[1].qty">
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-5 control-label">Large Item (anything up to a chest of king size bed) </label>
-                      <div class="col-sm-7">
+                     <label class="col-sm-12">Large Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(200cm x 140cm x  50cm) like a fridge freezer or a double bed" data-placement="top">example</a> </label>
+                      <div class="col-sm-12">
                         <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty">
                       </div>
                     </div>
                   </form>
-                </div>
+                        
+                    </div>
+<!--
+                     
+-->
+                    
+               
                  
-                <br>
-                <hr>
+              
                     
 <!--
                 <div class="row">

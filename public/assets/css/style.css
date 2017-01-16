@@ -19594,6 +19594,12 @@ div.dataTables_wrapper div.dataTables_length label select {
  background-color: aqua;
  padding-top: 20px;
 }
+    
+.input-group2{
+width: 150px;
+  margin: 40px auto;
+  
+}
 
 
 }
