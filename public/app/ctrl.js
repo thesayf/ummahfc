@@ -590,7 +590,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
     $scope.changeData();
 
-    $scope.$watch('dashInstant.itemBoxes', function(oldValue, newValue) {
+    /*$scope.$watch('dashInstant.itemBoxes', function(oldValue, newValue) {
         $scope.loadTime = 0;
         $scope.unloadTime = 0;
         $scope.totalCuft = 0;
@@ -609,7 +609,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         } else {
             $('#limit-note').addClass('hide');
         }
-    }, true)
+    }, true)*/
 
 })
 
