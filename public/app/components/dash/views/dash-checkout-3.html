@@ -118,7 +118,7 @@ body { margin-top:20px; }
                                                           <div class="form-group">
                                                             <label>
                                                               <span>Billing Postcode</span>
-                                                              <input class="form-control" type="text" size="6" data-stripe="address_zip">
+                                                              <input class="form-control" ng-model="ccDeets.zip" type="text" size="6" data-stripe="address_zip">
                                                             </label>
                                                          </div>
                                                         </div>
@@ -135,14 +135,14 @@ body { margin-top:20px; }
                                     </div>
             <!-- CREDIT CARD FORM ENDS HERE -->
 
-            
+
 
 
         </div>
 
 
     </div>
-                        
+
                         <div class="form-group">
                           <div class="col-sm-offset-2 col-sm-10">
                             <a href="/checkout-2"><button class="btn btn-default btn-space wizard-next pull-right"><i class="icon s7-angle-left"></i>Back</button></a>

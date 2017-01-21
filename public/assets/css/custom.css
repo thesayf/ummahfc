@@ -8,6 +8,17 @@
 .has-error input::-webkit-input-placeholder {
    	color: #a94442;
 }
+.auto-marg {margin: 0 auto !important;}
+.plus-minus {
+    cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari*/
+     -khtml-user-select: none; /* Konqueror */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
 
 .has-error input:-moz-placeholder { /* Firefox 18- */
    color: #a94442;

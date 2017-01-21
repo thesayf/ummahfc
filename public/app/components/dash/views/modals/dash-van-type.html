@@ -11,42 +11,45 @@
             </div>
             <div class="modal-body">
             <div class="panel-body">
-                    
+
                     <div class="pricing-table pricing-table-primary">
-                     
+
                             <p>Tell us how many small items, medium items or large items to be delivered. Every item for delivery must be accurately listed</p>
-                          
+
                 <hr>
                         <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
                     <div class="form-group">
                       <label class="col-sm-12">Small Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(40cm x 40cm x 30cm) like an average packing box or a black bag " data-placement="top">example</a> </label>
-                      <div class="col-sm-12">
-                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[0].qty">
+                      <div class="col-sm-6 input-group auto-marg">
+                        <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[0].qty"> -->
+                        <span ng-click="changeInventory('minus', 0)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[0].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 0)" class="input-group-addon plus-minus">+</span>
                       </div>
-                    </div>    
+                    </div>
                     <div class="form-group">
                       <label class="col-sm-12">Medium Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(105cm x 105cm x 50cm) like a chest of drawers or a dining table" data-placement="top">example</a> </label>
-                      <div class="col-sm-12">
-                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[1].qty">
+                      <div class="col-sm-6 input-group auto-marg">
+                        <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[1].qty"> -->
+                        <span ng-click="changeInventory('minus', 1)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[1].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 1)" class="input-group-addon plus-minus">+</span>
                       </div>
                     </div>
                     <div class="form-group">
                      <label class="col-sm-12">Large Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(200cm x 140cm x  50cm) like a fridge freezer or a double bed" data-placement="top">example</a> </label>
-                      <div class="col-sm-12">
-                        <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty">
+                      <div class="col-sm-6 input-group auto-marg">
+                        <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty"> -->
+                        <span ng-click="changeInventory('minus', 2)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[2].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 2)" class="input-group-addon plus-minus">+</span>
                       </div>
                     </div>
                   </form>
-                        
+
                     </div>
 <!--
-                     
+
 -->
-                    
-               
-                 
-              
-                    
+
+
+
+
+
 <!--
                 <div class="row">
                     <div class="panel-heading">
@@ -60,11 +63,11 @@
                       </div>
                     </div>
                   </form>
-                
+
                 </div>
 -->
-                
-                
+
+
             </div>
             </div>
             <div class="modal-footer">

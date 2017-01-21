@@ -4,12 +4,16 @@
 // Ctrl For Dash
 app.controller('HomeCtrl', function($scope, $localStorage, $location) {
     $localStorage.vg = {};
-    
+    $homeContact = {};
+
     $scope.dashpage = function() {
-        
         $location.path("/dash")
-        
     }
+
+    $scope.homeContactSubmit = function() {
+        console.log('hi');
+    }
+
 })
 
 // Ctrl For Dash
@@ -103,7 +107,28 @@ app.controller('DashLoginCtrl', function($scope, $http, $rootScope, $location, $
 
 // Ctrl For Dash
 app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, rates, $location, $timeout, $http, swift, $filter, autho) {
-    
+
+    function idleLogout() {
+        var t;
+        window.onload = resetTimer;
+        window.onmousemove = resetTimer;
+        window.onmousedown = resetTimer; // catches touchscreen presses
+        window.onclick = resetTimer;     // catches touchpad clicks
+        window.onscroll = resetTimer;    // catches scrolling with arrow keys
+        window.onkeypress = resetTimer;
+
+        function logout() {
+            $localStorage.vg = {};
+            $location.path('/');
+        }
+
+        function resetTimer() {
+            clearTimeout(t);
+            t = setTimeout(logout, 1800000);  // time is in milliseconds
+        }
+    }
+    idleLogout();
+
      /*Popover*/
         $('[data-toggle="popover"]').popover();
 
@@ -217,6 +242,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     //console.log(timepicker.length);
 
     $scope.changeData = function() {
+
         var flag = 0;
         var canProgress = 0;
 
@@ -288,7 +314,6 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
             canProgress = canProgress + 1;
 
         }
-        console.log($scope.dashInstant.jobDate);
         if($scope.dashInstant.jobStartTime == undefined || $scope.dashInstant.jobStartTime == '') {
             canProgress = canProgress + 1;
         } else {
@@ -324,6 +349,18 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
     if($scope.dashInstant !== undefined) {
         $scope.dashInstant.extraHelp = $('#swt5')[0].checked;
+    }
+
+    $scope.changeInventory = function(type, num) {
+        var currNum = $scope.dashInstant.itemBoxes[num].qty;
+        if(type == 'plus') {
+            $scope.dashInstant.itemBoxes[num].qty = currNum + 1;
+        } else {
+            if(currNum > 0) {
+                $scope.dashInstant.itemBoxes[num].qty = currNum - 1;
+            }
+
+        }
     }
 
     $scope.holdDriverDelay = function(e) {
@@ -399,18 +436,26 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
 
         } else {
-            $('.modal-body').prepend('<img class="spin-img" src="/assets/img/35.gif">');
-            $('.modal-body').addClass('tc');
-            $('.review-body').addClass('hide');
-            swift.driverList(function(resp) {
-                //$localStorage.vg.drivers = resp;
-                $scope.dashInstant.driverCount = Math.ceil(resp.length / 4);
-                $timeout(function() {
-                    $('.review-body').removeClass('hide');
-                    $('.modal-body').removeClass('tc');
-                    $('.spin-img').remove();
-                },1000)
-            })
+
+            /*if() {
+
+            }*/
+            if($scope.totalCuft >= 600) {
+                alert('Please call us for moves with 600 cubic feet or over!');
+            } else {
+                $('.modal-body').prepend('<img class="spin-img" src="/assets/img/35.gif">');
+                $('.modal-body').addClass('tc');
+                $('.review-body').addClass('hide');
+                swift.driverList(function(resp) {
+                    //$localStorage.vg.drivers = resp;
+                    $scope.dashInstant.driverCount = Math.ceil(resp.length / 4);
+                    $timeout(function() {
+                        $('.review-body').removeClass('hide');
+                        $('.modal-body').removeClass('tc');
+                        $('.spin-img').remove();
+                    },1000)
+                })
+            }
         }
     }
 
@@ -439,37 +484,53 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
                 var van = rates[rat].van;
                 var jobMinCub = rates[rat].minRange;
                 var jobMaxCub = rates[rat].maxRange;
+                var vanDeets = rates[rat].details;
             }
         }
 
         $scope.dashInstant.jobMinCub = jobMinCub;
         $scope.dashInstant.jobMaxCub = jobMaxCub;
+        $scope.dashInstant.vanDeets = vanDeets;
 
         var driveTime = $scope.dashInstant.duration / 60;
-        var fuelCost = ($scope.dashInstant.distance * 0.000621371192237) * .70;
+        //var milesTravel = $scope.dashInstant.distance * 0.000621371192237;
+        //console.log('distance: '+$scope.dashInstant.distance);
+        var fuelCost = $scope.dashInstant.distance * 1;
 
         var totalTime = $scope.loadTime + $scope.unloadTime + driveTime;
         var workCost = totalTime * rate;
+
         if($scope.dashInstant.extraHelp == true) {
             var extra = 20 * (totalTime/60);
         } else {
             var extra = 0;
         }
+
+        if(van == 'Small Van' && (workCost+extra) < 15) {
+            workCost = 15;
+        }
+        if(van == 'Medium Van' && (workCost+extra) < 20) {
+            workCost = 20;
+        }
+        if(van == 'Luton Van' && (workCost+extra) < 35) {
+            workCost = 35;
+        }
+
         $scope.totalCost = Math.ceil((workCost + fuelCost + extra) * 10) / 10;
 
-        $scope.dashInstant.estiCalc = $scope.totalCost;
+
+
+        $scope.dashInstant.estiCalc = Math.ceil($scope.totalCost);
         $scope.dashInstant.deposit = (($scope.totalCost / 100) * 25);
-        $scope.dashInstant.deposit = $scope.dashInstant.deposit.toFixed(2);
+        $scope.dashInstant.deposit = Math.ceil($scope.dashInstant.deposit);
         $scope.dashInstant.toPay = $scope.dashInstant.estiCalc - $scope.dashInstant.deposit;
-        $scope.dashInstant.toPay = $scope.dashInstant.toPay.toFixed(2);
-        console.log('filter');
+        $scope.dashInstant.toPay = Math.ceil($scope.dashInstant.toPay);
+
         //console.log(new Date($scope.dashInstant.jobDate).toISOString());
         var ar = $scope.dashInstant.jobDate.split("-");
         var d = ar[1]+"/"+ar[0]+"/"+ar[2];
         $scope.dashInstant.jobTimestamp = new Date(d).getTime();
         $scope.dashInstant.van = van;
-        //console.log(Date.parse($scope.dashInstant.jobDate));
-        //console.log($filter('date')($scope.dashInstant.jobDate, 'EEEE, d ,MMMM'));
 
 
     }
@@ -876,6 +937,10 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
               $.growl.error({ message: 'Card CVC Number Must Be 3 Digits!'});
               flag = flag + 1;
           }
+          if($scope.ccDeets.zip == undefined || $scope.ccDeets.zip.length < 4) {
+              $.growl.error({ message: 'Please add a billing post code!'});
+              flag = flag + 1;
+          }
 
           if(flag > 0) {
             return false;
@@ -885,6 +950,7 @@ app.controller('CheckoutCtrl', function($scope, $location, $localStorage, $http,
 
             // Request a token from Stripe:
             Stripe.card.createToken($form, function(status, res) {
+                $localStorage.vg.jobDetails
                 $http.post("/api/charge-card", {stripe: res, user: $localStorage.vg.jobDetails}).then(function(status){
                     if(status.data.status !== false) {
                         $.growl.notice({message: status.data.message});

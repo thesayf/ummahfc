@@ -72,7 +72,7 @@
                             <a href="/faq" class="nav-link">FAQ</a>
                         </li>
                         <li><a href="/drivers">Drivers</a></li>
-                        
+
                     </ul>
 
                     <!-- Navbar right -->
@@ -122,21 +122,21 @@
                     <!-- Contact form -->
                     <div class="col-sm-6 col-sm-offset-3">
                         <form role="form" name="ajax-form" id="contact-form"
-                              action="https://formsubmit.io/send/17a46d93-adb2-4bd5-8694-ec9ba05bf5fd" method="post"
+                              action="https://formsubmit.io/send/25ef0582-389f-43ac-9647-66fa33264758" method="post"
                               class="contact-form" data-parsley-validate novalidate>
 
                             <div class="form-group">
-                                <input class="form-control" id="name2" name="name" placeholder="Your name" type="text" value="" parsley-trigger="change" required>
+                                <input ng-model="homeContact.name" class="form-control" id="name2" name="name" placeholder="Your name" type="text" value="" parsley-trigger="change" required>
                             </div>
                             <!-- /Form-name -->
 
                             <div class="form-group">
-                                <input class="form-control" id="email2" name="email" type="email" placeholder="Your email" value="" parsley-trigger="change" required>
+                                <input ng-model="homeContact.email" class="form-control" id="email2" name="email" type="email" placeholder="Your email" value="" parsley-trigger="change" required>
                             </div>
                             <!-- /Form-email -->
 
                             <div class="form-group">
-                                <textarea class="form-control" id="message2" name="message" rows="5" placeholder="Message" parsley-trigger="change" required></textarea>
+                                <textarea ng-model="homeContact.msg" class="form-control" id="message2" name="message" rows="5" placeholder="Message" parsley-trigger="change" required></textarea>
                             </div>
                             <!-- /Form Msg -->
 
@@ -145,7 +145,7 @@
                                     <div id="success-form" class="text-success" style="display: none;">E-mail was successfully sent.</div>
                                     <div class="error text-center" id="err-form"></div>
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-custom" id="send">Submit</button>
+                                        <button ng-click="homeContactsubmit()" type="submit" class="btn btn-custom" id="send">Submit</button>
                                     </div>
                                 </div> <!-- /col -->
                             </div> <!-- /row -->
@@ -153,7 +153,7 @@
                         </form> <!-- /form -->
                     </div> <!-- end col -->
 
-                    
+
                 </div> <!-- end row -->
 
             </div> <!-- end container -->

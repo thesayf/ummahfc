@@ -37,64 +37,6 @@ app.factory("email", function(){
     };
 });
 
-/*app.factory("dashInstant", function(){
-    return {
-        jobName: '',
-        vanType: '',
-        vanName: '',
-        jobDate: '',
-        jobHoursEsti: '',
-        extraHelp: '',
-        estiCalc: '',
-        fuelPrice: '',
-        duration: '',
-        distance: '',
-        suggestedPrice: '',
-        driverNote: '',
-        address: {
-            "start_location": {
-		        "name": '',
-		        "number": '',
-		        "lat": '',
-		        "lng": ''
-		    },
-            "end_location": {
-		        "name": '',
-                "number": '',
-		        "lat": '',
-		        "lng": ''
-		    },
-            "pickup1": {
-		        "name": '',
-		        "lat": '',
-		        "lng": ''
-		    },
-            "dropoff1": {
-		        "name": '',
-		        "lat": '',
-		        "lng": ''
-		    },
-            "pickup2": {
-		        "name": '',
-		        "lat": '',
-		        "lng": ''
-		    },
-            "dropoff2": {
-		        "name": '',
-		        "lat": '',
-		        "lng": ''
-		    },
-        },
-        distance: 0,
-        payment_method: 'cash',
-        pk: '',
-        recieptUrl: '',
-        status: '',
-        : {},
-        finalCost: ''
-    };
-});*/
-
 
 
 app.factory("dashVans", function(){
@@ -247,19 +189,19 @@ app.factory('items', function() {
     var items = {};
 
     items.smItems = {
-        loadTime: 1,
-        unloadTime: 1,
-        cuFt: 1.2
+        loadTime: 1.5,
+        unloadTime: 1.5,
+        cuFt: 2
     };
     items.mdItems = {
-        loadTime: 2,
-        unloadTime: 2,
-        cuFt: 5.2
+        loadTime: 4,
+        unloadTime: 4,
+        cuFt: 20
     };
     items.lgItems = {
-        loadTime: 3,
-        unloadTime: 3,
-        cuFt: 52
+        loadTime: 6,
+        unloadTime: 6,
+        cuFt: 50
     };
 
     return items;
@@ -267,9 +209,27 @@ app.factory('items', function() {
 
 app.factory('rates', function() {
     return {
-        0: {minRange: 0, maxRange: 300,  rate: .25, van: 'Small Van'},
-        1: {minRange: 301, maxRange: 400,  rate: .33, van: 'Medium Van'},
-        2: {minRange: 401, maxRange: 600,  rate: .58, van: 'Luton Van'}
+        0: {
+            minRange: 0,
+            maxRange: 300,
+            rate: .25,
+            van: 'Small Van',
+            details: 'Short Wheel Base - 350 ft3, Length: 3.4m, Width: 1.7m, Height: 1.7m, Payload: 1200-1500kg'
+        },
+        1: {
+            minRange: 301,
+            maxRange: 400,
+            rate: .33,
+            van: 'Medium Van',
+            details: 'Long Wheel Base - 600 ft3, Length: 4m, Width: 2m, Height: 2.2m, Payload: 1200-1500kg'
+        },
+        2: {
+            minRange: 401,
+            maxRange: 600,
+            rate: .58,
+            van: 'Luton Van',
+            details: 'Luton Van - 600 ft3, Length: 4m, Width: 2m, Height: 2.2m, Payload: 1200-1500kg'
+        }
     };
 })
 

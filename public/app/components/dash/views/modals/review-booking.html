@@ -10,17 +10,17 @@
             <div class="modal-body">
                 <div id="modal-cont" class="row">
 
-                    <div id="review-body" class="row pricing-tables review-body">            
+                    <div id="review-body" class="row pricing-tables review-body">
             <div class="col-md-12">
               <div class="pricing-table pricing-table-primary">
                   <div class="pricing-table-title text-center">Your Quote</div>
                   <div class="panel-divider panel-divider-xl"></div>
                   <div class="col-md-12">
                 <div class="pricing-table-price"><span class="currency">£</span><span class="value">{{dashInstant.estiCalc}}</span><span class="frecuency">/Total</span></div>
-                      <div class="pricing-table-description">For a <strong>{{dashInstant.van}} </strong> | <a href="javascript:;" data-toggle="popover" data-trigger="hover" title="Popover on hover" data-content="This is a popover with a title!" data-placement="top">View Van Details</a></div>
-                      
-                      
-                      
+                      <div class="pricing-table-description">For a <strong>{{dashInstant.van}} </strong> | <a href="javascript:;" data-toggle="popover" data-trigger="hover" title="Van Details" data-content="{{dashInstant.vanDeets}}" data-placement="top">View Van Details</a></div>
+
+
+
                       <div class="pricing-table-description"><strong>{{dashInstant.driverCount}}</strong> Drivers avaiable for this delivery</div>
                       <div class="pricing-table-description col-md-120"> Deposit to pay today <strong>£{{dashInstant.deposit}}</strong>.
                 </div>
@@ -28,8 +28,8 @@
                 </div>
                   </div>
               </div>
-            </div>            
-                        
+            </div>
+
                     </div>
 <!--
                   <div id="review-body" class="text-center review-body">
