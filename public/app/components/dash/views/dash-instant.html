@@ -12,7 +12,7 @@
                                     <tr>
 
                                         <td>
-                                            <button data-toggle="modal" data-target="#inv-fullWidth" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Add items for collection</button>
+                                            <button data-toggle="modal" data-target="#inv-fullWidth" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-box2"></i> Add items for collection <span ng-if="totalQty > 0" class="badge badge-primary" >{{totalQty}}</span></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -27,11 +27,11 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button data-toggle="modal" data-target="#form-bp99" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Job Date</button></td>
+                                            <button data-toggle="modal" data-target="#form-bp99" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Job Date <span ng-if="jd" class="badge badge-primary" >{{jd}}</span></button></td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button data-toggle="modal" data-target="#form-bp3" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Pickup Slot</button>
+                                            <button data-toggle="modal" data-target="#form-bp3" type="button" class=" col-xs-12 btn btn-space btn-success btn-rounded pull-right"><i class="icon icon-left s7-stopwatch"></i> Choose Pickup Slot <span ng-if="st" class="badge badge-primary" >{{st}}</span></button>
 
 <!--
                                             <div class="input-group date datetimepicker col-md-12 col-xs-12">
@@ -136,47 +136,47 @@
                     </tr>
                   </thead>
                   <tbody class="no-border-x">
-                    <tr>
+                    <tr ng-if="nowTime < 9">
                       <td><strong>09:00</strong> - 11:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="09:00 - 11:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                    <tr>
+                    <tr ng-if="nowTime < 10">
                       <td><strong>10:00</strong> - 12:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="10:00 - 12:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                    <tr>
+                    <tr ng-if="nowTime < 11">
                       <td><strong>11:00</strong> - 13:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="11:00 - 13:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                      <tr>
+                      <tr ng-if="nowTime < 12">
                       <td><strong>12:00</strong> - 14:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="12:00 - 14:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                      <tr>
+                      <tr ng-if="nowTime < 13">
                       <td><strong>13:00</strong> - 15:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="13:00 - 15:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                      <tr>
+                      <tr ng-if="nowTime < 14">
                       <td><strong>14:00</strong> - 16:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="14:00 - 16:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                      <tr>
+                      <tr ng-if="nowTime < 15">
                       <td><strong>15:00</strong> - 17:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" type="radio" checked="" ng-change="changeData()" value="15:00 - 17:00" name="rad1" id="rad1"></td>
                     </tr>
-                    <tr>
+                    <tr ng-if="nowTime < 16">
                       <td><strong>16:00</strong> - 18:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="16:00 - 18:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                    <tr>
+                    <tr ng-if="nowTime < 17">
                       <td><strong>17:00</strong> - 19:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="17:00 - 19:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                    <tr>
+                    <tr ng-if="nowTime < 18">
                       <td><strong>18:00</strong> - 20:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="18:00 - 20:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>
-                    <tr>
+                    <tr ng-if="nowTime < 19">
                       <td><strong>19:00</strong> - 21:00</td>
                       <td><input ng-model="dashInstant.jobStartTime" ng-change="changeData()" value="19:00 - 21:00" type="radio" checked="" name="rad1" id="rad1"></td>
                     </tr>

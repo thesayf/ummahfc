@@ -246,11 +246,46 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         var flag = 0;
         var canProgress = 0;
 
+        var realTime = new Date();
+        var h = realTime.getHours();
+        var m = realTime.getMinutes();
+        var month = realTime.getUTCMonth() + 1; //months from 1-12
+        var day = realTime.getUTCDate();
+        var year = realTime.getUTCFullYear().toString().substr(2,2);
+        if(month < 10) {
+            var nowDate = day+'-0'+month+'-'+year;
+        } else {
+            var nowDate = day+'-'+month+'-'+year;
+        }
+
+
+        if($scope.dashInstant.jobStartTime !== undefined || $scope.dashInstant.jobStartTime !== '') {
+            $scope.st = $scope.dashInstant.jobStartTime;
+        }
+
+        if($scope.dashInstant.jobDate !== undefined) {
+            $scope.jd = $scope.dashInstant.jobDate;
+            if($scope.dashInstant.jobDate == nowDate) {
+                $scope.nowTime = h;
+            } else {
+                $scope.nowTime = 0;
+            }
+            console.log($scope.nowTime);
+        }
+
+
         // IF THERES NO INVENTORY FLAG
         if($scope.dashInstant.itemBoxes[0].qty < 1 && $scope.dashInstant.itemBoxes[1].qty < 1 && $scope.dashInstant.itemBoxes[2].qty < 1) {
             flag = flag + 1;
             canProgress = canProgress + 1;
         }
+
+        $scope.totalQty = ($scope.dashInstant.itemBoxes[0].qty + $scope.dashInstant.itemBoxes[1].qty) + $scope.dashInstant.itemBoxes[2].qty;
+        console.log($scope.totalQty);
+
+
+        /*$scope.totalQty = ($scope.dashInstant.itemBoxes[0].qty + scope.dashInstant.itemBoxes[1].qty) + $scope.dashInstant.itemBoxes[2].qty;*/
+
 
         // IF NO ADDRESS DATA
         if($scope.dashInstant.address == undefined) {
@@ -590,7 +625,8 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
 
     $scope.changeData();
 
-    /*$scope.$watch('dashInstant.itemBoxes', function(oldValue, newValue) {
+    $scope.$watch('dashInstant.itemBoxes', function(oldValue, newValue) {
+        $scope.changeData();
         $scope.loadTime = 0;
         $scope.unloadTime = 0;
         $scope.totalCuft = 0;
@@ -609,7 +645,7 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
         } else {
             $('#limit-note').addClass('hide');
         }
-    }, true)*/
+    }, true)
 
 })
 
