@@ -3889,10 +3889,10 @@ fieldset[disabled] .btn-warning.active {
   background-color: #ffffff;
 }
 .btn-danger {
-  border-color: #ed4b4b;
+  border-color: #01bf86;
   color: #ffffff;
-  background-color: #63bf63;
-  border-color: #63bf63;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger:focus,
 .btn-danger.focus {
@@ -3958,13 +3958,13 @@ fieldset[disabled] .btn-danger.active {
 .btn-danger:focus,
 .btn-danger.focus {
   color: #ffffff;
-  background-color: #ef6262;
-  border-color: #ef6262;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger:hover {
   color: #ffffff;
-  background-color: #f17979;
-  border-color: #f17979;
+  background-color: #63bf63;
+  border-color: #63bf63;
 }
 .btn-danger:active,
 .btn-danger.active,
@@ -3983,8 +3983,8 @@ fieldset[disabled] .btn-danger.active {
 .btn-danger.active.focus,
 .open > .dropdown-toggle.btn-danger.focus {
   color: #ffffff;
-  background-color: #ed4b4b;
-  border-color: #ed4b4b;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger:active,
 .btn-danger.active,
@@ -4009,8 +4009,8 @@ fieldset[disabled] .btn-danger:active,
 .btn-danger.disabled.active,
 .btn-danger[disabled].active,
 fieldset[disabled] .btn-danger.active {
-  background-color: #63bf63;
-  border-color: #63bf63;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .btn-danger .badge {
   color: #ef6262;
@@ -5106,7 +5106,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-brand:focus {
   color: #5e5e5e;
   background-color: transparent;
-}
+} 
 .navbar-default .navbar-text {
   color: #777777;
 }
@@ -6302,8 +6302,8 @@ button.list-group-item-danger.active:focus {
 }
 .panel-primary > .panel-heading {
   color: #ffffff;
-  background-color: #63bf63;
-  border-color: #63bf63;
+  background-color: #01bf86;
+  border-color: #01bf86;
 }
 .panel-primary > .panel-heading + .panel-collapse > .panel-body {
   border-top-color: #ef6262;
@@ -6501,8 +6501,8 @@ button.close {
 .modal-content {
   position: relative;
   background-color: #ffffff;
-  border: 1px solid #999999;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 0px solid #999999;
+  border: 0px solid rgba(0, 0, 0, 0.2);
   border-radius: 0;
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   background-clip: padding-box;
@@ -7547,7 +7547,7 @@ button:focus {
 	[Top header]
 */
 .am-top-header {
-  background-color: #63bf63;
+  background-color: #01bf86;
   border: 0;
   margin-bottom: 0;
 }
@@ -7564,7 +7564,7 @@ button:focus {
   line-height: 80px;
   height: 80px;
   width: 100px;
-  background-image: url("../img/Moverspro-11.png");
+  background-image: url("../img/tvclogo.png");
   background-repeat: no-repeat;
   background-position: center center;
   margin-right: 20px;
@@ -7586,7 +7586,7 @@ button:focus {
   margin-left: 0;
   margin-right: 10px;
   width: 180px;
-  background-image: url("../img/Moverspro-logo3.png");
+  background-image: url("../img/smallvc.png");
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .am-nosidebar-left .am-top-header .navbar-header .navbar-brand {
@@ -16776,7 +16776,7 @@ fieldset[disabled] .btn-social.btn-tumblr.active {
 .md-modal.colored-header .modal-content .modal-header,
 .modal.colored-header .md-content .modal-header,
 .md-modal.colored-header .md-content .modal-header {
-  background-color: #63bf63;
+  background-color: #01bf86;
   color: #ffffff;
   padding: 20px 15px;
 }
@@ -19600,6 +19600,96 @@ width: 150px;
   margin: 40px auto;
   
 }
+
+/* Padding - just for asthetics on Bootsnipp.com */
+body { margin-top:20px; }
+
+/* CSS for Credit Card Payment form */
+.credit-card-box .panel-title {
+    display: inline;
+    font-weight: bold;
+}
+.credit-card-box .form-control.error {
+    border-color: red;
+    outline: 0;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(255,0,0,0.6);
+}
+.credit-card-box label.error {
+  font-weight: bold;
+  color: red;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+.credit-card-box .payment-errors {
+  font-weight: bold;
+  color: red;
+  padding: 2px 8px;
+  margin-top: 2px;
+}
+.credit-card-box label {
+    display: block;
+}
+/* The old "center div vertically" hack */
+.credit-card-box .display-table {
+    display: table;
+}
+.credit-card-box .display-tr {
+    display: table-row;
+}
+.credit-card-box .display-td {
+    display: table-cell;
+    vertical-align: middle;
+    width: 50%;
+}
+/* Just looks nicer */
+.credit-card-box .panel-heading img {
+    min-width: 180px;
+}
+    
+.accepted{
+    color: black !important; 
+    }
+    
+.open1{
+        
+    font-family: "Open Sans"  
+    }
+    
+    .modal-price-table{
+        margin-right: 50px;
+        margin-left: 50px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+    
+    .modal-price-table2{
+        
+        padding-top: 0px;
+        padding-bottom: 0px;
+        
+    }
+    
+    .inv-no-border{
+        
+        padding-top: 0px;
+        
+    }
+    
+    .rev-border{
+        padding-top: 0px !important;
+        
+    }
+    
+/*
+    @media screen and (max-width: 480px) {
+        
+         .testy{
+             font-size: 100px;
+            
+        }
+        
+}
+*/
 
 
 }

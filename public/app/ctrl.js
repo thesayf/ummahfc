@@ -129,12 +129,19 @@ app.controller('DashInstantCtrl', function($scope, maps, $localStorage, items, r
     }
     idleLogout();
 
+    $('#popimage').on('mouseover', function() {
+        $(this).next('.popover').append('<p>this is append</p>')
+        
+    });
+    
      /*Popover*/
-        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="popover"]').popover(
+        
+        );
 
     // Start GMaps
     maps.init();
-
+    
     $scope.autocompleteOptions = {
         componentRestrictions: { country: 'uk' },
         types: ['geocode']

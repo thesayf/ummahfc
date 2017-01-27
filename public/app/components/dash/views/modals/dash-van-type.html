@@ -5,35 +5,34 @@
         <div class="modal-content">
             <div class="modal-header">
                 <!--cancel button starts here-->
-                <button type="button" data-dismiss="modal" aria-hidden="true" class="close"><i class="icon s7-close"></i></button>
-                <h3 class="modal-title text-center">Add All Items For Delivery</h3>
+                <button type="button" data-dismiss="modal" aria-hidden="true" class="close"></button>
+                <h3 class="modal-title text-center">Add Items For Delivery</h3>
                 <!--cancel button ends here-->
             </div>
-            <div class="modal-body">
-            <div class="panel-body">
+            <div class="modal-body inv-no-border">
+            <div class="panel-body inv-no-border">
 
-                    <div class="pricing-table pricing-table-primary">
 
-                            <p>Tell us how many small items, medium items or large items to be delivered. Every item for delivery must be accurately listed</p>
+                            <p class="text-center">How many small items, medium items or large items to be delivered. Every item for delivery must be accurately listed</p>
 
                 <hr>
                         <form action="#" style="border-radius: 0px;" class="form-horizontal group-border-dashed">
                     <div class="form-group">
-                      <label class="col-sm-12">Small Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(40cm x 40cm x 30cm) like an average packing box or a black bag " data-placement="top">example</a> </label>
+                      <label class="col-sm-12 text-center">Small Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(40cm x 40cm x 30cm) like an average packing box or a black bag " data-placement="top">example</a> </label>
                       <div class="col-sm-6 input-group auto-marg">
                         <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[0].qty"> -->
                         <span ng-click="changeInventory('minus', 0)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[0].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 0)" class="input-group-addon plus-minus">+</span>
                       </div>
                     </div>
                     <div class="form-group">
-                      <label class="col-sm-12">Medium Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(105cm x 105cm x 50cm) like a chest of drawers or a dining table" data-placement="top">example</a> </label>
+                      <label class="col-sm-12 text-center">Medium Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(105cm x 105cm x 50cm) like a chest of drawers or a dining table" data-placement="top">example</a> </label>
                       <div class="col-sm-6 input-group auto-marg">
                         <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[1].qty"> -->
                         <span ng-click="changeInventory('minus', 1)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[1].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 1)" class="input-group-addon plus-minus">+</span>
                       </div>
                     </div>
                     <div class="form-group">
-                     <label class="col-sm-12">Large Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(200cm x 140cm x  50cm) like a fridge freezer or a double bed" data-placement="top">example</a> </label>
+                     <label class="col-sm-12 text-center">Large Item | <a href="javascript:;" data-toggle="popover" data-trigger="hover" data-content="(200cm x 140cm x  50cm) like a fridge freezer or a double bed" data-placement="top">example</a> </label>
                       <div class="col-sm-6 input-group auto-marg">
                         <!-- <input type="number" ng-change="changeData()" class="form-control" ng-model="dashInstant.itemBoxes[2].qty"> -->
                         <span ng-click="changeInventory('minus', 2)" class="input-group-addon plus-minus">-</span><input class="form-control" type="text" ng-model="dashInstant.itemBoxes[2].qty" ng-change="changeData()"><span ng-click="changeInventory('plus', 2)" class="input-group-addon plus-minus">+</span>
@@ -41,7 +40,6 @@
                     </div>
                   </form>
 
-                    </div>
 <!--
 
 -->
